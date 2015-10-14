@@ -1,0 +1,17 @@
+{
+  "author": "Christian Revillard",
+  "name": "Creanvas",
+  "description": "ToDo",
+  "version": "0.0.0",
+  "repository": {
+    "url": ""
+  },
+  "main": "./creanvas.js",
+  "keywords": [ ],
+  "dependencies": {
+    "amdefine": "^1.0.0"
+  },
+  "engines": {
+    "node": "*"
+  }
+}
