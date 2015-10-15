@@ -1,25 +1,36 @@
-﻿//define(['creanvas/events'], function (events) {
+﻿define(['creanvas/events', 'creanvas/timer'],
+  function (events, timer) {
   
-//  var Application = function (applicationModule) {
-//    var self = this;
-//    var module = applicationModule;
-//    var applicationEvents = new events.EventEmitter();
-
-
-//    var createInstance = function (onCreated) {
-      
-
-//      events.serverEvents.emit("createInstance", self, onCreated);
+  events.serverEvents.on('addApplication', function (callback) { callback(new Application()); });
+  
+  var Application = function () {
+    var appEvents = this.events = events.newEmitter();
     
-//    }
-//  };
-
-//  events.serverEvents.on("createApplication", function (applicationModule, callback) {
-//    requirejs(applicationModule, function (app) {
-      
-//      var app = new Application(applicationModule);
+    var onGetNewFrame = function (dt) {
+      appEvents.emit("getNewFrame", dt);
+    };
     
-//      callback(app);
-//    })    
-//  })
-//});
+    events.serverEvents.on('getNewFrame', onGetNewFrame);
+    
+    var onUpdateClients = function () {
+      appEvents.emit("updateClients");
+    };    
+    events.serverEvents.on('updateClients', onUpdateClients);
+    
+    this.connect = function (clientChannel) {
+      clientChannel = clientChannel || events.newEmitter();
+      events.serverEvents.emit('clientConnected', appEvents, clientChannel);
+      return clientChannel;
+    }
+    
+    this.addElement = function (elementData) {      
+      events.serverEvents.emit("addElement", appEvents, elementData);
+    };
+    
+    this.dispose = function () {
+      appEvents.removeAllListeners();
+      events.serverEvents.removeListener('getNewFrame', onGetNewFrame);
+      events.serverEvents.removeListener('updateClients', onUpdateClients);
+    };
+  };
+});

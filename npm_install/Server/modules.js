@@ -1,9 +1,7 @@
-﻿// make sure all the modules are loaded at least once...
+﻿// modules are just listening to events, not referenced by any other;
 define([
-  'creanvas/intervals', 
   'creanvas/element', 
   'creanvas/clientUpdater',
-  'creanvas/creanvasApplicationInstance'
+  'creanvas/creanvasApplication'
 ], function () {
-  console.log('Not directly referenced modules are loaded.');
 });

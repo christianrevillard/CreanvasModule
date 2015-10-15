@@ -2,8 +2,8 @@
   function (events, timer) {
   
   var elements = [];
-  var refreshFrameRate = 40;
-  var refreshClientRate = 40;
+  var refreshFrameRate = 2000;//40;
+  var refreshClientRate =2000;//40;
   
   var lastUpdateTime = timer.time;
   
@@ -20,10 +20,7 @@
     }, 
   refreshClientRate);
   
-  return {
-    getApplicationInstance: function (callback) {
-      events.serverEvents.emit('addApplicationInstance', callback);    
-    },
-    events: events.serverEvents
+  return function (callback) {
+    events.serverEvents.emit('addApplication', callback);
   };
 });

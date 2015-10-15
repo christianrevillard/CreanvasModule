@@ -1,24 +1,18 @@
-﻿// eventemitter may need:
-// id, join...
+﻿// Common to node and browser.
 
-
-define(['creanvas/creanvasServer'], function (server) {
+define(['creanvas/creanvasServer'], function (creanvas) {
   self = this;
   
-  // need to be a creanvasApplicatonInstance, with own elementList, set of clientupdaters
-  // if socket join a room, will need to do something about browser events. or just let the ClietnUpdater play this role?
-  
   var currentInstance = null;
-  
-  
+    
   var startANewOne = function (callback) {
     console.log('Starting a new application');
     
-    server.getApplicationInstance(function (newInstance) {
+    creanvas(function (app) {
       currentInstance = {
-        instance: newInstance,
+        instance: app,
         nbOfPlayers: 0,
-        connect: function (eventsOut) {
+        connect: function (clientChannel) {
           if (this.nbOfPlayers === 3) {
             console.log('Too many people, create a new one!');
             return;
@@ -28,11 +22,13 @@ define(['creanvas/creanvasServer'], function (server) {
           
           this.nbOfPlayers++;
           
-          this.instance.addElement({ x: 100, y: 100 });
+          app.addElement({ x: 100, y: 100 });
           
-          return newInstance.connect(eventsOut);
-        }
+          setInterval(function () { app.events.emit('message', 'Message for everyone in ' + app.events.id); },2000);
+          setInterval(function () { app.events.emit('message', 'Message for everyone in ' + app.events.id); }, 2000);
 
+          return app.connect(clientChannel);
+        }
       };
       callback(currentInstance);
     });
@@ -43,6 +39,9 @@ define(['creanvas/creanvasServer'], function (server) {
     getApplication: function (callback) {
       if (!currentInstance || currentInstance.nbOfPlayers >= 3) {
         console.log('need a new one!');
+        if (currentInstance) {
+       //   currentInstance.instance.dispose();
+        }
         startANewOne(callback);
       }
       else {

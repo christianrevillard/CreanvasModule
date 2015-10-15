@@ -7,7 +7,8 @@
      
   return {
     serverEvents: new EventEmitter(),
-    getNew: function () {
+    
+    newEmitter: function () {
       var eventEmitter = new EventEmitter();
       eventEmitter.id = (new Date().getTime() % 1000) + '-' + Math.round(1000 * Math.random());
       return eventEmitter;
