@@ -18,14 +18,14 @@ define(['creanvas/creanvasServer'], function (creanvas) {
             return;
           }
           
-          console.log('Connecting a client');
+          console.log('Connecting a client', clientChannel ? clientChannel.id:'auto');
           
           this.nbOfPlayers++;
           
           app.addElement({ x: 100, y: 100 });
           
-          setInterval(function () { app.events.emit('message', 'Message for everyone in ' + app.events.id); },2000);
-          setInterval(function () { app.events.emit('message', 'Message for everyone in ' + app.events.id); }, 2000);
+          setInterval(function () { app.events.emit('emit', 'Message for everyone in ' + app.events.id); },2000);
+          setInterval(function () { app.events.emit('broadcast', clientChannel.id, 'Message for others in ' + app.events.id + ' - from ' + clientChannel.id); }, 2000);
 
           return app.connect(clientChannel);
         }
@@ -39,9 +39,6 @@ define(['creanvas/creanvasServer'], function (creanvas) {
     getApplication: function (callback) {
       if (!currentInstance || currentInstance.nbOfPlayers >= 3) {
         console.log('need a new one!');
-        if (currentInstance) {
-       //   currentInstance.instance.dispose();
-        }
         startANewOne(callback);
       }
       else {

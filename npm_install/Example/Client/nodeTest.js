@@ -1,6 +1,6 @@
 ﻿var socket = io("/Example/Server/nodeTestSocket");
 
-requirejs(['../../Client/creanvasClient'],
+requirejs(['../Client/creanvasClient'],
   function (client) {
     
   client(

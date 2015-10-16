@@ -495,7 +495,7 @@
     <Compile Include="npm_install\Server\clientUpdater.js" />
     <Compile Include="npm_install\Server\creanvasApplication.js" />
     <Compile Include="npm_install\Server\creanvasServer.js" />
-    <Compile Include="npm_install\Client\creanvasClient.js" />
+    <Compile Include="npm_install\Example\Client\creanvasClient.js" />
     <Compile Include="Draft\Client - Copy\CreJs.js" />
     <Compile Include="Draft\Client - Copy\NodeJsController.js" />
     <Compile Include="Draft\Client - Copy\NodeJsElement.js" />
@@ -827,7 +827,6 @@
     <Folder Include="npm_install\Example2\Server\" />
     <Folder Include="npm_install\Example\" />
     <Folder Include="npm_install\Example\Client\" />
-    <Folder Include="npm_install\Client\" />
     <Folder Include="npm_install\Example\scripts\" />
     <Folder Include="npm_install\Example\Server\" />
     <Folder Include="npm_install\Server\" />

@@ -9,18 +9,18 @@
   
   setInterval(
     function () {
-      events.serverEvents.emit("getNewFrame", timer.time - lastUpdateTime);
+      events.commands.emit("getNewFrame", timer.time - lastUpdateTime);
       lastUpdateTime = timer.time;
     }, 
   refreshFrameRate);
   
   setInterval(
     function () {
-      events.serverEvents.emit("updateClients");
+      events.commands.emit("updateClients");
     }, 
   refreshClientRate);
   
   return function (callback) {
-    events.serverEvents.emit('addApplication', callback);
+    events.commands.emit('addApplication', callback);
   };
 });

@@ -1,6 +1,6 @@
 ﻿define(['creanvas/events'], function (events) {
   
-  events.serverEvents.on("addElement", function (appEvents, elementData) {
+  events.commands.on("addElement", function (appEvents, elementData) {
     new Element(appEvents, elementData);
   });
   

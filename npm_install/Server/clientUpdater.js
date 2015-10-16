@@ -1,6 +1,6 @@
 ﻿define(['creanvas/events'], function (events) {
   
-  events.serverEvents.on(
+  events.commands.on(
     "clientConnected", 
     function (appEvents, clientChannel) {
       new ClientUpdater(appEvents, clientChannel);

@@ -8,7 +8,7 @@ requirejs.config({
 var minApp;
 
 requirejs([
-  '../../Client/creanvasClient',
+  '../Client/creanvasClient',
   '../Server/testApplication'
 ],
   function (client, testApplication) {
