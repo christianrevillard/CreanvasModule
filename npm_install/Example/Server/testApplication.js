@@ -1,16 +1,16 @@
 ﻿// Common to node and browser.
 
-define(['creanvas/creanvasServer'], function (creanvas) {
+define(['creanvas/creanvas'], function (creanvas) {
   self = this;
   
-  var currentInstance = null;
+  var testApplication = null;
     
   var startANewOne = function (callback) {
-    console.log('Starting a new application');
+    console.log('Starting a new testApplication');
     
     creanvas(function (app) {
-      currentInstance = {
-        instance: app,
+      testApplication = {
+        app: app,
         nbOfPlayers: 0,
         connect: function (clientChannel) {
           if (this.nbOfPlayers === 3) {
@@ -18,31 +18,31 @@ define(['creanvas/creanvasServer'], function (creanvas) {
             return;
           }
           
-          console.log('Connecting a client', clientChannel ? clientChannel.id:'auto');
+          console.log('Connecting a client', clientChannel.id);
           
           this.nbOfPlayers++;
           
           app.addElement({ x: 100, y: 100 });
           
-          setInterval(function () { app.events.emit('emit', 'Message for everyone in ' + app.events.id); },2000);
-          setInterval(function () { app.events.emit('broadcast', clientChannel.id, 'Message for others in ' + app.events.id + ' - from ' + clientChannel.id); }, 2000);
+          setInterval(function () { app.emit('emit', 'Message for everyone in ' + app.id); },10000);
+          setInterval(function () { app.emit('broadcast', clientChannel.id, 'Message for others in ' + app.id + ' - from ' + clientChannel.id); }, 10000);
 
           return app.connect(clientChannel);
         }
       };
-      callback(currentInstance);
+      callback(testApplication);
     });
   };
   
   return {
     
     getApplication: function (callback) {
-      if (!currentInstance || currentInstance.nbOfPlayers >= 3) {
+      if (!testApplication || testApplication.nbOfPlayers >= 3) {
         console.log('need a new one!');
         startANewOne(callback);
       }
       else {
-        callback(currentInstance);
+        callback(testApplication);
       }
     }
   };

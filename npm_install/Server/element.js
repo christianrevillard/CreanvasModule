@@ -1,22 +1,25 @@
-﻿define(['creanvas/events'], function (events) {
+﻿define(['creanvas/serverBus'], function (serverBus) {
   
-  events.commands.on("addElement", function (appEvents, elementData) {
-    new Element(appEvents, elementData);
+  serverBus.on('applicationCreated', function (appBus) {
+    appBus.on(
+      "addElement", 
+    function (elementData) {
+        new Element(appBus, elementData);
+      });
   });
   
-  var Element = function (appEvents, elementData) {
+  var Element = function (appBus, elementData) {
+    
+    console.log('Element - Adding Element', appBus.id);
     
     var self = this;
     self.x = elementData.x;
     self.y = elementData.y;
-       
-    appEvents.on("getNewFrame", function (dt) {
+    
+    appBus.on("getNewFrame", function (dt) {
       
-     // console.log('update element for appId', appEvents.id, dt.toFixed(2));
-     // console.log('new position for appId', appEvents.id, self.x.toFixed(2), self.y.toFixed(2));
-
       self.x += dt * 200 / 10;
-      self.y += dt * 100 / 10; 
+      self.y += dt * 100 / 10;
       
       if (self.x > 400) {
         self.x = 0;
@@ -26,8 +29,8 @@
         self.y = 0;
       }
       
-      appEvents.emit('elementUpdated', self);
+      console.log('element is now updated');
+      appBus.emit('elementUpdated', self);
     });
   };
-   
 });

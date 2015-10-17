@@ -3,6 +3,6 @@ define([
   'creanvas/element', 
   'creanvas/clientUpdater',
   'creanvas/clientMessenger',
-  'creanvas/creanvasApplication'
+  'creanvas/application'
 ], function () {
 });

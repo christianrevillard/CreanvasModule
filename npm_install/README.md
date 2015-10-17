@@ -8,6 +8,7 @@ return just a function(callback);
 
 callback is function(app)
 
+
 app interface
 -------------
 connect(socket) : to pass the socket for node/socket.io usage;
@@ -17,3 +18,12 @@ dispose: clean up event listeners. Application will no longer work.
 
 Should be everything?
 the reste is done by elements parameters....
+
+
+commands
+--------
+(emit event on commands object)
+appCommand : connecting a command to a specific app so it can be disposed.
+
+events
+------

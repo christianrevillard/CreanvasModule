@@ -493,8 +493,8 @@
     <Compile Include="npm_install\Server\browserifiedEventEmitter.js" />
     <Compile Include="npm_install\Server\clientMessenger.js" />
     <Compile Include="npm_install\Server\clientUpdater.js" />
-    <Compile Include="npm_install\Server\creanvasApplication.js" />
-    <Compile Include="npm_install\Server\creanvasServer.js" />
+    <Compile Include="npm_install\Server\application.js" />
+    <Compile Include="npm_install\Server\creanvas.js" />
     <Compile Include="npm_install\Example\Client\creanvasClient.js" />
     <Compile Include="Draft\Client - Copy\CreJs.js" />
     <Compile Include="Draft\Client - Copy\NodeJsController.js" />
@@ -549,7 +549,8 @@
     <Compile Include="Draft\Server\ElementTypes\Circle.js" />
     <Compile Include="app.js" />
     <Compile Include="npm_install\Server\element.js" />
-    <Compile Include="npm_install\Server\events.js" />
+    <Compile Include="npm_install\Server\serverBus.js" />
+    <Compile Include="npm_install\Server\EventEmitter.js" />
     <Compile Include="npm_install\Server\modules.js" />
     <Compile Include="npm_install\Server\timer.js" />
   </ItemGroup>

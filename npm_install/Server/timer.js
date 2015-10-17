@@ -1,6 +1,5 @@
 ﻿define(
-  ['creanvas/events'],
-  function (events) {
+  function () {
     
     var timer = {
       paused: false,
@@ -17,5 +16,3 @@
     
     return timer;
   });
-
-
