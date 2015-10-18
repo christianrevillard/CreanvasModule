@@ -1,8 +1,8 @@
 ﻿// modules are just listening to events, not referenced by any other;
 define([
-  'creanvas/element', 
+  'creanvas/logger',
   'creanvas/clientUpdater',
   'creanvas/clientMessenger',
-  'creanvas/application'
+  'creanvas/element'
 ], function () {
 });

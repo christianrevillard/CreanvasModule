@@ -29,12 +29,7 @@ requirejs([
       });
     }
   };
-});
-
-var joinBrowser = function () {
-  console.log('Clicked');
-  if (!minApp)
-    return;
 
   minApp.join();
-};
+});
+

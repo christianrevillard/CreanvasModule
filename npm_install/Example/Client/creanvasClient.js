@@ -2,7 +2,7 @@
   
   return function (eventsReceiver, canvas) {
     
-    console.log('Setting up client ', canvas.id, eventsReceiver.id);
+    console.log('Setting up client ', canvas.id);
     
     var ctx = canvas.getContext("2d");
     ctx.font = "12px Arial";
@@ -14,7 +14,7 @@
       currentMessage = currentMessage.slice(0, 100);
      });
         
-    eventsReceiver.on('update', function (data) {
+    eventsReceiver.on('elementsUpdated', function (data) {
       var elements = JSON.parse(data);
       
       ctx.clearRect(0, 0, canvas.width, canvas.height); ctx.beginPath();

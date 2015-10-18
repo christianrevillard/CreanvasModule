@@ -9,9 +9,7 @@
   });
   
   var Element = function (appBus, elementData) {
-    
-    console.log('Element - Adding Element', appBus.id);
-    
+        
     var self = this;
     self.x = elementData.x;
     self.y = elementData.y;
@@ -29,8 +27,9 @@
         self.y = 0;
       }
       
-      console.log('element is now updated');
       appBus.emit('elementUpdated', self);
     });
+
+    appBus.emit('elementAdded', self);
   };
 });

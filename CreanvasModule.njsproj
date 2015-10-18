@@ -492,8 +492,8 @@
     <Compile Include="npm_install\Example\Server\testApplication.js" />
     <Compile Include="npm_install\Server\browserifiedEventEmitter.js" />
     <Compile Include="npm_install\Server\clientMessenger.js" />
+    <Compile Include="npm_install\Server\logger.js" />
     <Compile Include="npm_install\Server\clientUpdater.js" />
-    <Compile Include="npm_install\Server\application.js" />
     <Compile Include="npm_install\Server\creanvas.js" />
     <Compile Include="npm_install\Example\Client\creanvasClient.js" />
     <Compile Include="Draft\Client - Copy\CreJs.js" />
@@ -1372,6 +1372,8 @@
     <Content Include="npm_install\Example2\node_modules\requirejs\package.json" />
     <Content Include="npm_install\Example2\node_modules\requirejs\README.md" />
     <Content Include="npm_install\Example2\package.json" />
+    <Content Include="npm_install\Example\Client\browser.html" />
+    <Content Include="npm_install\Example\Client\node.html" />
     <Content Include="npm_install\Example\Client\index.html" />
     <Content Include="npm_install\Example\package.json" />
     <Content Include="npm_install\package.json" />

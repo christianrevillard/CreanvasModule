@@ -12,7 +12,7 @@ var onConnection = function (socket) {
     function (testApplication) {
     
     var joined = false;
-
+    
     socket.on("join", function (){
       
       if (joined)

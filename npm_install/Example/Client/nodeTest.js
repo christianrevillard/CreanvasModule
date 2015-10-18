@@ -1,4 +1,10 @@
-﻿var socket = io("/Example/Server/nodeTestSocket");
+﻿// entry point for in-browser, config requirejs here
+
+requirejs.config({
+  paths: { 'creanvas': '../../Server' }
+});
+
+var socket = io("/Example/Server/nodeTestSocket");
 
 requirejs(['../Client/creanvasClient'],
   function (client) {
@@ -6,9 +12,7 @@ requirejs(['../Client/creanvasClient'],
   client(
     socket, 
     document.getElementById('nodeCanvas'));  
-});
 
-
-var joinNode = function () {
   socket.emit("join");
-};
+
+});

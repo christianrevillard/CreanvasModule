@@ -9,26 +9,23 @@
   });
   
   var ClientMessenger = function (appBus, clientChannel) {
-    
-    console.log('Adding ClientMEssenger', appBus.id, clientChannel.id);
-    
-    var onEmit = function (message) {
+    var onSendMessage = function (message) {
       clientChannel.emit('message', message);
     };
     
-    appBus.on("emit", onEmit);
+    appBus.on("sendMessage", onSendMessage);
     
-    var onBroadcast = function (fromClientId, message) {
+    var onBroadcastMessage = function (fromClientId, message) {
       if (fromClientId === clientChannel.id)
         return;
       clientChannel.emit('message', message);
     };
     
-    appBus.on("broadcast", onBroadcast);
+    appBus.on("broadcastMessage", onBroadcastMessage);
     
     clientChannel.on('disconnect', function () {
-      appBus.removeListener("emit", onEmit);
-      appBus.removeListener("broadcast", onBroadcast);
+      appBus.removeListener("sendMessage", onSendMessage);
+      appBus.removeListener("broadCastMessage", onBroadcastMessage);
     });
   };
 });
