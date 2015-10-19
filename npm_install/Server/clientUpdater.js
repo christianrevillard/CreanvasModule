@@ -12,7 +12,14 @@
     var updatedElements = [];
     
     var onElementUpdated = function (element) {
-      updatedElements.push(element);
+      updatedElements.push({
+        id: element.id,
+        type: element.type,
+        x: element.position.x,
+        y: element.position.y,        
+        z: element.position.z,
+        angle: element.position.angle
+      });
     };
     
     appBus.on("elementUpdated", onElementUpdated);

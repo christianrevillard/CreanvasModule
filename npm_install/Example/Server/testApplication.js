@@ -25,7 +25,22 @@ define(['creanvas/creanvas'], function (creanvas) {
         
         this.nbOfPlayers++;
         
-        app.addElement({ x: 100, y: 100 });
+        app.addElement(
+          {
+            position: { x: 100, y: 100 },
+            type:'X',
+            speed: { x: 50, y: 50},
+            afterMove: function () {
+              
+              if (this.position.x > 400) {
+                this.position.x = 0;
+              }
+                            
+              if (this.position.y > 400) {
+                this.position.y = 0;
+              }
+            }
+          });
         
         clientChannel.emit('message', 'Welcome, you are ' + clientChannel.id + ' on ' + app.id);
         app.emit('broadcastMessage', clientChannel.id, clientChannel.id + ' has joined ' + app.id);

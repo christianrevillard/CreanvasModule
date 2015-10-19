@@ -6,7 +6,7 @@ requirejs.config({
 
 var socket = io("/Example/Server/nodeTestSocket");
 
-requirejs(['../Client/creanvasClient'],
+requirejs(['./testApplicationClient'],
   function (client) {
     
   client(

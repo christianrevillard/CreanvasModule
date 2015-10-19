@@ -3,6 +3,7 @@ define([
   'creanvas/logger',
   'creanvas/clientUpdater',
   'creanvas/clientMessenger',
-  'creanvas/element'
+  'creanvas/element',
+  'creanvas/elementMover',
 ], function () {
 });

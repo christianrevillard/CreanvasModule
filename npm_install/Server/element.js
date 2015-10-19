@@ -4,32 +4,23 @@
     appBus.on(
       "addElement", 
     function (elementData) {
+      // will need call back if the client needs the Id.
         new Element(appBus, elementData);
       });
   });
   
-  var Element = function (appBus, elementData) {
-        
-    var self = this;
-    self.x = elementData.x;
-    self.y = elementData.y;
+  var elementId = 0;
     
-    appBus.on("getNewFrame", function (dt) {
-      
-      self.x += dt * 200 / 10;
-      self.y += dt * 100 / 10;
-      
-      if (self.x > 400) {
-        self.x = 0;
-      }
-      
-      if (self.y > 400) {
-        self.y = 0;
-      }
-      
-      appBus.emit('elementUpdated', self);
-    });
+  var Element = function (appBus, element) {
+    // some format, check ? 
+    // TODO, just use as is for the moment.
+    // how to pass condition some x=0 when x>400?
 
-    appBus.emit('elementAdded', self);
+    element.id = element.id || (++elementId);
+
+    // do we need this at all?  
+    // any need for a lit of elements somewhere (in collision solver of course)   
+   
+    appBus.emit('elementAdded', element);
   };
 });

@@ -1,16 +1,16 @@
 ﻿define(['creanvas/serverBus', 'creanvas/timer', 'creanvas/EventEmitter', 'creanvas/modules'],
   function (serverBus, timer, EventEmitter) {
   
-  var refreshFrameRate = 2000;//40;
-  var refreshClientRate = 2000;//40;
+  var refreshFrameRate = 40;
+  var refreshClientRate = 40;
   
-  var nextAppId = 1;
+  var appId = 0;
   
   var Application = function () {
     var appBus = new EventEmitter();
-    var nextClientId = 1;
+    var clientId = 0;
     
-    appBus.id = 'App-' + (nextAppId++);
+    appBus.id = 'App-' + (++appId);
     
     var lastUpdateTime = timer.time;
     
@@ -42,7 +42,7 @@
     this.connect = function (clientChannel) {
       clientChannel = clientChannel || new EventEmitter();
       
-      clientChannel.id = clientChannel.id || (appBus.id + '-Client-' + (nextClientId++));
+      clientChannel.id = clientChannel.id || (appBus.id + '-Client-' + (++clientId));
       
       appBus.emit('clientConnected', clientChannel);
       return clientChannel;
