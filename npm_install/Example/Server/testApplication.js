@@ -32,12 +32,12 @@ define(['creanvas/creanvas'], function (creanvas) {
             speed: { x: 50, y: 50},
             afterMove: function () {
               
-              if (this.position.x > 400) {
-                this.position.x = 0;
+              if (this.position.x > 800) {
+                this.position.x = -800;
               }
                             
-              if (this.position.y > 400) {
-                this.position.y = 0;
+              if (this.position.y > 500) {
+                this.position.y = -500;
               }
             }
           });

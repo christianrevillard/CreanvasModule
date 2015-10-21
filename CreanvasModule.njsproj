@@ -16,6 +16,10 @@
   <PropertyGroup Condition="'$(Configuration)' == 'Debug'" />
   <PropertyGroup Condition="'$(Configuration)' == 'Release'" />
   <ItemGroup>
+    <Compile Include="npm_install\Client\coordinatesConverter.js" />
+    <Compile Include="npm_install\Client\elementsUpdater.js" />
+    <Compile Include="npm_install\Client\elementsDisplayer.js" />
+    <Compile Include="npm_install\Client\system.js" />
     <Compile Include="npm_install\Example2\app.js" />
     <Compile Include="npm_install\Example2\Client\browserTest.js" />
     <Compile Include="npm_install\Example2\Client\nodeTest.js" />

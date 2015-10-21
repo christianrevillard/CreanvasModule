@@ -1,7 +1,8 @@
 ﻿// entry point for in-browser, config requirejs here
 
 requirejs.config({
-  paths: { 'creanvas': '../../Server' }
+  paths: { 'creanvas': '../../Server' },
+  paths: { 'client': '../../Client' }
 });
 
 var socket = io("/Example/Server/nodeTestSocket");
