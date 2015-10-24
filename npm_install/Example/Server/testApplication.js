@@ -15,8 +15,10 @@ define(['creanvas/creanvas'], function (creanvas) {
     testApplication = {
       app: app,
       nbOfPlayers: 0,
+      z:0,
       connect: function (clientChannel) {
-        if (this.nbOfPlayers === 3) {
+        self = this;
+        if (self.nbOfPlayers === 3) {
           console.log('testApplicaton: Too many people, create a new one!');
           return;
         }
@@ -25,13 +27,25 @@ define(['creanvas/creanvas'], function (creanvas) {
         
         console.log('testApplicaton: Connecting a client', clientChannel.id);
         
-        this.nbOfPlayers++;
-        
+        self.nbOfPlayers++;
+        self.z++;
+
         app.addElement(
           {
             id : 'X' + (++elementId),
-            position: { x: 100, y: 100 },
-            type:'X',
+            position: { x: 100, y: 100, z: self.z },
+            type: 'X',
+            onClick: function () {
+              app.emit('broadcastMessage', clientChannel.id, 'Clicked by someone ' + this.id);
+              clientChannel.emit('message', 'Clicked by me' + this.id);
+            },
+            onDoubleClick: function () {
+              app.emit('broadcastMessage', clientChannel.id,'DoubleClicked by someone ' + this.id);
+              clientChannel.emit('message', 'DoubleClicked by me' + this.id);
+              self.nbOfPlayers--;
+              this.emit('dispose');
+            },
+            draggable: elementId%2,
             speed: { x: 50, y: 50},
             afterMove: function () {
               
@@ -47,9 +61,9 @@ define(['creanvas/creanvas'], function (creanvas) {
         
         clientChannel.emit('message', 'Welcome, you are ' + clientChannel.id + ' on ' + app.id);
         app.emit('broadcastMessage', clientChannel.id, clientChannel.id + ' has joined ' + app.id);
-        app.on('elementEvent', function (event, element) {
-          clientChannel.emit('message', event.eventId + ' on element ' + element.id);
-        });
+        //app.on('elementEvent', function (event, element) {
+        //  clientChannel.emit('message', event.eventId + ' on element ' + element.id);
+        //});
 
         return clientChannel;
       }

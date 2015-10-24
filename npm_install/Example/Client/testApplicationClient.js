@@ -2,8 +2,8 @@
   
   return function (clientChannel, canvas) {
     
-    var currentMessage = "";
-        
+    var messages = [];
+    
     var ctx = canvas.getContext("2d");
     ctx.font = "40px Arial";
     
@@ -13,7 +13,7 @@
       left: -800,
       right: 800,
       top: -500,
-      bottom:500,
+      bottom: 500,
       elementTypes: [
         {
           typeName: "X",
@@ -69,21 +69,20 @@
           boxData: { width: 150, height: 150 }
         }
       ],
-      onDraw: function (context){
+      onDraw: function (context) {
         context.beginPath();
         context.fillStyle = "black";
-        context.fillText(currentMessage, -750, -450);
+        context.fillText(messages.toString(), -750, -450);
       },
       background: function (context) {
         context.fillStyle = "#DDD";
-        context.fillRect(-795,-495, 1590, 990);
+        context.fillRect(-795, -495, 1590, 990);
       }
-    });    
+    });
     
     clientChannel.on('message', function (message) {
-      currentMessage = message + '-'  + currentMessage;
-      currentMessage = currentMessage.slice(0, 200);
-      setTimeout(function () { currentMessage = '';}, 5000);
-     });
+      messages.unshift(message);
+      setTimeout(function () { messages.pop(); }, 5000);
+    });
   };
 });

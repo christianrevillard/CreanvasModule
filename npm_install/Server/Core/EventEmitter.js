@@ -1,4 +1,4 @@
-﻿define(['creanvas/browserifiedEventEmitter'],
+﻿define(['creanvas/Core/browserifiedEventEmitter'],
   function (browserEvents) {
   
   var isNode = (typeof module !== 'undefined' && module.exports);

@@ -69,6 +69,7 @@ define(['client/coordinatesConverter'], function (coordinates) {
     };
         
     registerCanvasPointerEvent('click', 'click', false);
+    registerCanvasPointerEvent('dblclick', 'doubleclick', false);
     registerCanvasPointerEvent('mousedown', 'pointerDown', false);
     registerCanvasPointerEvent('touchstart', 'pointerDown', false);
     registerCanvasPointerEvent('mousemove', 'pointerMove', true);

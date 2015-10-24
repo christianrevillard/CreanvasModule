@@ -1,4 +1,4 @@
-﻿define(['creanvas/serverBus'], function (serverBus) {
+﻿define(['creanvas/Core/serverBus'], function (serverBus) {
   
   // todo log levels to avoid comment in/out !
   
@@ -20,11 +20,13 @@
     appBus.on("elementAdded", function () { console.log('elementAdded', appBus.id); });
     
    // appBus.on("elementUpdated", function () { console.log('elementUpdated', appBus.id); });
-
+    
+    appBus.on("elementEvent", function (event, element) { console.log('elementEvent', appBus.id, event.eventId, element.id); });
+        
     appBus.on("clientConnected", function (clientChannel) {
       console.log('clientConnected', appBus.id, clientChannel.id);
       
-      clientChannel.on("disconnect", function () { console.log('disconnect', appBus.id, clientChannel.id); });
+      clientChannel.clientSide.on("disconnect", function () { console.log('disconnect', appBus.id, clientChannel.id); });
      });
   });
 });
