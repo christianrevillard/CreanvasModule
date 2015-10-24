@@ -1,15 +1,17 @@
 ﻿// entry point for in-browser, config requirejs here
 
 requirejs.config({
-  paths: { 'creanvas': '../../Server' },
-  paths: { 'client': '../../Client' }
+  paths: {
+    'creanvas': '../../Server' ,
+    'client': '../../Client'
+  }
 });
 
 
 var minApp;
 
 requirejs([
-  './testApplicationClient ',
+  './testApplicationClient',
   '../Server/testApplication'
 ],
   function (client, testApplication) {

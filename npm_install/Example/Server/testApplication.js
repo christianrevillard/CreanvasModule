@@ -8,6 +8,8 @@ define(['creanvas/creanvas'], function (creanvas) {
   var startANewOne = function (callback) {
     console.log('Starting a new testApplication');
     
+    var elementId = 0;
+
     var app = creanvas();
     
     testApplication = {
@@ -27,6 +29,7 @@ define(['creanvas/creanvas'], function (creanvas) {
         
         app.addElement(
           {
+            id : 'X' + (++elementId),
             position: { x: 100, y: 100 },
             type:'X',
             speed: { x: 50, y: 50},
@@ -44,7 +47,10 @@ define(['creanvas/creanvas'], function (creanvas) {
         
         clientChannel.emit('message', 'Welcome, you are ' + clientChannel.id + ' on ' + app.id);
         app.emit('broadcastMessage', clientChannel.id, clientChannel.id + ' has joined ' + app.id);
-        
+        app.on('elementEvent', function (event, element) {
+          clientChannel.emit('message', event.eventId + ' on element ' + element.id);
+        });
+
         return clientChannel;
       }
     };

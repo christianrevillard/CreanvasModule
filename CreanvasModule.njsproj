@@ -498,6 +498,9 @@
     <Compile Include="npm_install\Example\Server\nodeTestSocket.js" />
     <Compile Include="npm_install\Example\Server\testApplication.js" />
     <Compile Include="npm_install\Server\browserifiedEventEmitter.js" />
+    <Compile Include="npm_install\Server\elementEventChecker.js" />
+    <Compile Include="npm_install\Server\clientEventReceiver.js" />
+    <Compile Include="npm_install\Server\elementList.js" />
     <Compile Include="npm_install\Server\clientMessenger.js" />
     <Compile Include="npm_install\Server\elementMover.js" />
     <Compile Include="npm_install\Server\logger.js" />

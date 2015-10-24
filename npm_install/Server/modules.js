@@ -5,5 +5,8 @@ define([
   'creanvas/clientMessenger',
   'creanvas/element',
   'creanvas/elementMover',
+  'creanvas/elementList',
+  'creanvas/clientEventReceiver',
+  'creanvas/elementEventChecker'
 ], function () {
 });

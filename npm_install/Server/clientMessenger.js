@@ -27,11 +27,5 @@
       appBus.removeListener("sendMessage", onSendMessage);
       appBus.removeListener("broadCastMessage", onBroadcastMessage);
     });
-
-
-    clientChannel.on('pointerEvent', function () {
-      console.log(arguments)
-    });
-
   };
 });

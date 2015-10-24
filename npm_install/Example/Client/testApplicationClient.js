@@ -83,6 +83,7 @@
     clientChannel.on('message', function (message) {
       currentMessage = message + '-'  + currentMessage;
       currentMessage = currentMessage.slice(0, 200);
+      setTimeout(function () { currentMessage = '';}, 5000);
      });
   };
 });
