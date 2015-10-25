@@ -3,10 +3,10 @@
   serverBus.on('applicationCreated', function (appBus) {
     
     var updatedElements = [];
-
+    
     appBus.on(
       "elementAdded", 
-    function (element) {        
+    function (element) {
         element.on("elementUpdated", function () {
           
           updatedElements = updatedElements.filter(function (existing) { return existing.id !== element.id });
@@ -29,23 +29,21 @@
             deleted: true
           });
         });
-      });    
+      });
     
     appBus.on(
       "clientConnected", 
     function (clientChannel) {
         
-        var onUpdateClients = function () {
-          if (updatedElements.length == 0) return;
-          clientChannel.clientSide.emit('elementsUpdated', JSON.stringify(updatedElements));
-          updatedElements = [];
-        };
-        
-        appBus.on("updateClients", onUpdateClients);
-        
-        clientChannel.clientSide.on('disconnect', function () {
-          appBus.removeListener("updateClients", onUpdateClients);
-        });
+        appBus.addClientChannelListener(
+          clientChannel, 
+          'updateClients',
+          function () {
+            if (updatedElements.length == 0) return;
+            clientChannel.emit('elementsUpdated', JSON.stringify(updatedElements));
+            updatedElements = [];
+          }
+        );
       });
   });
 });

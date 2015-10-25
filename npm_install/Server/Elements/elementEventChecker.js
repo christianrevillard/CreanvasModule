@@ -4,13 +4,13 @@
     appBus.on(
       "addElement", 
     function (element) {
-        new ElementEventChecker(appBus, element);
+        elementEventChecker(appBus, element);
       });
   });
   
-  var ElementEventChecker = function (appBus, element) {
+  var elementEventChecker = function (appBus, element) {
     
-    appBus.on('checkElementEvent', function (event) {
+    appBus.addElementListener(element, 'checkElementEvent', function (event) {
       if (!element.position)
         return;
       
@@ -21,7 +21,7 @@
           return;
         }
         
-        appBus.emit('isPointInElement' + element.id, event.x, event.y, function (result) {
+        element.emit('isPointInElement', event.x, event.y, function (result) {
           if (result) {
             event.element = element;
           }

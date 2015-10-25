@@ -10,7 +10,7 @@
   
   var clientEventReceiver = function (appBus, clientChannel) {
     
-    clientChannel.clientSide.on('pointerEvent', function (eventData) {
+    clientChannel.on('pointerEvent', function (eventData) {
       var event = JSON.parse(eventData);
       appBus.emit('checkElementEvent', event);
       if (event.element) {

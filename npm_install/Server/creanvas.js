@@ -54,6 +54,20 @@
       appBus.removeAllListeners();
     };
     
+    appBus.addClientChannelListener = function (clientChannel, event, handler) {
+      appBus.on(event, handler);
+      clientChannel.on('disconnect', function () { 
+        appBus.removeListener(event, handler);
+      });
+    };
+    
+    appBus.addElementListener = function (element, event, handler) {
+      appBus.on(event, handler);
+      element.on('dispose', function () {
+        appBus.removeListener(event, handler);
+      });
+    };
+   
     serverBus.emit('applicationCreated', appBus);
   };
   

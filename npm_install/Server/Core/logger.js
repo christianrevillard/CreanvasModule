@@ -26,7 +26,7 @@
     appBus.on("clientConnected", function (clientChannel) {
       console.log('clientConnected', appBus.id, clientChannel.id);
       
-      clientChannel.clientSide.on("disconnect", function () { console.log('disconnect', appBus.id, clientChannel.id); });
+      clientChannel.on("disconnect", function () { console.log('disconnect', appBus.id, clientChannel.id); });
      });
   });
 });
