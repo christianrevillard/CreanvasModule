@@ -21,7 +21,7 @@
     
    // appBus.on("elementUpdated", function () { console.log('elementUpdated', appBus.id); });
     
-    appBus.on("elementEvent", function (event, element) { console.log('elementEvent', appBus.id, event.eventId, element.id); });
+//    appBus.on("elementEvent", function (event, element) { console.log('elementEvent', appBus.id, event.eventId, element.id); });
         
     appBus.on("clientConnected", function (clientChannel) {
       console.log('clientConnected', appBus.id, clientChannel.id);

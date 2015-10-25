@@ -12,6 +12,15 @@ define(['creanvas/creanvas'], function (creanvas) {
 
     var app = creanvas();
     
+    app.addElement({
+      id: 'myDropzone',
+      type: 'dropZone',
+      dropZone: { maxCount: 1 },
+      position: { x: 400, y: -250, z: -100 },
+      circular: {radius: 250}
+    })
+
+
     testApplication = {
       app: app,
       nbOfPlayers: 0,
@@ -29,8 +38,8 @@ define(['creanvas/creanvas'], function (creanvas) {
         
         self.nbOfPlayers++;
         self.z++;
-
-        app.addElement(
+        
+        var element = 
           {
             id : 'X' + (++elementId),
             position: { x: 100, y: 100, z: self.z },
@@ -45,7 +54,8 @@ define(['creanvas/creanvas'], function (creanvas) {
               self.nbOfPlayers--;
               this.emit('dispose');
             },
-            draggable: elementId%2,
+            draggable: elementId % 2,
+            droppable: true,
             speed: { x: 50, y: 50},
             afterMove: function () {
               
@@ -58,7 +68,11 @@ define(['creanvas/creanvas'], function (creanvas) {
               }
             },
             circular: {radius:100}
-          });
+        };
+        app.addElement(element);
+        element.on('droppedIn', function (dropZone) { element.speed = { x: 0, y: 0, angle: Math.PI / 4 } });
+        element.on('draggedOut', function (dropZone) { element.speed = { x: 50, y: 50 }});
+
         
         clientChannel.emit('message', 'Welcome, you are ' + clientChannel.id + ' on ' + app.id);
         app.emit('broadcastMessage', clientChannel.id, clientChannel.id + ' has joined ' + app.id);

@@ -14,14 +14,14 @@
     
     appBus.on("getNewFrame", function (dt) {
       
-      element.position.x += element.speed.x * dt;
-      element.position.y += element.speed.y * dt;
-      element.position.angle += element.speed.angle * dt;
+      element.position.x += (element.speed.x || 0) * dt;
+      element.position.y += (element.speed.y || 0) * dt;
+      element.position.angle += (element.speed.angle ||0) * dt;
       
       if (element.acceleration) {
-        element.speed.x += element.acceleration.x * dt;
-        element.speed.y += element.acceleration.y * dt;
-        element.speed.angle += element.acceleration.angle * dt;
+        element.speed.x += (element.acceleration.x || 0) * dt;
+        element.speed.y += (element.acceleration.y || 0) * dt;
+        element.speed.angle += (element.acceleration.angle || 0) * dt;
       }
       
       if (element.afterMove) { element.afterMove(); }

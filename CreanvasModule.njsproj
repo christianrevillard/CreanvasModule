@@ -497,9 +497,10 @@
     <Compile Include="npm_install\Example\scripts\require.js" />
     <Compile Include="npm_install\Example\Server\nodeTestSocket.js" />
     <Compile Include="npm_install\Example\Server\testApplication.js" />
-    <Compile Include="npm_install\Server\ClientCommunication\clientChannel.js" />
     <Compile Include="npm_install\Server\Core\browserifiedEventEmitter.js" />
     <Compile Include="npm_install\Server\Elements\ElementClasses\clickable.js" />
+    <Compile Include="npm_install\Server\Elements\ElementClasses\dropZone.js" />
+    <Compile Include="npm_install\Server\Elements\ElementClasses\droppable.js" />
     <Compile Include="npm_install\Server\Elements\ElementClasses\draggable.js" />
     <Compile Include="npm_install\Server\Elements\ElementTypes\circular.js" />
     <Compile Include="npm_install\Server\Elements\elementEventHandler.js" />

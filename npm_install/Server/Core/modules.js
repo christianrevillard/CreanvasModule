@@ -2,7 +2,6 @@
 define([
   'creanvas/Core/logger',
 
-  'creanvas/ClientCommunication/clientChannel',
   'creanvas/ClientCommunication/clientUpdater',
   'creanvas/ClientCommunication/clientMessenger',
   'creanvas/ClientCommunication/clientEventReceiver',
@@ -14,6 +13,8 @@ define([
   'creanvas/Elements/ElementClasses/moving',
   'creanvas/Elements/ElementClasses/draggable',
   'creanvas/Elements/ElementClasses/clickable',
+  'creanvas/Elements/ElementClasses/droppable',
+  'creanvas/Elements/ElementClasses/dropZone',
 
   'creanvas/Elements/ElementTypes/circular',
 ], function () {

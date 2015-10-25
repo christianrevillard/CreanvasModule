@@ -47,6 +47,15 @@
           },
           boxData: { width: 150, height: 150 }
         },
+    
+        {
+          typeName: "dropZone",
+          draw: function (context) {
+            context.strokeStyle = "#000";
+            context.arc(0, 0, 250, 0, 2 * Math.PI);
+            context.stroke();
+          }
+        },
         {
           typeName: 'O',
           draw: function (context) {
@@ -75,7 +84,7 @@
         context.fillText(messages.toString(), -750, -450);
       },
       background: function (context) {
-        context.fillStyle = "#DDD";
+        context.fillStyle = "#EEE";
         context.fillRect(-795, -495, 1590, 990);
       }
     });

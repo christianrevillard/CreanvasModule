@@ -11,6 +11,7 @@
     appBus.setMaxListeners(0);
     
     appBus.id = 'App-' + (++appId);
+    var clientId = 0;
     
     var lastUpdateTime = timer.time;
     
@@ -40,8 +41,19 @@
     }
     
     this.connect = function (clientChannel) {
+                 
+      if (!clientChannel) {
+        clientChannel = new EventEmitter();
+        clientChannel.setMaxListeners(0);
+        clientChannel.id = appBus.id + '-Client-' + (++clientId);
+      }
       
-      appBus.emit('connectClient', clientChannel);
+      appBus.emit('clientConnected', clientChannel);
+      
+      clientChannel.on('disconnect', function () {
+        clientChannel.removeAllListeners();
+      });
+      
       return clientChannel;
     }
     
