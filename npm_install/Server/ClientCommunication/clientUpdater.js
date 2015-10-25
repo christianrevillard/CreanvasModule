@@ -31,17 +31,21 @@
         });
       });
     
+    appBus.on('updateClients', function () {
+      appBus.emit('sendUpdatedElementsToClientChannels');
+      updatedElements = [];
+    });
+    
     appBus.on(
       "clientConnected", 
     function (clientChannel) {
         
         appBus.addClientChannelListener(
           clientChannel, 
-          'updateClients',
+          'sendUpdatedElementsToClientChannels',
           function () {
             if (updatedElements.length == 0) return;
             clientChannel.emit('elementsUpdated', JSON.stringify(updatedElements));
-            updatedElements = [];
           }
         );
       });

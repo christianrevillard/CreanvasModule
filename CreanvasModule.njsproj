@@ -5,8 +5,8 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{a44c2184-6b6a-4fd6-9af0-48208e623d5f}</ProjectGuid>
     <ProjectHome />
-    <ProjectView>ShowAllFiles</ProjectView>
-    <StartupFile>npm_install\Example\app.js</StartupFile>
+    <ProjectView>ProjectFiles</ProjectView>
+    <StartupFile>npm_install\TicTacToe\app.js</StartupFile>
     <WorkingDirectory>.</WorkingDirectory>
     <OutputPath>.</OutputPath>
     <ProjectTypeGuids>{3AF33F2E-1136-4D97-BBB7-1795711AC8B8};{349c5851-65df-11da-9384-00065b846f21};{9092AA53-FB77-4645-B42D-1CCCA6BD08BD}</ProjectTypeGuids>
@@ -20,6 +20,12 @@
     <Compile Include="npm_install\Client\elementsUpdater.js" />
     <Compile Include="npm_install\Client\elementsDisplayer.js" />
     <Compile Include="npm_install\Client\system.js" />
+    <Compile Include="npm_install\Server\Elements\ElementClasses\generator.js" />
+    <Compile Include="npm_install\Server\Elements\ElementTypes\box.js" />
+    <Compile Include="npm_install\TicTacToe\app.js" />
+    <Compile Include="npm_install\TicTacToe\Client\browserTicTacToe.js" />
+    <Compile Include="npm_install\TicTacToe\Client\nodeTicTacToe.js" />
+    <Compile Include="npm_install\TicTacToe\Client\TicTacToeClient.js" />
     <Compile Include="npm_install\Example2\app.js" />
     <Compile Include="npm_install\Example2\Client\browserTest.js" />
     <Compile Include="npm_install\Example2\Client\nodeTest.js" />
@@ -568,11 +574,30 @@
     <Compile Include="npm_install\Server\Core\EventEmitter.js" />
     <Compile Include="npm_install\Server\Core\modules.js" />
     <Compile Include="npm_install\Server\Core\timer.js" />
+    <Compile Include="npm_install\TicTacToe\scripts\require.js" />
+    <Compile Include="npm_install\TicTacToe\Server\TicTacToeSocket.js" />
+    <Compile Include="npm_install\TicTacToe\Server\TicTacToe.js" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Draft\Client\" />
     <Folder Include="Draft\Client - Copy\" />
     <Folder Include="Draft\" />
+    <Folder Include="npm_install\Example - Copy\" />
+    <Folder Include="npm_install\Example - Copy\node_modules\" />
+    <Folder Include="npm_install\Example - Copy\node_modules\cre-nodejs-server\" />
+    <Folder Include="npm_install\Example - Copy\node_modules\cre-nodejs-server\node_modules\" />
+    <Folder Include="npm_install\Example - Copy\node_modules\cre-nodejs-server\node_modules\socket.io\" />
+    <Folder Include="npm_install\Example - Copy\node_modules\cre-nodejs-server\node_modules\socket.io\node_modules\" />
+    <Folder Include="npm_install\Example - Copy\node_modules\cre-nodejs-server\node_modules\socket.io\node_modules\socket.io-adapter\" />
+    <Folder Include="npm_install\Example - Copy\node_modules\cre-nodejs-server\node_modules\socket.io\node_modules\socket.io-adapter\node_modules\" />
+    <Folder Include="npm_install\Example - Copy\node_modules\cre-nodejs-server\node_modules\socket.io\node_modules\socket.io-adapter\node_modules\socket.io-parser\" />
+    <Folder Include="npm_install\Example - Copy\node_modules\cre-nodejs-server\node_modules\socket.io\node_modules\socket.io-adapter\node_modules\socket.io-parser\node_modules\" />
+    <Folder Include="npm_install\Example - Copy\node_modules\cre-nodejs-server\node_modules\socket.io\node_modules\socket.io-adapter\node_modules\socket.io-parser\node_modules\json3\" />
+    <Folder Include="npm_install\Example - Copy\node_modules\cre-nodejs-server\node_modules\socket.io\node_modules\socket.io-adapter\node_modules\socket.io-parser\node_modules\json3\coverage\" />
+    <Folder Include="npm_install\Example - Copy\node_modules\cre-nodejs-server\node_modules\socket.io\node_modules\socket.io-adapter\node_modules\socket.io-parser\node_modules\json3\coverage\lcov-report\" />
+    <Folder Include="npm_install\TicTacToe\" />
+    <Folder Include="npm_install\TicTacToe\Client\" />
+    <Folder Include="npm_install\Example - Copy\node_modules\cre-nodejs-server\node_modules\socket.io\node_modules\socket.io-adapter\node_modules\socket.io-parser\node_modules\json3\coverage\lcov-report\lib\" />
     <Folder Include="npm_install\Example2\" />
     <Folder Include="npm_install\Example2\Client\" />
     <Folder Include="npm_install\Example2\node_modules\" />
@@ -855,6 +880,8 @@
     <Folder Include="npm_install\Server\Core\" />
     <Folder Include="npm_install\Server\Elements\ElementTypes\" />
     <Folder Include="npm_install\Server\Elements\ElementClasses\" />
+    <Folder Include="npm_install\TicTacToe\scripts\" />
+    <Folder Include="npm_install\TicTacToe\Server\" />
     <Folder Include="scripts\" />
     <Folder Include="Draft\Server\" />
     <Folder Include="Draft\Server - Copy\" />
@@ -866,6 +893,9 @@
     <Folder Include="Draft\Server\ElementTypes\" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="npm_install\TicTacToe\Client\browser.html" />
+    <Content Include="npm_install\TicTacToe\Client\index.html" />
+    <Content Include="npm_install\TicTacToe\Client\node.html" />
     <Content Include="npm_install\Example2\Client\index.html" />
     <Content Include="npm_install\Example2\node_modules\.bin\r.js.cmd" />
     <Content Include="npm_install\Example2\node_modules\cre-nodejs-server\examples\chat\Client\index.html" />
@@ -1398,6 +1428,7 @@
     <Content Include="npm_install\Example\Client\index.html" />
     <Content Include="npm_install\Example\package.json" />
     <Content Include="npm_install\package.json" />
+    <Content Include="npm_install\TicTacToe\package.json" />
     <Content Include="scripts\export.bat" />
     <Content Include="package.json" />
     <Content Include="npm_install\README.md" />

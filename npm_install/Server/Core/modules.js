@@ -15,7 +15,9 @@ define([
   'creanvas/Elements/ElementClasses/clickable',
   'creanvas/Elements/ElementClasses/droppable',
   'creanvas/Elements/ElementClasses/dropZone',
+  'creanvas/Elements/ElementClasses/generator',
 
   'creanvas/Elements/ElementTypes/circular',
+  'creanvas/Elements/ElementTypes/box',
 ], function () {
 });

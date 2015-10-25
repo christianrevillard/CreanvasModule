@@ -8,6 +8,7 @@
     system.elementTypes = parameters.elementTypes;
     system.clientChannel = parameters.clientChannel;
     system.onDraw = parameters.onDraw;
+    system.onUnscaledDraw = parameters.onUnscaledDraw;    
     system.context = system.canvas.getContext("2d");
     system.left = parameters.left || 0;
     system.right = parameters.right || system.canvas.width;

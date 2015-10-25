@@ -38,7 +38,7 @@
             //el.scale.x = updated["scaleX"] === undefined?el.scale.x:updated["scaleX"];
             //el.scale.y = updated["scaleY"] === undefined?el.scale.y:updated["scaleY"];
             angle: updated["angle"],
-            elementType: updated.type ? system.elementTypes.filter(function (e) { return e.typeName == updated.type; })[0]:null
+            elementType: system.elementTypes.filter(function (e) { return e.typeName == updated.type; })[0]
           });
         }
       });

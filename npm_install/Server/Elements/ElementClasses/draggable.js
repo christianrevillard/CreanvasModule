@@ -12,6 +12,7 @@
   
   var draggableElement = function (appBus, element) {
     
+    console.log('Applying draggable', element.id);
     var originalZ;    
     
     element.on('elementEvent', function (event) {

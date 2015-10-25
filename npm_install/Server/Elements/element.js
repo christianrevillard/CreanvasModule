@@ -13,7 +13,7 @@
     element.position = element.position || {};
     element.position.x = element.position.x || 0;
     element.position.y = element.position.y || 0;
-    element.position.z = element.position.z || -Infinity;
+    element.position.z = element.position.z || 0;
     element.position.angle = element.position.angle || 0;
 
     element.elementBus = new EventEmitter();
