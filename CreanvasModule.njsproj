@@ -503,7 +503,6 @@
     <Compile Include="npm_install\Server\Elements\ElementClasses\draggable.js" />
     <Compile Include="npm_install\Server\Elements\ElementTypes\circular.js" />
     <Compile Include="npm_install\Server\Elements\elementEventHandler.js" />
-    <Compile Include="npm_install\Server\Elements\elementBorderChecker.js" />
     <Compile Include="npm_install\Server\Elements\elementEventChecker.js" />
     <Compile Include="npm_install\Server\ClientCommunication\clientEventReceiver.js" />
     <Compile Include="npm_install\Server\Elements\elementList.js" />

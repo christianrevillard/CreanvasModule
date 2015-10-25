@@ -8,10 +8,7 @@ define([
   'creanvas/ClientCommunication/clientEventReceiver',
 
   'creanvas/Elements/element',
-//  'creanvas/Elements/elementList',
-
   'creanvas/Elements/elementEventChecker',
-  'creanvas/Elements/elementBorderChecker',
   'creanvas/Elements/elementEventHandler',
 
   'creanvas/Elements/ElementClasses/moving',

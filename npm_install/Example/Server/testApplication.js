@@ -56,7 +56,8 @@ define(['creanvas/creanvas'], function (creanvas) {
               if (this.position.y > 500) {
                 this.position.y = -500;
               }
-            }
+            },
+            circular: {radius:100}
           });
         
         clientChannel.emit('message', 'Welcome, you are ' + clientChannel.id + ' on ' + app.id);
