@@ -30,18 +30,25 @@
       element.elementBus.removeAllListeners();
     });
     
-    appBus.addElementListener(element, 'dipose', function () { 
+    appBus.addElementListener(element, 'dispose', function () { 
       element.elementBus.emit('dispose');
     });
-
-    console.log('Adding element:', element.id);
-
-    appBus.emit('elementAdded', element);    
-
-    element.emit('elementUpdated');
+        
+    if (element.events) {
+      
+      for (var eventId in element.events) {
+        if (element.events.hasOwnProperty(eventId)) {
+          element.on(eventId, element.events[eventId]);
+        }
+      }
+    }
 
     appBus.addElementListener(element, 'clientConnected', function () {
       element.emit('elementUpdated');
     });
+
+    appBus.emit('elementAdded', element);
+    
+    element.emit('elementUpdated');
   };
 });

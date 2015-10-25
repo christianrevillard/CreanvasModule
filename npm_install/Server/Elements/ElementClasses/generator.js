@@ -29,7 +29,7 @@
         element.emit('elementEvent', { eventId: 'pointerUp' });
         
         if (childCount === maxChildCount) { 
-          element.emit('generatorEmpty');
+          element.emit('generatorEmpty', element);
         }
       }
     });

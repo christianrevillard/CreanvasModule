@@ -31,6 +31,7 @@
 						.forEach(drawElement);
           
           if (system.onDraw) {
+            coordinates.resetTransform(system);
             system.onDraw(system.context);
           }
                     

@@ -11,8 +11,8 @@ define(['creanvas/creanvas'], function (creanvas) {
     var elementId = 0;
 
     var app = creanvas();
-        
-    var xGenerator = {
+         
+    app.addElement({
       id: 'X-Gen',
       type: 'X',
       generator: {
@@ -30,14 +30,13 @@ define(['creanvas/creanvas'], function (creanvas) {
         }
       },
       position: { x: 4.5, y: 1.5, z: -100 },
-      circular: { radius: 0.5 }
-    }
-    
-    app.addElement(xGenerator);
-    
-    xGenerator.on('generatorEmpty', function () {
-      xGenerator.type = 'X-Empty';
-      xGenerator.emit('elementUpdated');
+      circular: { radius: 0.5 },
+      events: {
+        generatorEmpty : function (element) {
+          element.type = 'X-Empty';
+          element.emit('elementUpdated');
+        }
+      }
     });
         
     var oGenerator = {

@@ -40,34 +40,36 @@ define(['creanvas/creanvas'], function (creanvas) {
         self.z++;
         
         var element = 
-          {
-            id : 'X' + (++elementId),
-            position: { x: 100, y: 100, z: self.z },
-            type: 'X',
-            onClick: function () {
-              app.emit('broadcastMessage', clientChannel.id, 'Clicked by someone ' + this.id);
-              clientChannel.emit('message', 'Clicked by me' + this.id);
-            },
-            onDoubleClick: function () {
-              app.emit('broadcastMessage', clientChannel.id,'DoubleClicked by someone ' + this.id);
-              clientChannel.emit('message', 'DoubleClicked by me' + this.id);
-              self.nbOfPlayers--;
-              this.emit('dispose');
-            },
-            draggable: elementId % 2,
-            droppable: true,
-            speed: { x: 50, y: 50},
-            afterMove: function () {
+ {
+          id : 'X' + (++elementId),
+          position: { x: 100, y: 100, z: self.z },
+          type: 'X',
+          onClick: function () {
+            app.emit('broadcastMessage', clientChannel.id, 'Clicked by someone ' + this.id);
+            clientChannel.emit('message', 'Clicked by me' + this.id);
+          },
+          onDoubleClick: function () {
+            app.emit('broadcastMessage', clientChannel.id, 'DoubleClicked by someone ' + this.id);
+            clientChannel.emit('message', 'DoubleClicked by me' + this.id);
+            self.nbOfPlayers--;
+            this.emit('dispose');
+          },
+          draggable: elementId % 2,
+          droppable: true,
+          speed: { x: 50, y: 50 },
+          events: {
+            moved: function (element) {
               
-              if (this.position.x > 800) {
-                this.position.x = -800;
+              if (element.position.x > 800) {
+                element.position.x = -800;
               }
-                            
-              if (this.position.y > 500) {
-                this.position.y = -500;
+              
+              if (element.position.y > 500) {
+                element.position.y = -500;
               }
-            },
-            circular: {radius:100}
+            }
+          },
+          circular: { radius: 100 }
         };
         app.addElement(element);
         element.on('droppedIn', function (dropZone) { element.speed = { x: 0, y: 0, angle: Math.PI / 4 } });

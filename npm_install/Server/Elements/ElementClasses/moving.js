@@ -14,19 +14,26 @@
     
     appBus.on("getNewFrame", function (dt) {
       
+      //if (!element.speed.x && !element.speed.y && !element.speed.angle) {
+      element.emit('commitMove', dt)
+      //}
+      //else {
+       // element.emit('pendingMove', dt)
+//      }
+    });
+    
+    element.on('commitMove', function (dt) {
       element.position.x += (element.speed.x || 0) * dt;
       element.position.y += (element.speed.y || 0) * dt;
-      element.position.angle += (element.speed.angle ||0) * dt;
+      element.position.angle += (element.speed.angle || 0) * dt;
       
       if (element.acceleration) {
         element.speed.x += (element.acceleration.x || 0) * dt;
         element.speed.y += (element.acceleration.y || 0) * dt;
         element.speed.angle += (element.acceleration.angle || 0) * dt;
       }
-      
-      if (element.afterMove) { element.afterMove(); }
-      
-      element.emit('elementUpdated');
-    });
+      element.emit('moved', element);
+      element.emit('elementUpdated', element);
+    });      
   };
 });
