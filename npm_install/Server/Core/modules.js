@@ -6,6 +6,10 @@ define([
   'creanvas/ClientCommunication/clientMessenger',
   'creanvas/ClientCommunication/clientEventReceiver',
 
+  'creanvas/CollisionSolver/collisionSolver',
+  'creanvas/CollisionSolver/broadPhaseProcessor',
+  'creanvas/CollisionSolver/broadTile',
+
   'creanvas/Elements/element',
   'creanvas/Elements/elementEventChecker',
   'creanvas/Elements/elementEventHandler',

@@ -10,7 +10,12 @@ define(['creanvas/creanvas'], function (creanvas) {
     
     var elementId = 0;
 
-    var app = creanvas();
+    var app = creanvas({
+      left: -800,
+      right: 800,
+      top: -500,
+      bottom: 500
+    });
     
     app.addElement({
       id: 'myDropzone',
@@ -40,7 +45,7 @@ define(['creanvas/creanvas'], function (creanvas) {
         self.z++;
         
         var element = 
- {
+      {
           id : 'X' + (++elementId),
           position: { x: 100, y: 100, z: self.z },
           type: 'X',
@@ -57,6 +62,7 @@ define(['creanvas/creanvas'], function (creanvas) {
           draggable: elementId % 2,
           droppable: true,
           speed: { x: 50, y: 50 },
+          solid: {},
           events: {
             moved: function (element) {
               

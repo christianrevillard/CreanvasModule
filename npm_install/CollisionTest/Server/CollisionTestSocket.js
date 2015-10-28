@@ -4,11 +4,11 @@ var requirejs = require('requirejs');
 
 requirejs.config({
   nodeRequire: require,
-  paths: {'creanvas':'../Server','local':'Server', 'modules':'../Modules'}
+  paths: {'creanvas':'../Server','local':'Server'}
 });
 
 var onConnection = function (socket) {
-  requirejs(['local/TicTacToe'],
+  requirejs(['local/CollisionTest'],
     function (testApplication) {
     
     var joined = false;

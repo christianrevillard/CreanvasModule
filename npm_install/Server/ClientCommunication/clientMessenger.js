@@ -1,10 +1,11 @@
 ﻿define(['creanvas/Core/serverBus'], function (serverBus) {
   
-  serverBus.on('applicationCreated', function (appBus) {
+  serverBus.on('applicationCreated', function (appBus, parameters) {
     appBus.on(
       "clientConnected", 
     function (clientChannel) {
         clientMessenger(appBus, clientChannel);
+        clientChannel.emit('applicationParameters', parameters)
       });
   });
   

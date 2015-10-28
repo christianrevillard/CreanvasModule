@@ -3,8 +3,7 @@
 requirejs.config({
   paths: {
     'creanvas': '../../Server' ,
-    'client': '../../Client',
-    'modules': '../../Modules' ,
+    'client': '../../Client'
   }
 });
 
@@ -12,8 +11,8 @@ requirejs.config({
 var minApp;
 
 requirejs([
-  './TicTacToeClient',
-  '../Server/TicTacToe'
+  './collisionTestClient',
+  '../Server/CollisionTest'
 ],
   function (client, testApplication) {
   

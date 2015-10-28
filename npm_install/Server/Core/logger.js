@@ -18,6 +18,14 @@
     appBus.on("broadcastMessage", function (fromClientId) { console.log('broadcastMessage', appBus.id, fromClientId); });
 
     appBus.on("elementAdded", function () { console.log('elementAdded', appBus.id); });
+        
+   // appBus.on("addBroadTile", function () { console.log('addBroadTile', appBus.id); });
+    
+    appBus.on("broadTileAdded", function () { console.log('broadTileAdded', appBus.id); });
+    
+    //appBus.on("processBroadPhase", function () { console.log('processBroadPhase', appBus.id); });
+    
+    //appBus.on("broadPhaseCompleted", function () { console.log('broadPhaseCompleted', appBus.id); });
     
    // appBus.on("elementUpdated", function () { console.log('elementUpdated', appBus.id); });
     

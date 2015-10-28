@@ -6,7 +6,7 @@
   
   var appId = 0;
   
-  var Application = function () {
+  var Application = function (parameters) {
     var appBus = new EventEmitter();
     appBus.setMaxListeners(0);
     
@@ -80,10 +80,10 @@
       });
     };
    
-    serverBus.emit('applicationCreated', appBus);
+    serverBus.emit('applicationCreated', appBus, parameters);
   };
   
-  return function () {
-    return new Application();
+  return function (parameters) {
+    return new Application(parameters);
   }
 });

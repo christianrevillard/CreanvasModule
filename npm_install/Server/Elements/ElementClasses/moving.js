@@ -14,12 +14,12 @@
     
     appBus.on("getNewFrame", function (dt) {
       
-      //if (!element.speed.x && !element.speed.y && !element.speed.angle) {
-      element.emit('commitMove', dt)
-      //}
-      //else {
-       // element.emit('pendingMove', dt)
-//      }
+      if (element.solid) {
+        element.emit('pendingMove', dt)
+      }
+      else {
+        element.emit('commitMove', dt)
+      }
     });
     
     element.on('commitMove', function (dt) {
@@ -34,6 +34,6 @@
       }
       element.emit('moved', element);
       element.emit('elementUpdated', element);
-    });      
+    });
   };
 });
