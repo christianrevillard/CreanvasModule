@@ -7,8 +7,7 @@
     
     appBus.on('broadTileAdded', function (tile) {
       broadTiles.push(tile);
-    });
-        
+    });        
 
     appBus.on('broadTileProcessed', function (solidElements, tileCollisionsToCheck) {
       collisionsToCheck = collisionsToCheck.concat(tileCollisionsToCheck);
