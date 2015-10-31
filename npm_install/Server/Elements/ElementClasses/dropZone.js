@@ -26,7 +26,7 @@
         return;
       }
 
-      element.emit('isPointInElement', x, y, function () {
+      if (element.isPointInElement(x, y)) {
         droppedElements.push(dropped);
         dropped.position.x = element.position.x;
         dropped.position.y = element.position.y;
@@ -34,7 +34,7 @@
         dropped.emit('elementUpdated');
         dropped.emit('droppedIn', element);
         element.emit('droppedIn', dropped);
-      })
+      }
     });
 
     element.on('dragOut', function (draggedOut) {

@@ -4,7 +4,7 @@ var requirejs = require('requirejs');
 
 requirejs.config({
   nodeRequire: require,
-  paths: {'creanvas':'../Server','local':'Server'}
+  paths: {'creanvas':'../Server','local':'Server','modules':'../Modules' }
 });
 
 var onConnection = function (socket) {

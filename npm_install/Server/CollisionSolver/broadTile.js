@@ -18,18 +18,22 @@ define(['creanvas/Core/serverBus'], function (serverBus) {
       appBus.emit('broadTileAdded', tile);
 
       appBus.on('processBroadPhase', function (elements) {
-        
         var tileElements = [];
         var collisionsToCheck = [];
         
         elements.forEach(function (element) {
-          element.emit('isInTile', tile, function () {
-//            console.log(element.id, 'is in tile', tile.left, tile.top);
+          if (element.isInTile(tile)) {
             tileElements.forEach(function (other) {
-              collisionsToCheck.push({ e1: other, e2: element })
+              var first = element.id < other.id?element:other;
+              var second = element.id < other.id?other:element;
+              collisionsToCheck.push({
+                id: first.id + '-' + second.id, 
+                e1: first, 
+                e2: second
+              });                
             });
             tileElements.push(element);
-          });
+          }
         });
         
         tile.status = 'done';

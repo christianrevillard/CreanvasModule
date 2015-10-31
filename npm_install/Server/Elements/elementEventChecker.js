@@ -21,9 +21,9 @@
           return;
         }
         
-        element.emit('isPointInElement', event.x, event.y, function () {
+        if (element.isPointInElement(event.x, event.y)) {
           event.element = element;
-        });
+        }
       } 
       // 'continue'/'stop' event, find by touchidentifier. pointerUp, pointerMove
       else  {

@@ -29,10 +29,11 @@
     <Compile Include="npm_install\CollisionTest\Server\CollisionTest.js" />
     <Compile Include="npm_install\Modules\Vector.js" />
     <Compile Include="npm_install\Server\CollisionSolver\AxeAlignedBoxCircleCollision.js" />
+    <Compile Include="npm_install\Server\CollisionSolver\narrowPhaseProcessor.js" />
     <Compile Include="npm_install\Server\CollisionSolver\broadTile.js" />
     <Compile Include="npm_install\Server\CollisionSolver\broadPhaseProcessor.js" />
     <Compile Include="npm_install\Server\CollisionSolver\CircleCircleCollision.js" />
-    <Compile Include="npm_install\Server\CollisionSolver\CollisionFactory.js" />
+    <Compile Include="npm_install\Server\CollisionSolver\collisionHandlerFactory.js" />
     <Compile Include="npm_install\Server\CollisionSolver\collisionSolver - Copy.js" />
     <Compile Include="npm_install\Server\CollisionSolver\collisionSolver.js" />
     <Compile Include="npm_install\Server\Elements\ElementClasses\generator.js" />

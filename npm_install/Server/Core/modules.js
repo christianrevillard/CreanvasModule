@@ -9,6 +9,7 @@ define([
   'creanvas/CollisionSolver/collisionSolver',
   'creanvas/CollisionSolver/broadPhaseProcessor',
   'creanvas/CollisionSolver/broadTile',
+  'creanvas/CollisionSolver/narrowPhaseProcessor',
 
   'creanvas/Elements/element',
   'creanvas/Elements/elementEventChecker',

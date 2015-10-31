@@ -1,7 +1,4 @@
-﻿//var vector = require('../Vector');
-//var collisionFactory = require('./CollisionFactory');
-
-define(['creanvas/Core/serverBus','creanvas/CollisionSolver/broadTile'], function (serverBus) {
+﻿define(['creanvas/Core/serverBus', 'creanvas/CollisionSolver/collisionHandlerFactory','creanvas/CollisionSolver/broadTile'], function (serverBus, collisionFactory) {
   
   serverBus.on('applicationCreated', function (appBus, parameters) {
     var tilesPerRow = 8;
@@ -15,10 +12,32 @@ define(['creanvas/Core/serverBus','creanvas/CollisionSolver/broadTile'], functio
 
     appBus.on('broadTileProcessed', function (solidElements, tileCollisionsToCheck) {
       collisionsToCheck = collisionsToCheck.concat(tileCollisionsToCheck);
-      if (broadTiles.every(function (tile) { return tile.status != 'pending' })) {
-        appBus.emit('broadPhaseCompleted', solidElements, collisionsToCheck);
-        collisionsToCheck = [];
+      if (broadTiles.some(function (tile) { return tile.status == 'pending' })) {
+        return;
       }
+      
+      var ids = collisionsToCheck.map(function (c) { return c.id; });
+      
+      collisionsToCheck = collisionsToCheck.filter(function (item, index, array) {
+        return index === ids.indexOf(item.id);
+      });
+      
+      collisionsToCheck.forEach(function (c) {
+        c.handler = collisionFactory(c.e1, c.e2);
+        c.status = undefined;
+        c.e1.collisions = c.e1.collisions || [];
+        c.e2.collisions = c.e2.collisions || [];
+        c.e1.collisions[c.e2.id] = { collisionWith: c.e2, handler: c.handler };
+        c.e2.collisions[c.e1.id] = { collisionWith: c.e1, handler: c.handler };
+      });
+
+      appBus.emit('broadPhaseCompleted', solidElements, collisionsToCheck);
+      
+      collisionsToCheck = [];
+      
+      solidElements.forEach(function (element) {
+        element.emit('commitMove', element.pending.dt);
+      });
     });
     
     var height = (parameters.bottom - parameters.top) / tilesPerRow;
@@ -41,27 +60,6 @@ define(['creanvas/Core/serverBus','creanvas/CollisionSolver/broadTile'], functio
       
       appBus.emit('processBroadPhase', solidElements);
     });
-    
-    
-    
-    
-    
-
-    // temp, 
-    appBus.on('broadPhaseCompleted', function (solidElements, collisionsToCheck) {
-      
-      if (collisionsToCheck.length > 0) { 
-        console.log('Collisions to check:', collisionsToCheck.length);
-      }
-      
-      collisionsToCheck = [];
-
-      solidElements.forEach(function (element) {
-        element.emit('commitMove', element.pending.dt);
-      });
-    });
-
-
 
   });
 });
