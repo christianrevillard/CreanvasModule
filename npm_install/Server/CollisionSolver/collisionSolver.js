@@ -16,28 +16,37 @@
         
         solidElements.push(element);
         
-        element.on('updatePendingMove', function (dt) {
-          element.pending = {
-            dt: dt,
-            position: {
-              x : element.position.x + (element.speed.x || 0) * dt,
-              y : element.position.y + (element.speed.y || 0) * dt,
-              angle : element.position.y + (element.speed.angle || 0) * dt
-            }
-          };
-        });
+        element.solid.isInTile = element.isInTile || function () {
+          console.log('isInTile is not defined for element ', element.id)
+          return false;
+        };
+        
+        element.solid.getCollisionPoint = element.getCollisionPoint || function () {
+          console.log('getCollisionPoint is not defined for element ', element.id)
+          return null;
+        };
+        
+        element.solid.getMomentOfInertia = element.solid.getMomentOfInertia || function () {
+          console.log('getMomentOfInertia is not defined for element ', element.id)
+          return Infinity;
+        };
+        
+        element.mass = element.mass || 0;
+        
+        element.solid.coefficient = element.solid.coefficient || 1;
+        
+        element.solid.staticFriction = element.solid.staticFriction || 0;
+        
+        element.solid.dynamicFriction = element.solid.dynamicFriction || 0;
+        
+        element.on('move', function (dt) {
           
-        element.on('pendingMove', function (dt) {
+          element.readyForSolver = true;
           
-          element.emit('updatePendingMove', dt);
-          
-          if (solidElements.every(function (el) { return el.pending; })) {
+          if (solidElements.every(function (el) { return el.readyForSolver; })) {
+            solidElements.forEach(function (el) { el.readyForSolver = false; })
             appBus.emit("solveCollisions", solidElements);
           }
-        });
-        
-        element.on('commitMove', function (dt) {
-          element.pending = null;
         });
       });
   };

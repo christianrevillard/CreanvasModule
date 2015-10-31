@@ -30,12 +30,12 @@
         c.e2.collisions[c.e1.id] = { collisionWith: c.e1, collision: c};
       });
 
-      appBus.emit('broadPhaseCompleted', solidElements, collisionsToCheck);
+      appBus.emit('broadPhaseCompleted', collisionsToCheck);
       
       collisionsToCheck = [];
       
       solidElements.forEach(function (element) {
-        element.emit('commitMove', element.pending.dt);
+        element.emit('commitMove');
       });
     });
     

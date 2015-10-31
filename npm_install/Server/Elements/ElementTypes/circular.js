@@ -18,31 +18,35 @@
       return element.position && ((x - element.position.x) * (x - element.position.x) + (y - element.position.y) * (y - element.position.y) < radius * radius);
     };
     
-    element.isInTile = function (tile) {
-      var pending = element.pending || element;
-      var left = Math.min(element.position.x - radius, pending.position.x - radius);
-      var right = Math.max(element.position.x + radius, pending.position.x + radius);
-      var top = Math.min(element.position.y - radius, pending.position.y - radius);
-      var bottom = Math.max(element.position.y + radius, pending.position.y + radius);
+    element.solid.isInTile = function (tile) {
+      var original = element.originalPosition || element.position;
+      var left = Math.min(element.position.x - radius, original.x - radius);
+      var right = Math.max(element.position.x + radius, original.x + radius);
+      var top = Math.min(element.position.y - radius, original.y - radius);
+      var bottom = Math.max(element.position.y + radius, original.y + radius);
       
       return left <= tile.right && right >= tile.left && top <= tile.bottom && bottom >= tile.top;
     };
     
-    element.getCollisionPoint = function (x, y) {
-      var distance = Math.sqrt((this.position.x - x) * (this.position.x - x) + (this.position.y - y) * (this.position.y - y));
+    element.solid.getCollisionPoint = function (x, y) {
+      var distance = Math.sqrt((element.position.x - x) * (element.position.x - x) + (element.position.y - y) * (element.position.y - y));
       
       var collisionPoint = distance == 0 ? 
-      { x: this.position.x, y: this.position.y } :
+      { x: element.position.x, y: element.position.y } :
 		  {
-        x: this.position.x + this.circular.radius / distance * (x - this.position.x),
-        y: this.position.y + this.circular.radius / distance * (y - this.position.y)
+        x: element.position.x + element.circular.radius / distance * (x - element.position.x),
+        y: element.position.y + element.circular.radius / distance * (y - element.position.y)
       };
       
       var normalVector = distance == 0 ? 
         new Vector(1, 0):
-        new Vector((x - this.position.x) / distance, (y - this.position.y) / distance);
+        new Vector((x - element.position.x) / distance, (y - element.position.y) / distance);
       
       return { collisionPoint: collisionPoint, normalVector: normalVector };
+    };
+
+    element.solid.getMomentOfInertia = function () {
+      return element.mass / 2 * element.circular.radius * element.circular.radius;
     };
   };
 });

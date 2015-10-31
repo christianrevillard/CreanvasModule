@@ -20,7 +20,7 @@ define(['creanvas/creanvas'], function (creanvas) {
     app.addElement({
       id: 'O1',
       type: 'O',
-      solid: {},
+      solid:{},mass:10,
       position: { x: 400, y: -250, z: -100 },
       speed: { x: 50, y: -50 },
       circular: { radius: 50 },
@@ -49,7 +49,7 @@ define(['creanvas/creanvas'], function (creanvas) {
     app.addElement({
       id: 'O2',
       type: 'O',
-      solid: {},
+      solid:{},mass:10,
       position: { x: 200, y: 0, z: -100 },
       speed: { x: 50, y: 0 },
       circular: { radius: 50 },
@@ -78,7 +78,7 @@ define(['creanvas/creanvas'], function (creanvas) {
     app.addElement({
       id: 'O3',
       type: 'O',
-      solid: {},
+      solid:{},mass:10,
       position: { x: -400, y: -250, z: -100 },
       speed: { x: 50, y: -50 },
       circular: { radius: 50 },
@@ -107,7 +107,7 @@ define(['creanvas/creanvas'], function (creanvas) {
     app.addElement({
       id: 'O4',
       type: 'O',
-      solid: {},
+      solid:{},mass:10,
       position: { x: -400, y: 250, z: -100 },
       speed: { x: 50, y: -50 },
       circular: { radius: 50 },
@@ -136,7 +136,7 @@ define(['creanvas/creanvas'], function (creanvas) {
     app.addElement({
       id: 'O5',
       type: 'O',
-      solid: {},
+      solid:{},mass:10,
       position: { x: -200, y: 250, z: -100 },
       speed: { x: -50, y: -50 },
       circular: { radius: 50 },
@@ -165,7 +165,7 @@ define(['creanvas/creanvas'], function (creanvas) {
     app.addElement({
       id: 'O6',
       type: 'O',
-      solid: {},
+      solid:{},mass:10,
       position: { x: 0, y: 250, z: -100 },
       speed: { x: 50, y: 50 },
       circular: { radius: 50 },
@@ -194,7 +194,7 @@ define(['creanvas/creanvas'], function (creanvas) {
     app.addElement({
       id: 'O7',
       type: 'O',
-      solid: {},
+      solid:{},mass:10,
       position: { x: -150, y: -300, z: -100 },
       speed: { x: 50, y: 20 },
       circular: { radius: 50 },
@@ -223,7 +223,7 @@ define(['creanvas/creanvas'], function (creanvas) {
     app.addElement({
       id: 'O8',
       type: 'O',
-      solid: {},
+      solid:{},mass:10,
       position: { x: 450, y: 300, z: -100 },
       speed: { x: -50, y: -20 },
       circular: { radius: 50 },

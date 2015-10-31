@@ -1,17 +1,17 @@
 define(function () {
   
-  return function (element, otherElement) {
+  return function (e1, e2) {
     return {
       areColliding : function () {
         
         var distance = Math.sqrt(
-          (element.position.x - otherElement.position.x) * (element.position.x - otherElement.position.x) +
-			(element.position.y - otherElement.position.y) * (element.position.y - otherElement.position.y));
-        return distance < (element.circular.radius + otherElement.circular.radius);
+          (e1.position.x - e2.position.x) * (e1.position.x - e2.position.x) +
+			(e1.position.y - e2.position.y) * (e1.position.y - e2.position.y));
+        return distance < (e1.circular.radius + e2.circular.radius);
       },
       
       getCollisionPoint : function () {
-        return element.getCollisionPoint(otherElement.position.x, otherElement.position.y);
+        return e1.solid.getCollisionPoint(e2.position.x, e2.position.y);
       }
     };
   };

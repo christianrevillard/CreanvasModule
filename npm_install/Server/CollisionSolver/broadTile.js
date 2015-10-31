@@ -22,7 +22,7 @@ define(['creanvas/Core/serverBus'], function (serverBus) {
         var collisionsToCheck = [];
         
         elements.forEach(function (element) {
-          if (element.isInTile(tile)) {
+          if (element.solid.isInTile(tile)) {
             tileElements.forEach(function (other) {
               var first = element.id < other.id?element:other;
               var second = element.id < other.id?other:element;
