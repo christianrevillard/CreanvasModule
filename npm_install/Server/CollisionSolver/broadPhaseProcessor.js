@@ -27,8 +27,8 @@
         c.status = undefined;
         c.e1.collisions = c.e1.collisions || [];
         c.e2.collisions = c.e2.collisions || [];
-        c.e1.collisions[c.e2.id] = { collisionWith: c.e2, handler: c.handler };
-        c.e2.collisions[c.e1.id] = { collisionWith: c.e1, handler: c.handler };
+        c.e1.collisions[c.e2.id] = { collisionWith: c.e2, collision: c};
+        c.e2.collisions[c.e1.id] = { collisionWith: c.e1, collision: c};
       });
 
       appBus.emit('broadPhaseCompleted', solidElements, collisionsToCheck);

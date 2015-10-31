@@ -1,28 +1,27 @@
 ﻿define(['creanvas/Core/serverBus'], function (serverBus) {
   
-  var checkForCollision = function (c, collisionsToCheck) {
-        
-    if (c.status !== undefined)
-      return; // already handled - can this really happen, check.
+  var checkForCollision = function (collisionsToCheck) {
     
-    if (!c.e1.pending.dt && !c.e2.pending.dt)
+    var c = collisionsToCheck.filter(function (toCheck) { return toCheck.status === undefined })[0];
+    
+    if (!c.e1.pending.dt && !c.e2.pending.dt) {
+      c.status = false;
       return;     // no move for them, so no collision !
+    }
     
     if (!c.handler.areColliding()) {
-      c.e1.collisions[c.e2.id].status = c.e2.collisions[c.e1.id].status = false;
+      c.status = false;
       c.e1.collisions[c.e2.id].checkedDt = c.e1.pending.dt;
       c.e2.collisions[c.e1.id].checkedDt = c.e2.pending.dt;
       return;
     }
     
-    c.e1.collisions[c.e2.id].status = c.e2.collisions[c.e1.id].status = true;
+    c.status = true;
     
     moveOutOfOverlap(c);
     
     c.e1.collisions[c.e2.id].checkedDt = c.e1.pending.dt;
     c.e2.collisions[c.e1.id].checkedDt = c.e2.pending.dt;
-    c.e1.collisions[c.e2.id].handler = c.handler;
-    c.e2.collisions[c.e1.id].handler = c.handler;
     
     requeuePossibleCollisions(collisionsToCheck, c.e1);
     requeuePossibleCollisions(collisionsToCheck, c.e2);
@@ -46,7 +45,7 @@
       var highestDt = highestDtElement.pending.dt;
       var lowestDt = lowestDtElement.pending.dt;
       
-      highestDtElement.emit('updatePendingMove',lowestDt);
+      highestDtElement.emit('updatePendingMove', lowestDt);
       
       if (collision.handler.areColliding()) {
         // scenario 2a: different currentDt, do collide at minimum of the 2 => common dt to find between 0 and lowestDt
@@ -54,11 +53,11 @@
         moveOutOfOverlapCommonDt(collision);
       } else {
         // scenario 2b: different currentDt, do no collide at minimum of the 2. => only update highest dt to find non-collision				
-        highestDtElement.emit('updatePendingMove',highestDt);
+        highestDtElement.emit('updatePendingMove', highestDt);
         moveOutOfOverlapDifferentDt(collision);
       }
     }
-  };  
+  };
   
   var moveOutOfOverlapCommonDt = function (collision) {
     var steps = 1;
@@ -78,7 +77,7 @@
       
       testDt = (okDt + collidedDt) / 2;
       
-      collision.e1.emit('updatePendingMove',testDt);
+      collision.e1.emit('updatePendingMove', testDt);
       collision.e2.emit('updatePendingMove', testDt);
       
       if (collision.handler.areColliding()) {
@@ -121,9 +120,9 @@
   var requeuePossibleCollisions = function (collisionsToCheck, element) {
     element
 	.collisions
-	.filter(function (c) { return c.status !== undefined && c.checkedDt > element.pending.dt; })
+	.filter(function (c) { return c.collision.status !== undefined && c.checkedDt > element.pending.dt; })
 		.forEach(function (c) {
-      c.status = c.collisionWith.collisions[element.id].status = undefined;
+      c.status = undefined;
       
       collisionsToCheck.push({
         e1: element,
@@ -133,34 +132,18 @@
       });
     });
   };
-
+  
   serverBus.on('applicationCreated', function (appBus, parameters) {
-
+    
     appBus.on('broadPhaseCompleted', function (elements, collisionsToCheck) {
-            
-      while (collisionsToCheck.length > 0) {
-        checkForCollision(collisionsToCheck.shift(), collisionsToCheck);
+      
+      while (collisionsToCheck.some(function (c) { return c.status === undefined; })) {
+        checkForCollision(collisionsToCheck);
       };
-                        
-      // fill in directly while checking collisions ? let them stay in collisionsToCheck for example?
-      var collisions = [];
-      elements.forEach(function (e) {
-        if (!e.collisions)
-          return;
-        e.collisions.forEach(function (c) {
-          if (c.collisionWith.id < e.id)
-            return;
-          if (!c.status)
-            return;
-          collisions.push({
-            e1: e, 
-            e2: c.collisionWith,
-            collisionHandler: c.handler
-          });
-        });
-        e.collisions = null;
-      });
-      console.log(collisions);
+      
+      var collisions = collisionsToCheck.filter(function (c) { return c.status === true; });
+      
+      console.log(collisions.map(function (c) { return c.id; }));
     });
   });
 });
