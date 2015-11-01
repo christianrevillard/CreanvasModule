@@ -28,7 +28,7 @@
     <Compile Include="npm_install\CollisionTest\Server\CollisionTestSocket.js" />
     <Compile Include="npm_install\CollisionTest\Server\CollisionTest.js" />
     <Compile Include="npm_install\Modules\Vector.js" />
-    <Compile Include="npm_install\Server\CollisionSolver\AxeAlignedBoxCircleCollision.js" />
+    <Compile Include="npm_install\Server\CollisionSolver\BoxCircleCollision.js" />
     <Compile Include="npm_install\Server\CollisionSolver\narrowPhaseCollisionHandler.js" />
     <Compile Include="npm_install\Server\CollisionSolver\narrowPhaseCollisionChecker.js" />
     <Compile Include="npm_install\Server\CollisionSolver\broadTile.js" />

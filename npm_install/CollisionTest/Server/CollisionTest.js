@@ -18,11 +18,52 @@ define(['creanvas/creanvas'], function (creanvas) {
     });
     
     app.addElement({
+      id: 'leftwall',
+      type: 'Vertical',
+      solid: { coefficient: 0.5, staticFriction: 0.7, dynamicFriction: 0.5 },
+      mass: Infinity,
+      speed: {},
+      position: { x: -800, y: 0, z: -100 },
+      box: { left:-5, right:5, top:-500, bottom:500 }
+    });
+    
+    app.addElement({
+      id: 'rightwall',
+      type: 'Vertical',
+      solid: { coefficient: 0.5, staticFriction: 0.7, dynamicFriction: 0.5 },
+      mass: Infinity,
+      speed: {},
+      position: { x: 800, y: 0, z: -100 },
+      box: { left: -5, right: 5, top: -500, bottom: 500 }
+    });
+    
+    app.addElement({
+      id: 'topwall',
+      type: 'Horizontal',
+      solid: { coefficient: 0.5, staticFriction: 0.7, dynamicFriction: 0.5 },
+      mass: Infinity,
+      speed: {},
+      position: { x: 0, y: -500, z: -100 },
+      box: { left: -800, right: 800, top: -5, bottom: 5 }
+    });
+
+    app.addElement({
+      id: 'bottomwall',
+      type: 'Horizontal',
+      solid: { coefficient: 0.5, staticFriction: 0.7, dynamicFriction: 0.5 },
+      mass: Infinity,
+      speed: {},
+      position: { x: 0, y: 500, z: -100 },
+      box: { left: -800, right: 800, top: -5, bottom: 5 }
+    });
+    
+    app.addElement({
       id: 'O1',
       type: 'O',
-      solid:{},mass:10,
+      solid: { coefficient: 0.5, staticFriction: 0.7, dynamicFriction: 0.5 },
+      mass: 10,
       position: { x: 400, y: -250, z: -100 },
-      speed: { x: 50, y: -50 },
+      speed: { x: 50, y: -50, angle:Math.PI/2},
       circular: { radius: 50 },
       events: {
         moved: function (element) {
@@ -49,9 +90,10 @@ define(['creanvas/creanvas'], function (creanvas) {
     app.addElement({
       id: 'O2',
       type: 'O',
-      solid:{},mass:10,
+      solid: { coefficient: 1, staticFriction: 0.7, dynamicFriction: 0.5 },
+      mass: 10,
       position: { x: 200, y: 0, z: -100 },
-      speed: { x: 50, y: 0 },
+      speed: { x: 50, y: 0, angle: -Math.PI/4 },
       circular: { radius: 50 },
       events: {
         moved: function (element) {
@@ -77,10 +119,11 @@ define(['creanvas/creanvas'], function (creanvas) {
     
     app.addElement({
       id: 'O3',
-      type: 'O',
-      solid:{},mass:10,
+      type: 'Heavy',
+      solid: { coefficient: 1, staticFriction: 0.7, dynamicFriction: 0.5 },
+      mass: 100,
       position: { x: -400, y: -250, z: -100 },
-      speed: { x: 50, y: -50 },
+      speed: { x: 50, y: -50, angle: Math.PI/4 },
       circular: { radius: 50 },
       events: {
         moved: function (element) {
@@ -107,7 +150,8 @@ define(['creanvas/creanvas'], function (creanvas) {
     app.addElement({
       id: 'O4',
       type: 'O',
-      solid:{},mass:10,
+      solid: { coefficient: 1, staticFriction: 0.7, dynamicFriction: 0.5 },
+      mass: 10,
       position: { x: -400, y: 250, z: -100 },
       speed: { x: 50, y: -50 },
       circular: { radius: 50 },
@@ -136,9 +180,10 @@ define(['creanvas/creanvas'], function (creanvas) {
     app.addElement({
       id: 'O5',
       type: 'O',
-      solid:{},mass:10,
+      solid: { coefficient: 1, staticFriction: 0.7, dynamicFriction: 0.5 },
+      mass: 10,
       position: { x: -200, y: 250, z: -100 },
-      speed: { x: -50, y: -50 },
+      speed: { x: -50, y: -50, angle:2*Math.PI },
       circular: { radius: 50 },
       events: {
         moved: function (element) {
@@ -165,9 +210,10 @@ define(['creanvas/creanvas'], function (creanvas) {
     app.addElement({
       id: 'O6',
       type: 'O',
-      solid:{},mass:10,
+      solid: { coefficient: 1, staticFriction: 0.7, dynamicFriction: 0.5 },
+      mass: 10,
       position: { x: 0, y: 250, z: -100 },
-      speed: { x: 50, y: 50 },
+      speed: { x: 50, y: 50, angle: -Math.PI },
       circular: { radius: 50 },
       events: {
         moved: function (element) {
@@ -194,7 +240,8 @@ define(['creanvas/creanvas'], function (creanvas) {
     app.addElement({
       id: 'O7',
       type: 'O',
-      solid:{},mass:10,
+      solid: { coefficient: 1, staticFriction: 0.7, dynamicFriction: 0.5 },
+      mass: 10,
       position: { x: -150, y: -300, z: -100 },
       speed: { x: 50, y: 20 },
       circular: { radius: 50 },
@@ -223,7 +270,8 @@ define(['creanvas/creanvas'], function (creanvas) {
     app.addElement({
       id: 'O8',
       type: 'O',
-      solid:{},mass:10,
+      solid: { coefficient: 1, staticFriction: 0.7, dynamicFriction: 0.5 },
+      mass: 10,
       position: { x: 450, y: 300, z: -100 },
       speed: { x: -50, y: -20 },
       circular: { radius: 50 },

@@ -19,7 +19,12 @@
       return;
     }
     
-    var collisionPointInformation = handler.getCollisionPoint(e1, e2);
+    var collisionPointInformation = handler.getCollisionPoint();
+    
+    
+    if (!collisionPointInformation) { 
+      console.log(e1, e2);
+    }
     
     var collisionBasis = Vector.getBasisFromFirstVector(collisionPointInformation.normalVector);
     var collisionPoint = collisionPointInformation.collisionPoint;
@@ -80,7 +85,7 @@
     
     var localSpeedInCollisionBasis = localSpeed.getCoordinates(collisionBasis);
     
-    var moi = element.fixed ? Infinity: element.solid.getMomentOfInertia();
+    var moi = element.solid.getMomentOfInertia();
     
     var N = Vector.vectorProduct(		
       Vector.vectorProduct(centerToCollision, collisionBasis.v1),

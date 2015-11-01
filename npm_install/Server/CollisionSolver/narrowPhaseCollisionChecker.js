@@ -9,6 +9,12 @@
       return;     // no move for them, so no collision !
     }
     
+    if (!c.handler) {
+      c.status = false;
+      return;     // do not know what to do...
+    }
+
+    
     if (!c.handler.areColliding()) {
       c.status = false;
       c.e1.collisions[c.e2.id].checkedDt = c.e1.position.pendingDt;
