@@ -53,7 +53,7 @@ define(['modules/Vector'], function (Vector) {
       circle.position.y > boxBox.bottom &&
       !cornerCollision(circle, boxBox.right, boxBox.bottom))
       return false;
-    
+        
     return true;
       },
       

@@ -10,6 +10,12 @@
   
   var setUpElement = function (appBus, element) {
     
+    element.logItems = [];
+    element.log = function () {
+      element.logItems.unshift(JSON.stringify(arguments));
+      element.logItems.splice(50, element.logItems.length);
+    }
+
     element.position = element.position || {};
     element.position.x = element.position.x || 0;
     element.position.y = element.position.y || 0;

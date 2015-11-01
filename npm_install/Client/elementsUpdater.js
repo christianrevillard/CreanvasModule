@@ -14,33 +14,21 @@
           }
           return;
         }
-
-        if (el) {
-          el.x = updated["x"] === undefined?el.x:updated["x"];
-          el.y = updated["y"] === undefined?el.y:updated["y"];
-          el.z = updated["z"] === undefined?el.z:updated["z"];
-          //     el.scale.x = updated["scaleX"] === undefined?el.scale.x:updated["scaleX"];
-          //   el.scale.y = updated["scaleY"] === undefined?el.scale.y:updated["scaleY"];
-          el.angle = updated["angle"] === undefined?el.angle:updated["angle"];
-          
-          if (updated.type && (!el.elementType || el.elementType.typeName != updated.type)) {
-            el.elementType = system.elementTypes.filter(function (e) { return e.typeName == updated.type; })[0];
+        
+        var insert = el === undefined;
+        
+        el = el || {};
+        
+        for (var property in updated) {
+          if (updated.hasOwnProperty(property) && updated[property] !== undefined) {
+            el[property] = updated[property];
           }
         }
-        else {
-          //inserts
-          updated.elementType = system.elementTypes.filter(function (e) { return e.typeName == updated.type; })[0];
-          system.elements.push({
-            id: updated.id,
-            x: updated["x"],
-            y: updated["y"],
-            z: updated["z"],
-            //el.scale.x = updated["scaleX"] === undefined?el.scale.x:updated["scaleX"];
-            //el.scale.y = updated["scaleY"] === undefined?el.scale.y:updated["scaleY"];
-            angle: updated["angle"],
-            elementType: system.elementTypes.filter(function (e) { return e.typeName == updated.type; })[0]
-          });
+        if (el.type && (!el.elementType || el.elementType.typeName != el.type)) {
+          el.elementType = system.elementTypes.filter(function (e) { return e.typeName == el.type; })[0];
         }
+        
+        if (insert) { system.elements.push(el);}        
       });
       
       needRedraw = true;

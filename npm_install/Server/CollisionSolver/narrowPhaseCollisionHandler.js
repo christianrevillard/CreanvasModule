@@ -3,6 +3,9 @@
   var handleCollision = function (c) {
     
     var collisionEffects = getCollisionEffects(c.e1, c.e2, c.handler);
+    
+    if (!collisionEffects)
+      return;
            
     c.e1.speed.x += collisionEffects.e1.dSpeedX;
     c.e1.speed.y += collisionEffects.e1.dSpeedY;
@@ -11,6 +14,9 @@
     c.e2.speed.x += collisionEffects.e2.dSpeedX;
     c.e2.speed.y += collisionEffects.e2.dSpeedY;
     c.e2.speed.angle += collisionEffects.e2.dSpeedAngle;
+
+    c.e1.emit('collided', c.e2);
+    c.e2.emit('collided', c.e1);
   };
   
   var getCollisionEffects = function (e1, e2, handler) {
@@ -22,8 +28,9 @@
     var collisionPointInformation = handler.getCollisionPoint();
     
     
-    if (!collisionPointInformation) { 
-      console.log(e1, e2);
+    if (!collisionPointInformation || !collisionPointInformation.normalVector) {
+      console.log('error getting collision effects for:', e1, e2);
+      return null;
     }
     
     var collisionBasis = Vector.getBasisFromFirstVector(collisionPointInformation.normalVector);
@@ -78,6 +85,12 @@
       element.speed,
 			Vector.vectorProduct(rotation, centerToCollision));
     
+    if (element.solid.getEdgeSpeed) {
+     localSpeed = Vector.sum(
+        localSpeed,
+        element.solid.getEdgeSpeed(collisionPoint.x, collisionPoint.y));
+    }    
+    
     //if (element.moving.scaleSpeed) {
     //  localSpeed.x += centerToCollision.x * element.moving.scaleSpeed.x;
     //  localSpeed.y += centerToCollision.y * element.moving.scaleSpeed.y;
@@ -111,6 +124,7 @@
     appBus.on('collisionsFound', function (collisions) {
       
       collisions.forEach(handleCollision);
+      
     });
   });
 });

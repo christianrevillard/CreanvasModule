@@ -18,7 +18,7 @@
       //      ctx.scale(element.scale.x || 1, element.scale.y || 1);
       
       system.context.beginPath();
-      element.elementType.draw(system.context);
+      element.elementType.draw(system.context, element);
     };
     
     setInterval(

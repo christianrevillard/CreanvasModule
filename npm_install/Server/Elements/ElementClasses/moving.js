@@ -40,10 +40,13 @@
       element.position.x = element.originalPosition.x + (element.speed.x || 0) * dt;
       element.position.y = element.originalPosition.y + (element.speed.y || 0) * dt;
       element.position.angle = element.originalPosition.angle + (element.speed.angle || 0) * dt;
+      
+      element.log('updated for', dt, element.position);
     });
 
     element.on('commitMove', function () {
             
+      element.log('move commited', dt, element.position);
       element.originalPosition = null;
       var dt = element.position.pendingDt;
       
@@ -53,7 +56,7 @@
         element.speed.angle += (element.acceleration.angle || 0) * dt;
       }
       element.emit('moved', element);
-      element.emit('elementUpdated', element);
+      element.emit('elementUpdated');
     });
   };
 });

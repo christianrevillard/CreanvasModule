@@ -64,27 +64,7 @@ define(['creanvas/creanvas'], function (creanvas) {
       mass: 10,
       position: { x: 400, y: -250, z: -100 },
       speed: { x: 50, y: -50, angle:Math.PI/2},
-      circular: { radius: 50 },
-      events: {
-        moved: function (element) {
-          
-          if (element.position.x > 800) {
-            element.position.x = -800;
-          }
-          
-          if (element.position.x < -800) {
-            element.position.x = 800;
-          }
-          
-          if (element.position.y > 500) {
-            element.position.y = -500;
-          }
-          
-          if (element.position.y < -500) {
-            element.position.y = 500;
-          }
-        }
-      }
+      circular: { radius: 50, minRadius: 10, maxRadius: 100, speedRadius: 100 }
     });
     
     app.addElement({
@@ -94,27 +74,7 @@ define(['creanvas/creanvas'], function (creanvas) {
       mass: 10,
       position: { x: 200, y: 0, z: -100 },
       speed: { x: 50, y: 0, angle: -Math.PI/4 },
-      circular: { radius: 50 },
-      events: {
-        moved: function (element) {
-          
-          if (element.position.x > 800) {
-            element.position.x = -800;
-          }
-          
-          if (element.position.x < -800) {
-            element.position.x = 800;
-          }
-          
-          if (element.position.y > 500) {
-            element.position.y = -500;
-          }
-          
-          if (element.position.y < -500) {
-            element.position.y = 500;
-          }
-        }
-      }
+      circular: { radius: 50, minRadius: 10, maxRadius: 100, speedRadius: 100 }
     });
     
     app.addElement({
@@ -124,27 +84,7 @@ define(['creanvas/creanvas'], function (creanvas) {
       mass: 100,
       position: { x: -400, y: -250, z: -100 },
       speed: { x: 50, y: -50, angle: Math.PI/4 },
-      circular: { radius: 50 },
-      events: {
-        moved: function (element) {
-          
-          if (element.position.x > 800) {
-            element.position.x = -800;
-          }
-          
-          if (element.position.x < -800) {
-            element.position.x = 800;
-          }
-          
-          if (element.position.y > 500) {
-            element.position.y = -500;
-          }
-          
-          if (element.position.y < -500) {
-            element.position.y = 500;
-          }
-        }
-      }
+      circular: { radius: 50, minRadius:30, maxRadius:200, speedRadius:30 }
     });
     
     app.addElement({
@@ -154,27 +94,7 @@ define(['creanvas/creanvas'], function (creanvas) {
       mass: 10,
       position: { x: -400, y: 250, z: -100 },
       speed: { x: 50, y: -50 },
-      circular: { radius: 50 },
-      events: {
-        moved: function (element) {
-          
-          if (element.position.x > 800) {
-            element.position.x = -800;
-          }
-          
-          if (element.position.x < -800) {
-            element.position.x = 800;
-          }
-          
-          if (element.position.y > 500) {
-            element.position.y = -500;
-          }
-          
-          if (element.position.y < -500) {
-            element.position.y = 500;
-          }
-        }
-      }
+      circular: { radius: 50, minRadius: 10, maxRadius: 100, speedRadius: 100 }
     });
     
     app.addElement({
@@ -184,27 +104,7 @@ define(['creanvas/creanvas'], function (creanvas) {
       mass: 10,
       position: { x: -200, y: 250, z: -100 },
       speed: { x: -50, y: -50, angle:2*Math.PI },
-      circular: { radius: 50 },
-      events: {
-        moved: function (element) {
-          
-          if (element.position.x > 800) {
-            element.position.x = -800;
-          }
-          
-          if (element.position.x < -800) {
-            element.position.x = 800;
-          }
-          
-          if (element.position.y > 500) {
-            element.position.y = -500;
-          }
-          
-          if (element.position.y < -500) {
-            element.position.y = 500;
-          }
-        }
-      }
+      circular: { radius: 5, minRadius: 5, maxRadius: 50, speedRadius: 200 }
     });
     
     app.addElement({
@@ -214,27 +114,7 @@ define(['creanvas/creanvas'], function (creanvas) {
       mass: 10,
       position: { x: 0, y: 250, z: -100 },
       speed: { x: 50, y: 50, angle: -Math.PI },
-      circular: { radius: 50 },
-      events: {
-        moved: function (element) {
-          
-          if (element.position.x > 800) {
-            element.position.x = -800;
-          }
-          
-          if (element.position.x < -800) {
-            element.position.x = 800;
-          }
-          
-          if (element.position.y > 500) {
-            element.position.y = -500;
-          }
-          
-          if (element.position.y < -500) {
-            element.position.y = 500;
-          }
-        }
-      }
+      circular: { radius: 5, minRadius: 5, maxRadius: 50, speedRadius: 200 }
     });
     
     app.addElement({
@@ -244,27 +124,7 @@ define(['creanvas/creanvas'], function (creanvas) {
       mass: 10,
       position: { x: -150, y: -300, z: -100 },
       speed: { x: 50, y: 20 },
-      circular: { radius: 50 },
-      events: {
-        moved: function (element) {
-          
-          if (element.position.x > 800) {
-            element.position.x = -800;
-          }
-          
-          if (element.position.x < -800) {
-            element.position.x = 800;
-          }
-          
-          if (element.position.y > 500) {
-            element.position.y = -500;
-          }
-          
-          if (element.position.y < -500) {
-            element.position.y = 500;
-          }
-        }
-      }
+      circular: { radius: 5, minRadius: 5, maxRadius: 50, speedRadius: 200 }
     });
     
     app.addElement({
@@ -274,34 +134,9 @@ define(['creanvas/creanvas'], function (creanvas) {
       mass: 10,
       position: { x: 450, y: 300, z: -100 },
       speed: { x: -50, y: -20 },
-      circular: { radius: 50 },
-      events: {
-        moved: function (element) {
-          
-          if (element.position.x > 800) {
-            element.position.x = -800;
-          }
-          
-          if (element.position.x < -800) {
-            element.position.x = 800;
-          }
-          
-          if (element.position.y > 500) {
-            element.position.y = -500;
-          }
-          
-          if (element.position.y < -500) {
-            element.position.y = 500;
-          }
-        }
-      }
+      circular: { radius: 5, minRadius: 5, maxRadius: 50, speedRadius: 200 }
     });
     
-    
-    
-    
-    
-
     testApplication = {
       app: app,
       connect: function (clientChannel) {
