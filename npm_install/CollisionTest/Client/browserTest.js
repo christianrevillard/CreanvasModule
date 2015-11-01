@@ -3,12 +3,10 @@
 requirejs.config({
   paths: {
     'creanvas': '../../Server' ,
+    'modules': '../../Modules' ,
     'client': '../../Client'
   }
 });
-
-
-var minApp;
 
 requirejs([
   './collisionTestClient',
@@ -22,17 +20,8 @@ requirejs([
       document.getElementById('browserCanvas'));
   };
   
-  minApp = {
-    join: function () {
-      console.log('Join');
-        
-      testApplication.getApplication(function (newInstance) {
-        console.log('newInstance:', newInstance);
-        startClient(newInstance.connect());
-      });
-    }
-  };
-
-  minApp.join();
+  testApplication.getApplication(function (newInstance) {
+    console.log('newInstance:', newInstance);
+    startClient(newInstance.connect());
+  });
 });
-

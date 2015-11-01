@@ -2,7 +2,7 @@
   
   serverBus.on('applicationCreated', function (appBus) {
     appBus.on(
-      "addElement", 
+      "elementAdded", 
     function (element) {
         elementEventChecker(appBus, element);
       });
