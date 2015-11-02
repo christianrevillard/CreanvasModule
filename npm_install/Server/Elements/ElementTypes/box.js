@@ -19,7 +19,7 @@
     };
 
     element.solid.getBoundaryBox = function () {
-      var original = element.originalPosition || element.position;
+      var original = element.lastCommited?element.lastCommited.position:element.position;
       
       return {
         left: Math.min(element.position.x, original.x) + element.box.left,

@@ -19,6 +19,8 @@
       c.status = false;
       c.e1.collisions[c.e2.id].checkedDt = c.e1.position.pendingDt;
       c.e2.collisions[c.e1.id].checkedDt = c.e2.position.pendingDt;
+      c.e1.log('Do not collide', c.e1.id, c.e2.id, c.e1.position, c.e1.circular?c.e1.circular.radius:'box', c.e2.position, c.e2.circular?c.e2.circular.radius:'box');
+      c.e2.log('Do not collide', c.e1.id, c.e2.id, c.e1.position, c.e1.circular?c.e1.circular.radius:'box', c.e2.position, c.e2.circular?c.e2.circular.radius:'box');
       return;
     }
     
@@ -55,13 +57,13 @@
       if (collision.handler.areColliding()) {
         // scenario 2a: collision at lowest pendig.dt => find common pending.dt somewhere between 0 and lowest pending.dt
         // both moved at lowestDt already
-        collision.e1.log('Different dt, colliding at lowest', lowestDt);
-        collision.e2.log('Different dt, colliding at lowest', lowestDt);
+        collision.e1.log('Different dt, colliding at lowest', lowestDt, collision.e2.id);
+        collision.e2.log('Different dt, colliding at lowest', lowestDt, collision.e1.id);
         moveOutOfOverlapCommonDt(collision);
       } else {
         // scenario 2b: no collision at lowest pending.dt => decrease pending.dt on highest only				
-        collision.e1.log('Different dt, not colliding at lowest', lowestDt);
-        collision.e2.log('Different dt, not colliding at lowest', lowestDt);
+        collision.e1.log('Different dt, not colliding at lowest', lowestDt, collision.e2.id);
+        collision.e2.log('Different dt, not colliding at lowest', lowestDt, collision.e1.id);
         highestDtElement.emit('updatePosition', highestDt);
         moveOutOfOverlapDifferentDt(collision);
       }
@@ -71,8 +73,16 @@
     collision.e2.collisions[collision.e1.id].checkedDt = collision.e2.position.pendingDt;
 
     if (collision.handler.areColliding()) {
-      console.log('ERROR, should not have acollision here !', collision.e1, collision.e2);
-    };
+      collision.e1.log('Do collide', collision.e1.id, collision.e2.id, collision.e1.position, collision.e1.circular?collision.e1.circular.radius:'box', collision.e2.position, collision.e2.circular?collision.e2.circular.radius:'box');
+   collision.e2.log('Do collide', collision.e1.id, collision.e2.id, collision.e1.position, collision.e1.circular?collision.e1.circular.radius:'box', collision.e2.position, collision.e2.circular?collision.e2.circular.radius:'box');
+  console.log('ERROR, should not have acollision here !', collision.e1, collision.e2);
+      collision.handler.areColliding();
+    }
+    else { 
+      collision.e1.log('Do not collide', collision.e1.id, collision.e2.id,collision.e1.position, collision.e1.circular?collision.e1.circular.radius:'box',  collision.e2.position, collision.e2.circular?collision.e2.circular.radius:'box');
+      collision.e2.log('Do not collide', collision.e1.id, collision.e2.id, collision.e1.position, collision.e1.circular?collision.e1.circular.radius:'box', collision.e2.position, collision.e2.circular?collision.e2.circular.radius:'box');
+   };
+
   };
   
   var moveOutOfOverlapCommonDt = function (collision) {

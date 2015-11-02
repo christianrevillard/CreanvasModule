@@ -15,6 +15,15 @@
     element.speed.x = element.speed.x || 0;
     element.speed.y = element.speed.y || 0;
     element.speed.angle = element.speed.angle || 0;
+    
+    element.lastCommited = element.lastCommited || {};
+    
+    element.lastCommited.position = {
+        x: element.position.x,
+        y: element.position.y,
+        z: element.position.z,
+        angle: element.position.angle,
+    };
 
     appBus.on("getNewFrame", function (dt) {
       
@@ -26,28 +35,27 @@
     });
     
     element.on('move', function (dt) {
-      element.originalPosition = {
-        x: element.position.x,
-        y: element.position.y,
-        angle: element.position.angle
-      };
-      
       element.emit('updatePosition', dt);
     });
     
     element.on('updatePosition', function (dt) {      
       element.position.pendingDt = dt;
-      element.position.x = element.originalPosition.x + (element.speed.x || 0) * dt;
-      element.position.y = element.originalPosition.y + (element.speed.y || 0) * dt;
-      element.position.angle = element.originalPosition.angle + (element.speed.angle || 0) * dt;
-      
-      element.log('updated for', dt, element.position);
+      element.position.x = element.lastCommited.position.x + (element.speed.x || 0) * dt;
+      element.position.y = element.lastCommited.position.y + (element.speed.y || 0) * dt;
+      element.position.angle = element.lastCommited.position.angle + (element.speed.angle || 0) * dt;      
     });
 
     element.on('commitMove', function () {
             
-      element.log('move commited', dt, element.position);
-      element.originalPosition = null;
+//      element.log('move commited', dt, element.position);
+      
+      element.lastCommited.position = {
+        x: element.position.x,
+        y: element.position.y,
+        z: element.position.z,
+        angle: element.position.angle,
+      };
+      
       var dt = element.position.pendingDt;
       
       if (element.acceleration) {

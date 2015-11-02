@@ -64,7 +64,7 @@ define(['creanvas/creanvas'], function (creanvas) {
       mass: 10,
       position: { x: 400, y: -250, z: -100 },
       speed: { x: 50, y: -50, angle:Math.PI/2},
-      circular: { radius: 50, minRadius: 10, maxRadius: 100, speedRadius: 100 }
+      circular: { radius: 50, minRadius: 20, maxRadius: 100, speedRadius: 50 }
     });
     
     app.addElement({
@@ -74,7 +74,7 @@ define(['creanvas/creanvas'], function (creanvas) {
       mass: 10,
       position: { x: 200, y: 0, z: -100 },
       speed: { x: 50, y: 0, angle: -Math.PI/4 },
-      circular: { radius: 50, minRadius: 10, maxRadius: 100, speedRadius: 100 }
+      circular: { radius: 50, minRadius: 10, maxRadius: 100, speedRadius: 50 }
     });
     
     app.addElement({
@@ -94,7 +94,7 @@ define(['creanvas/creanvas'], function (creanvas) {
       mass: 10,
       position: { x: -400, y: 250, z: -100 },
       speed: { x: 50, y: -50 },
-      circular: { radius: 50, minRadius: 10, maxRadius: 100, speedRadius: 100 }
+      circular: { radius: 50, minRadius: 10, maxRadius: 100, speedRadius: 40 }
     });
     
     app.addElement({
@@ -104,7 +104,7 @@ define(['creanvas/creanvas'], function (creanvas) {
       mass: 10,
       position: { x: -200, y: 250, z: -100 },
       speed: { x: -50, y: -50, angle:2*Math.PI },
-      circular: { radius: 5, minRadius: 5, maxRadius: 50, speedRadius: 200 }
+      circular: { radius: 5, minRadius: 5, maxRadius: 50, speedRadius: 10 }
     });
     
     app.addElement({
@@ -114,7 +114,7 @@ define(['creanvas/creanvas'], function (creanvas) {
       mass: 10,
       position: { x: 0, y: 250, z: -100 },
       speed: { x: 50, y: 50, angle: -Math.PI },
-      circular: { radius: 5, minRadius: 5, maxRadius: 50, speedRadius: 200 }
+      circular: { radius: 5, minRadius: 5, maxRadius: 50, speedRadius: 50 }
     });
     
     app.addElement({
@@ -124,7 +124,7 @@ define(['creanvas/creanvas'], function (creanvas) {
       mass: 10,
       position: { x: -150, y: -300, z: -100 },
       speed: { x: 50, y: 20 },
-      circular: { radius: 5, minRadius: 5, maxRadius: 50, speedRadius: 200 }
+      circular: { radius: 5, minRadius: 5, maxRadius: 50, speedRadius: 40 }
     });
     
     app.addElement({
@@ -134,7 +134,7 @@ define(['creanvas/creanvas'], function (creanvas) {
       mass: 10,
       position: { x: 450, y: 300, z: -100 },
       speed: { x: -50, y: -20 },
-      circular: { radius: 5, minRadius: 5, maxRadius: 50, speedRadius: 200 }
+      circular: { radius: 5, minRadius: 10, maxRadius: 30, speedRadius: 5 }
     });
     
     testApplication = {
