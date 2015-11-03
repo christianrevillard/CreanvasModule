@@ -82,7 +82,7 @@ define(['creanvas/creanvas'], function (creanvas) {
       type: 'Heavy',
       solid: { coefficient: 1, staticFriction: 0.7, dynamicFriction: 0.5 },
       mass: 100,
-      draggable: {},
+      draggable: {speed:'keep', maxSpeed:1000},
       position: { x: -400, y: -250, z: -100 },
       speed: { x: 50, y: -50, angle: Math.PI/4 },
       circular: { radius: 50, minRadius:30, maxRadius:200, speedRadius:30 }

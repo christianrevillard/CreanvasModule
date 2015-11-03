@@ -5,7 +5,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{a44c2184-6b6a-4fd6-9af0-48208e623d5f}</ProjectGuid>
     <ProjectHome />
-    <ProjectView>ProjectFiles</ProjectView>
+    <ProjectView>ShowAllFiles</ProjectView>
     <StartupFile>npm_install\CollisionTest\app.js</StartupFile>
     <WorkingDirectory>.</WorkingDirectory>
     <OutputPath>.</OutputPath>
@@ -66,56 +66,7 @@
     <Compile Include="npm_install\Server\Core\logger.js" />
     <Compile Include="npm_install\Server\ClientCommunication\clientUpdater.js" />
     <Compile Include="npm_install\Server\creanvas.js" />
-    <Compile Include="Draft\Client - Copy\CreJs.js" />
-    <Compile Include="Draft\Client - Copy\NodeJsController.js" />
-    <Compile Include="Draft\Client - Copy\NodeJsElement.js" />
-    <Compile Include="Draft\Client\CreJs.js" />
-    <Compile Include="Draft\Client\NodeJsController.js" />
-    <Compile Include="Draft\Client\NodeJsElement.js" />
     <Compile Include="npm_install\scripts\require.js" />
-    <Compile Include="Draft\Server - Copy\CollisionSolver\AxeAlignedBoxCircleCollision.js" />
-    <Compile Include="Draft\Server - Copy\CollisionSolver\CircleCircleCollision.js" />
-    <Compile Include="Draft\Server - Copy\CollisionSolver\CollisionFactory.js" />
-    <Compile Include="Draft\Server - Copy\CollisionSolver\CollisionSolver.js" />
-    <Compile Include="Draft\Server - Copy\Copy of ServerController.js" />
-    <Compile Include="Draft\Server - Copy\Decorators.js" />
-    <Compile Include="Draft\Server - Copy\Decorators\Clickable.js" />
-    <Compile Include="Draft\Server - Copy\Decorators\CustomTimer.js" />
-    <Compile Include="Draft\Server - Copy\Decorators\Droppable.js" />
-    <Compile Include="Draft\Server - Copy\Decorators\DropZone.js" />
-    <Compile Include="Draft\Server - Copy\Decorators\Duplicable.js" />
-    <Compile Include="Draft\Server - Copy\Decorators\Movable.js" />
-    <Compile Include="Draft\Server - Copy\Decorators\Moving.js" />
-    <Compile Include="Draft\Server - Copy\Decorators\Solid.js" />
-    <Compile Include="Draft\Server - Copy\ElementTypes.js" />
-    <Compile Include="Draft\Server - Copy\ElementTypes\AxeAlignedBox.js" />
-    <Compile Include="Draft\Server - Copy\ElementTypes\Circle.js" />
-    <Compile Include="Draft\Server - Copy\ServerController.js" />
-    <Compile Include="Draft\Server - Copy\ServerElement.js" />
-    <Compile Include="Draft\Server - Copy\Vector.js" />
-    <Compile Include="Draft\Server\Copy of ServerController.js" />
-    <Compile Include="Draft\Server\Decorators.js" />
-    <Compile Include="Draft\Server\ElementTypes.js" />
-    <Compile Include="Draft\Server\null.js" />
-    <Compile Include="Draft\Server\ServerController - Copy.js" />
-    <Compile Include="Draft\Server\CreJsController.js" />
-    <Compile Include="Draft\Server\ServerElement - Copy.js" />
-    <Compile Include="Draft\Server\CreJsElement.js" />
-    <Compile Include="Draft\Server\Vector.js" />
-    <Compile Include="Draft\Server\CollisionSolver\AxeAlignedBoxCircleCollision.js" />
-    <Compile Include="Draft\Server\CollisionSolver\CircleCircleCollision.js" />
-    <Compile Include="Draft\Server\CollisionSolver\CollisionFactory.js" />
-    <Compile Include="Draft\Server\CollisionSolver\CollisionSolver.js" />
-    <Compile Include="Draft\Server\Decorators\Clickable.js" />
-    <Compile Include="Draft\Server\Decorators\CustomTimer.js" />
-    <Compile Include="Draft\Server\Decorators\Droppable.js" />
-    <Compile Include="Draft\Server\Decorators\DropZone.js" />
-    <Compile Include="Draft\Server\Decorators\Duplicable.js" />
-    <Compile Include="Draft\Server\Decorators\Movable.js" />
-    <Compile Include="Draft\Server\Decorators\Moving.js" />
-    <Compile Include="Draft\Server\Decorators\Solid.js" />
-    <Compile Include="Draft\Server\ElementTypes\AxeAlignedBox.js" />
-    <Compile Include="Draft\Server\ElementTypes\Circle.js" />
     <Compile Include="app.js" />
     <Compile Include="npm_install\Server\Elements\element.js" />
     <Compile Include="npm_install\Server\Core\serverBus.js" />
@@ -127,9 +78,6 @@
     <Compile Include="npm_install\TicTacToe\Server\TicTacToe.js" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Draft\Client\" />
-    <Folder Include="Draft\Client - Copy\" />
-    <Folder Include="Draft\" />
     <Folder Include="npm_install\CollisionTest\" />
     <Folder Include="npm_install\CollisionTest\Client\" />
     <Folder Include="npm_install\CollisionTest\scripts\" />
@@ -146,7 +94,6 @@
     <Folder Include="npm_install\Server\" />
     <Folder Include="npm_install\" />
     <Folder Include="npm_install\scripts\" />
-    <Folder Include="Draft\testing\" />
     <Folder Include="npm_install\Server\Elements\" />
     <Folder Include="npm_install\Server\ClientCommunication\" />
     <Folder Include="npm_install\Server\Core\" />
@@ -155,14 +102,6 @@
     <Folder Include="npm_install\TicTacToe\scripts\" />
     <Folder Include="npm_install\TicTacToe\Server\" />
     <Folder Include="scripts\" />
-    <Folder Include="Draft\Server\" />
-    <Folder Include="Draft\Server - Copy\" />
-    <Folder Include="Draft\Server - Copy\CollisionSolver\" />
-    <Folder Include="Draft\Server - Copy\Decorators\" />
-    <Folder Include="Draft\Server - Copy\ElementTypes\" />
-    <Folder Include="Draft\Server\CollisionSolver\" />
-    <Folder Include="Draft\Server\Decorators\" />
-    <Folder Include="Draft\Server\ElementTypes\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="npm_install\CollisionTest\Client\browser.html" />

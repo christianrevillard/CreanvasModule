@@ -17,31 +17,27 @@
     
     if (!c.handler.areColliding()) {
       c.status = false;
-      c.e1.collisions[c.e2.id].checkedDt = c.e1.position.pendingDt;
-      c.e2.collisions[c.e1.id].checkedDt = c.e2.position.pendingDt;
-      c.e1.log('Do not collide', c.e1.id, c.e2.id, c.e1.position, c.e1.circular?c.e1.circular.radius:'box', c.e2.position, c.e2.circular?c.e2.circular.radius:'box');
-      c.e2.log('Do not collide', c.e1.id, c.e2.id, c.e1.position, c.e1.circular?c.e1.circular.radius:'box', c.e2.position, c.e2.circular?c.e2.circular.radius:'box');
+      c[c.e1.id] = c.e1.position.pendingDt;
+      c[c.e2.id] = c.e2.position.pendingDt;
       return;
     }
-    
+        
     c.status = true;
-    
+        
     moveOutOfOverlap(c);
-    
-    requeuePossibleCollisions(c.e1);
-    requeuePossibleCollisions(c.e2);
+           
+    requeuePossibleCollisions(collisionsToCheck, c.e1);
+    requeuePossibleCollisions(collisionsToCheck, c.e2);
   };
   
   var moveOutOfOverlap = function (collision) {
-    var steps = 1;
+    var steps = 4;
     
     // Input: e1 and e2 overlap in current pending.dt
     // Out: pending.dt updated to an non-overlaping position.
     
     // scenario 1: same pending.dt 
     if (Math.abs(collision.e1.position.pendingDt - collision.e2.position.pendingDt) < 0.0001) {
-      collision.e1.log('Same pending dt', collision.e1.position.pendingDt);
-      collision.e2.log('Same pending dt', collision.e1.position.pendingDt);
       moveOutOfOverlapCommonDt(collision);
     }
     // scenario 2: different pending.dt
@@ -57,36 +53,20 @@
       if (collision.handler.areColliding()) {
         // scenario 2a: collision at lowest pendig.dt => find common pending.dt somewhere between 0 and lowest pending.dt
         // both moved at lowestDt already
-        collision.e1.log('Different dt, colliding at lowest', lowestDt, collision.e2.id);
-        collision.e2.log('Different dt, colliding at lowest', lowestDt, collision.e1.id);
         moveOutOfOverlapCommonDt(collision);
       } else {
         // scenario 2b: no collision at lowest pending.dt => decrease pending.dt on highest only				
-        collision.e1.log('Different dt, not colliding at lowest', lowestDt, collision.e2.id);
-        collision.e2.log('Different dt, not colliding at lowest', lowestDt, collision.e1.id);
         highestDtElement.emit('move', highestDt);
         moveOutOfOverlapDifferentDt(collision);
       }
     }
 
-    collision.e1.collisions[collision.e2.id].checkedDt = collision.e1.position.pendingDt;
-    collision.e2.collisions[collision.e1.id].checkedDt = collision.e2.position.pendingDt;
-
-    if (collision.handler.areColliding()) {
-      collision.e1.log('Do collide', collision.e1.id, collision.e2.id, collision.e1.position, collision.e1.circular?collision.e1.circular.radius:'box', collision.e2.position, collision.e2.circular?collision.e2.circular.radius:'box');
-   collision.e2.log('Do collide', collision.e1.id, collision.e2.id, collision.e1.position, collision.e1.circular?collision.e1.circular.radius:'box', collision.e2.position, collision.e2.circular?collision.e2.circular.radius:'box');
-  console.log('ERROR, should not have acollision here !', collision.e1, collision.e2);
-      collision.handler.areColliding();
-    }
-    else { 
-      collision.e1.log('Do not collide', collision.e1.id, collision.e2.id,collision.e1.position, collision.e1.circular?collision.e1.circular.radius:'box',  collision.e2.position, collision.e2.circular?collision.e2.circular.radius:'box');
-      collision.e2.log('Do not collide', collision.e1.id, collision.e2.id, collision.e1.position, collision.e1.circular?collision.e1.circular.radius:'box', collision.e2.position, collision.e2.circular?collision.e2.circular.radius:'box');
-   };
-
+    collision[collision.e1.id] = collision.e1.position.pendingDt;
+    collision[collision.e2.id] = collision.e2.position.pendingDt;
   };
   
   var moveOutOfOverlapCommonDt = function (collision) {
-    var steps = 1;
+    var steps = 4;
     // Input: e1 and e2 overlap in their current pending.dt, which is the same
     // Out: no nore overlap !
     var okDt = 0;
@@ -105,18 +85,11 @@
       
       if (collision.handler.areColliding()) {
         collidedDt = testDt;
-        collision.e1.log('Colliding: ok, notok', okDt, collidedDt);
-        collision.e2.log('Colliding: ok, notok', okDt, collidedDt);
       } else {
         okDt = testDt;
-        collision.e1.log('Not colliding: ok, notok', okDt, collidedDt);
-        collision.e2.log('Not colliding: ok, notok', okDt, collidedDt);
       }
     }
     
-    collision.e1.log('moveOutOfOverlapCommonDt completed', okDt);
-    collision.e2.log('moveOutOfOverlapCommonDt completed', okDt);
-
     collision.e1.emit('move', okDt);
     collision.e2.emit('move', okDt);
   };
@@ -132,9 +105,6 @@
     var okDt = fixed.position.pendingDt;
     var collidedDt = toUpdate.position.pendingDt;
 
-    collision.e1.log('Not colliding: ok, notok', okDt, collidedDt);
-    collision.e2.log('Not colliding: ok, notok', okDt, collidedDt);
-    
     var testDt;
     var collision;
     
@@ -148,25 +118,24 @@
       
       if (collision.handler.areColliding()) {
         collidedDt = testDt;
-        collision.e1.log('Colliding: ok, notok', okDt, collidedDt);
-        collision.e2.log('Colliding: ok, notok', okDt, collidedDt);
       } else {
         okDt = testDt;
-        collision.e1.log('Not colliding: ok, notok', okDt, collidedDt);
-        collision.e2.log('Not colliding: ok, notok', okDt, collidedDt);
       }
     }
     
-    collision.e1.log('moveOutOfOverlapDifferentDt completed', okDt);    
-    collision.e2.log('moveOutOfOverlapDifferentDt completed', okDt);
     toUpdate.emit('move', okDt);
   };
   
-  var requeuePossibleCollisions = function (element) {
-    element
-	  .collisions
-	  .filter(function (c) { return c.collision.status !== undefined && c.checkedDt > element.position.pendingDt; })
-		.forEach(function (c) { c.status = undefined; });
+  var requeuePossibleCollisions = function (collisionsToCheck, element) {
+    collisionsToCheck
+    .filter(function (c) {
+      return (c.e1.id === element.id || c.e2.id === element.id) &&
+     c.status !== undefined &&
+      c[element.id] > element.position.pendingDt;
+    })
+		.forEach(function (c) {
+      c.status = undefined;
+    });
   };
   
   serverBus.on('applicationCreated', function (appBus, parameters) {

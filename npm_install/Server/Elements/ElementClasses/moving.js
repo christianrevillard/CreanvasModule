@@ -24,23 +24,11 @@
         element.emit('commitMove')
       }
     });
-        
+    
     element.on('move', function (dt) {
       element.position.pendingDt = dt;
       if (element.target.position) {
-        console.log('moving to target', element.id, element.target.position);
-        if (element.target.position.dt) { 
-          // updating, after collision TODO
-          element.position.x = element.lastCommited.position.x;
-          element.position.y = element.lastCommited.position.y;
-          element.position.angle = element.lastCommited.position.angle;
-        } else {
-          element.target.position.dt = dt;
-          element.position.x = element.target.position.x;
-          element.position.y = element.target.position.y;
-          element.position.angle = element.target.position.angle;
-          // TODO, speed to use..
-        }
+        return;
       }
       else {
         element.position.x = element.lastCommited.position.x + (element.speed.x || 0) * dt;
@@ -50,23 +38,14 @@
     });
 
     element.on('commitMove', function () {
-            
-//      element.log('move commited', dt, element.position);
-      
-      if (element.target.position &&
-        element.position.x === element.target.position.x &&
-        element.position.y === element.target.position.y &&
-        element.position.angle === element.target.position.angle) {
-        element.target.position = null;
-      }
-
+                  
       element.lastCommited.position = {
         x: element.position.x,
         y: element.position.y,
         z: element.position.z,
         angle: element.position.angle,
       };
-      
+            
       var dt = element.position.pendingDt;
       
       if (element.acceleration) {
@@ -74,6 +53,7 @@
         element.speed.y += (element.acceleration.y || 0) * dt;
         element.speed.angle += (element.acceleration.angle || 0) * dt;
       }
+      
       element.emit('moved', element);
       element.emit('elementUpdated');
     });

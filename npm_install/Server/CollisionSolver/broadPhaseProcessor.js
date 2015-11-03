@@ -24,10 +24,10 @@
       collisionsToCheck.forEach(function (c) {
         c.handler = collisionFactory(c.e1, c.e2);
         c.status = undefined;
-        c.e1.collisions = c.e1.collisions || [];
-        c.e2.collisions = c.e2.collisions || [];
-        c.e1.collisions[c.e2.id] = { collisionWith: c.e2, collision: c};
-        c.e2.collisions[c.e1.id] = { collisionWith: c.e1, collision: c};
+        //c.e1.collisions = c.e1.collisions || [];
+        //c.e2.collisions = c.e2.collisions || [];
+        //c.e1.collisions.push({ collisionWith: c.e2.id, collision: c });
+        //c.e2.collisions.push({ collisionWith: c.e1.id, collision: c });
       });
 
       appBus.emit('broadPhaseCompleted', collisionsToCheck);
