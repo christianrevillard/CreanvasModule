@@ -52,7 +52,7 @@
       var highestDt = highestDtElement.position.pendingDt;
       var lowestDt = lowestDtElement.position.pendingDt;
       
-      highestDtElement.emit('updatePosition', lowestDt);
+      highestDtElement.emit('move', lowestDt);
       
       if (collision.handler.areColliding()) {
         // scenario 2a: collision at lowest pendig.dt => find common pending.dt somewhere between 0 and lowest pending.dt
@@ -64,7 +64,7 @@
         // scenario 2b: no collision at lowest pending.dt => decrease pending.dt on highest only				
         collision.e1.log('Different dt, not colliding at lowest', lowestDt, collision.e2.id);
         collision.e2.log('Different dt, not colliding at lowest', lowestDt, collision.e1.id);
-        highestDtElement.emit('updatePosition', highestDt);
+        highestDtElement.emit('move', highestDt);
         moveOutOfOverlapDifferentDt(collision);
       }
     }
@@ -100,8 +100,8 @@
       
       testDt = (okDt + collidedDt) / 2;
       
-      collision.e1.emit('updatePosition', testDt);
-      collision.e2.emit('updatePosition', testDt);
+      collision.e1.emit('move', testDt);
+      collision.e2.emit('move', testDt);
       
       if (collision.handler.areColliding()) {
         collidedDt = testDt;
@@ -117,8 +117,8 @@
     collision.e1.log('moveOutOfOverlapCommonDt completed', okDt);
     collision.e2.log('moveOutOfOverlapCommonDt completed', okDt);
 
-    collision.e1.emit('updatePosition', okDt);
-    collision.e2.emit('updatePosition', okDt);
+    collision.e1.emit('move', okDt);
+    collision.e2.emit('move', okDt);
   };
   
   var moveOutOfOverlapDifferentDt = function (collision) {
@@ -144,7 +144,7 @@
       
       testDt = (okDt + collidedDt) / 2;
       
-      toUpdate.emit('updatePosition', testDt);
+      toUpdate.emit('move', testDt);
       
       if (collision.handler.areColliding()) {
         collidedDt = testDt;
@@ -159,7 +159,7 @@
     
     collision.e1.log('moveOutOfOverlapDifferentDt completed', okDt);    
     collision.e2.log('moveOutOfOverlapDifferentDt completed', okDt);
-    toUpdate.emit('updatePosition', okDt);
+    toUpdate.emit('move', okDt);
   };
   
   var requeuePossibleCollisions = function (element) {

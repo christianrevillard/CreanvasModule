@@ -60,7 +60,7 @@
       }
     };
 
-    element.on('updatePosition', function (dt) {
+    element.on('move', function (dt) {
       element.circular.radius = element.lastCommited.circular.radius + (element.circular.speedRadius || 0) * dt;
       
       if (element.circular.radius > element.circular.maxRadius) {

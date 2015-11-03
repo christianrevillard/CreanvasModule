@@ -15,13 +15,23 @@
       element.logItems.unshift(JSON.stringify(arguments));
       element.logItems.splice(50, element.logItems.length);
     }
-
+    
     element.position = element.position || {};
     element.position.x = element.position.x || 0;
     element.position.y = element.position.y || 0;
     element.position.z = element.position.z || 0;
     element.position.angle = element.position.angle || 0;
-
+    
+    element.lastCommited = {      
+      position : {
+        x: element.position.x,
+        y: element.position.y,
+        z: element.position.z,
+        angle: element.position.angle,
+      }
+    };
+    
+    element.target = {};
     element.elementBus = new EventEmitter();
 
     element.on = function () {

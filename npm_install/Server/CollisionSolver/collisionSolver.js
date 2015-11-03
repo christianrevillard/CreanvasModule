@@ -8,6 +8,8 @@
     
     var solidElements = [];
     
+    var isSolving = false;
+
     appBus.on(
       "elementAdded", 
     function (element) {
@@ -50,11 +52,16 @@
         
         element.on('move', function (dt) {
           
+          if (isSolving)
+            return;
+
           element.readyForSolver = true;
           
           if (solidElements.every(function (el) { return el.readyForSolver; })) {
+            isSolving = true;
             solidElements.forEach(function (el) { el.readyForSolver = false; })
             appBus.emit("solveCollisions", solidElements);
+            isSolving = false;
           }
         });
       });

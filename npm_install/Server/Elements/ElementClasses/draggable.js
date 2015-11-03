@@ -22,8 +22,13 @@
         element.position.z = Infinity;
       }
       else if (event.eventId === 'pointerMove') {
-        element.position.x = event.x;
-        element.position.y = event.y;
+        if (element.solid) {
+          element.target.position = {x :event.x, y :event.y};
+        }
+        else {
+          element.position.x = event.x;
+          element.position.y = event.y;
+        }
       }
       else if (event.eventId === 'pointerUp') {
         element.position.z = originalZ;
