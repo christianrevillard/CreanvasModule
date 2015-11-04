@@ -82,7 +82,7 @@ define(['creanvas/creanvas'], function (creanvas) {
       type: 'Heavy',
       solid: { coefficient: 1, staticFriction: 0.7, dynamicFriction: 0.5 },
       mass: 100,
-      draggable: {speed:'keep', maxSpeed:1000},
+      draggable: {speed:'keep', maxSpeed:1000, dropOnCollision:true},
       position: { x: -400, y: -250, z: -100 },
       speed: { x: 50, y: -50, angle: Math.PI/4 },
       circular: { radius: 50, minRadius:30, maxRadius:200, speedRadius:30 }
@@ -90,9 +90,10 @@ define(['creanvas/creanvas'], function (creanvas) {
     
     app.addElement({
       id: 'O4',
-      type: 'O',
+      type: 'Heavy',
       solid: { coefficient: 1, staticFriction: 0.7, dynamicFriction: 0.5 },
       mass: 10,
+      draggable: { speed: 'none', maxSpeed: 1000, dropOnCollision: false },
       position: { x: -400, y: 250, z: -100 },
       speed: { x: 50, y: -50 },
       circular: { radius: 50, minRadius: 10, maxRadius: 100, speedRadius: 40 }

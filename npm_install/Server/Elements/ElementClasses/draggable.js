@@ -41,17 +41,17 @@
 
     element.on('move', function (dt) {
       if (element.target.position) {
-        console.log('moving to target', element.id, element.target.position);
         
-        if (!element.target.position.dt) {
-          element.target.position.dt = dt;
-          
+        if (!element.draggable.originalSpeed) {          
           element.draggable.originalSpeed = {
             x: element.speed.x,
             y: element.speed.y,
             angle: element.speed.angle,
           };
-          
+        }
+        
+        if(!element.draggable.speedCalculated){
+
           element.speed.x = (element.target.position.x - element.position.x) / dt;
           element.speed.y = (element.target.position.y - element.position.y) / dt;          
           element.speed.angle = 0;
@@ -62,7 +62,9 @@
               element.speed.x = element.speed.x * element.draggable.maxSpeed / Math.sqrt(speedSquare);
               element.speed.y = element.speed.y * element.draggable.maxSpeed / Math.sqrt(speedSquare);
             }
-          }        
+          }
+          
+          element.draggable.speedCalculated = true;
         }
         
         element.position.x = element.lastCommited.position.x + dt * element.speed.x;
@@ -75,23 +77,40 @@
             
       if (element.draggable.speed === 'none') {
         element.speed = { x: 0, y: 0, angle: 0 };
+        console.log('none', element.speed);
       }
-      else if (element.draggable.speed === 'original') {
+      else if (element.draggable.speed === 'original' && element.draggable.originalSpeed) {
         element.speed = element.draggable.originalSpeed;
+        console.log('original', element.speed);
       }
-      // or keep, just keep...
+      else {
+        console.log('keep', element.speed);
+      }
+      
+      element.draggable.originalSpeed = null;
     };
 
     element.on('commitMove', function () {
-      if (element.target.position &&
+      if (!element.target.position)
+        return;
+      
+      element.draggable.speedCalculated = false;
+
+      if (
         element.position.x === element.target.position.x &&
-        element.position.y === element.target.position.y &&
-        element.position.angle === element.target.position.angle) {
+        element.position.y === element.target.position.y) {
+        console.log('target reached, complete drag', element.id, element.target.position);
         targetDragCompleted();
       }
     });
 
     element.on('collided', function () {
+      if (!element.target.position)
+        return;
+
+      if (element.draggable.dropOnCollision) {
+        element.emit('elementEvent', { eventId: 'pointerUp' });
+      }
       targetDragCompleted();
     });
   };
