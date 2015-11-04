@@ -63,8 +63,12 @@ define(['creanvas/creanvas'], function (creanvas) {
       solid: { coefficient: 0.5, staticFriction: 0.7, dynamicFriction: 0.5 },
       mass: 10,
       position: { x: 400, y: -250, z: -100 },
-      speed: { x: 50, y: -50, angle:Math.PI/2},
-      circular: { radius: 50, minRadius: 20, maxRadius: 100, speedRadius: 50 }
+      speed: { x: 0, y: 0, angle:Math.PI/2},
+      circular: { radius: 50, minRadius: 20, maxRadius: 100, speedRadius: 50 },
+      limits: {
+        position: { x: [0, 0], y: [0, 0] },
+        speed: [0,10]
+      }
     });
     
     app.addElement({
@@ -82,10 +86,14 @@ define(['creanvas/creanvas'], function (creanvas) {
       type: 'Heavy',
       solid: { coefficient: 1, staticFriction: 0.7, dynamicFriction: 0.5 },
       mass: 100,
-      draggable: {speed:'keep', maxSpeed:1000, dropOnCollision:true},
+      draggable: {speed:'keep', dropOnCollision:true},
       position: { x: -400, y: -250, z: -100 },
       speed: { x: 50, y: -50, angle: Math.PI/4 },
-      circular: { radius: 50, minRadius:30, maxRadius:200, speedRadius:30 }
+      circular: { radius: 50, minRadius: 30, maxRadius: 200, speedRadius: 30 },
+      limits: {
+        speed: [0, 1000]
+      },
+      timer: { time: 0.01, eventId: 'newFrame' }
     });
     
     app.addElement({
@@ -93,10 +101,13 @@ define(['creanvas/creanvas'], function (creanvas) {
       type: 'Heavy',
       solid: { coefficient: 1, staticFriction: 0.7, dynamicFriction: 0.5 },
       mass: 10,
-      draggable: { speed: 'none', maxSpeed: 1000, dropOnCollision: false },
+      draggable: { speed: 'none', dropOnCollision: false },
       position: { x: -400, y: 250, z: -100 },
       speed: { x: 50, y: -50 },
-      circular: { radius: 50, minRadius: 10, maxRadius: 100, speedRadius: 40 }
+      circular: { radius: 50, minRadius: 10, maxRadius: 100, speedRadius: 40 },
+      limits: {
+        speed: [0, 1000]
+      }
     });
     
     app.addElement({
@@ -104,9 +115,13 @@ define(['creanvas/creanvas'], function (creanvas) {
       type: 'O',
       solid: { coefficient: 1, staticFriction: 0.7, dynamicFriction: 0.5 },
       mass: 10,
-      position: { x: -200, y: 250, z: -100 },
+      position: { x: -100, y: 250, z: -100 },
       speed: { x: -50, y: -50, angle:2*Math.PI },
-      circular: { radius: 5, minRadius: 5, maxRadius: 50, speedRadius: 10 }
+      circular: { radius: 5, minRadius: 5, maxRadius: 50, speedRadius: 10 },
+      limits: {
+        position: { x: [-400, 0], y: [0, 300] },
+        speed: [0, 100]
+      }
     });
     
     app.addElement({

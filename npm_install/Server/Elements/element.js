@@ -54,11 +54,11 @@
     }
 
     appBus.addElementListener(element, 'clientConnected', function () {
-      element.emit('elementUpdated');
+      element.emit('positionUpdated');
     });
-
+    
     appBus.emit('elementAdded', element);
     
-    element.emit('elementUpdated');
+    element.emit('positionUpdated');
   };
 });

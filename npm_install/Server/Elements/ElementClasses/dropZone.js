@@ -31,7 +31,7 @@
         dropped.position.x = element.position.x;
         dropped.position.y = element.position.y;
         dropped.droppable.dropZone = element;
-        dropped.emit('elementUpdated');
+        dropped.emit('positionUpdated');
         dropped.emit('droppedIn', element);
         element.emit('droppedIn', dropped);
       }

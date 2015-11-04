@@ -7,20 +7,18 @@
     appBus.on(
       "elementAdded", 
     function (element) {
-        element.on("elementUpdated", function (toSend) {
-          
-          toSend = toSend || {
+        element.on("positionUpdated", function () {
+          element.emit("elementUpdated", {
             type: element.type,
             x: element.position.x,
             y: element.position.y,        
             z: element.position.z,
             angle: element.position.angle
-          };
-          
-          toSend.id = element.id;
-
-//          updatedElements = updatedElements.filter(function (existing) { return existing.id !== element.id });
-          
+          });
+        });   
+        
+        element.on("elementUpdated", function (toSend) {          
+          toSend.id = element.id;          
           updatedElements.push(toSend);
         });
         

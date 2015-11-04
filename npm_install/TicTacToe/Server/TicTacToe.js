@@ -34,7 +34,7 @@ define(['creanvas/creanvas'], function (creanvas) {
       events: {
         generatorEmpty : function (element) {
           element.type = 'X-Empty';
-          element.emit('elementUpdated');
+          element.emit('positionUpdated');
         }
       }
     });
@@ -64,7 +64,7 @@ define(['creanvas/creanvas'], function (creanvas) {
     
     oGenerator.on('generatorEmpty', function () {
       oGenerator.type = 'O-Empty';
-      oGenerator.emit('elementUpdated');
+      oGenerator.emit('positionUpdated');
     });
     
     for (var i = 0; i < 3; i++)

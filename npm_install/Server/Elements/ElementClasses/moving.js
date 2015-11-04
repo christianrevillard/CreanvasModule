@@ -54,8 +54,8 @@
         element.speed.angle += (element.acceleration.angle || 0) * dt;
       }
       
-      element.emit('moved', element);
-      element.emit('elementUpdated');
+      element.emit('positionUpdated', element);
+      element.emit("speedUpdated");
     });
   };
 });

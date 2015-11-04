@@ -64,7 +64,7 @@ define(['creanvas/creanvas'], function (creanvas) {
           speed: { x: 50, y: 50 },
           solid: {},
           events: {
-            moved: function (element) {
+            positionUpdated: function (element) {
               
               if (element.position.x > 800) {
                 element.position.x = -800;

@@ -36,7 +36,9 @@
     <Compile Include="npm_install\Server\CollisionSolver\CircleCircleCollision.js" />
     <Compile Include="npm_install\Server\CollisionSolver\collisionHandlerFactory.js" />
     <Compile Include="npm_install\Server\CollisionSolver\collisionSolver.js" />
+    <Compile Include="npm_install\Server\Elements\ElementClasses\targetMover.js" />
     <Compile Include="npm_install\Server\Elements\ElementClasses\generator.js" />
+    <Compile Include="npm_install\Server\Elements\ElementClasses\limitHandler.js" />
     <Compile Include="npm_install\Server\Elements\ElementTypes\box.js" />
     <Compile Include="npm_install\TicTacToe\app.js" />
     <Compile Include="npm_install\TicTacToe\Client\browserTicTacToe.js" />

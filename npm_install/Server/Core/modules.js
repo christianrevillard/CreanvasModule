@@ -17,11 +17,13 @@ define([
   'creanvas/Elements/elementEventHandler',
 
   'creanvas/Elements/ElementClasses/moving',
+  'creanvas/Elements/ElementClasses/targetMover',
   'creanvas/Elements/ElementClasses/draggable',
   'creanvas/Elements/ElementClasses/clickable',
   'creanvas/Elements/ElementClasses/droppable',
   'creanvas/Elements/ElementClasses/dropZone',
   'creanvas/Elements/ElementClasses/generator',
+  'creanvas/Elements/ElementClasses/limitHandler',
 
   'creanvas/Elements/ElementTypes/circular',
   'creanvas/Elements/ElementTypes/box',

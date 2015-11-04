@@ -52,7 +52,7 @@
       
       if (collision.handler.areColliding()) {
         // scenario 2a: collision at lowest pendig.dt => find common pending.dt somewhere between 0 and lowest pending.dt
-        // both moved at lowestDt already
+        // both positionUpdated at lowestDt already
         moveOutOfOverlapCommonDt(collision);
       } else {
         // scenario 2b: no collision at lowest pending.dt => decrease pending.dt on highest only				
