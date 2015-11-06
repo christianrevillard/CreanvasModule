@@ -76,6 +76,7 @@ define(['client/coordinatesConverter'], function (coordinates) {
     registerCanvasPointerEvent('touchmove', 'pointerMove', true);
     registerCanvasPointerEvent('mouseup', 'pointerUp', false);
     registerCanvasPointerEvent('touchend', 'pointerUp', false);
+    registerCanvasPointerEvent('mouseout', 'pointerUp', false);
     
     setInterval(sendToServer, clientToServerBuffering);    
   };

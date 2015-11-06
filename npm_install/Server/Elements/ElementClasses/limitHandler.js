@@ -40,7 +40,7 @@
             updated = true;
           }
           if (updated) {
-            element.emit("updatePosition", x, y);
+            element.emit("setTargetDestination", x, y);
           }
         }
       }
@@ -68,6 +68,7 @@
         } else if (speedSquare < element.limits.speed[0] * element.limits.speed[0]) {
           element.speed.x = element.speed.x * element.limits.speed[0] / Math.sqrt(speedSquare);
           element.speed.y = element.speed.y * element.limits.speed[0] / Math.sqrt(speedSquare);
+
         }
       }
     });

@@ -58,7 +58,30 @@
           }
         },
         {
-          typeName: 'Heavy',
+          typeName: 'HeavyNone',
+          draw: function (context, el) {
+            var color1, color2;
+            if (this.dropZone) {
+              color1 = "#8F8";
+              color2 = "#FFF";
+            }
+            else {
+              color1 = "#AFA";
+              color2 = "#DDD";
+            }
+            context.moveTo(0, 0);
+            context.lineTo(el.circularRadius, 0);
+            context.arc(0, 0, el.circularRadius, 0, 6);
+            context.lineTo(0, 0);
+            var gradient = context.createRadialGradient(0, 0, 45, -20 , -20, 3);
+            gradient.addColorStop(0.0, color1);
+            gradient.addColorStop(1.0, color2);
+            context.fillStyle = gradient;
+            context.fill();
+          }
+        },
+        {
+          typeName: 'HeavyKeep',
           draw: function (context, el) {
             var color1, color2;
             if (this.dropZone) {

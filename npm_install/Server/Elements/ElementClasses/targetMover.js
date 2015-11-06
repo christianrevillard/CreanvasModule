@@ -4,29 +4,32 @@
     appBus.on(
       "elementAdded", 
     function (element) {
-        elementMover(appBus, element);
+        targetMover(appBus, element);
       });
   });
   
-  var elementMover = function (appBus, element) {
+  var targetMover = function (appBus, element) {
     
-    element.on('updatePosition', function (x, y) {
-      
-      if (element.solid || (element.limits && element.limits.speed)) {
+    element.on('setTargetDestination', function (x, y, angle) {
         element.target = element.target || {};
         element.target.position = { x : x, y : y };
-      }
-      else {
-        element.position.x = x;
-        element.position.y = y;
-      }
     });
     
     element.on('move', function (dt) {
+      
+      // can use a mover factory
       if (!element.target.position)
         return;
-      
+            
       if (!element.target.speedCalculated) {
+        
+        if (!element.target.originalSpeed) {
+          element.target.originalSpeed = {
+            x: element.speed.x,
+            y: element.speed.y,
+            angle: element.speed.angle,
+          };
+        }
         
         element.speed.x = (element.target.position.x - element.position.x) / dt;
         element.speed.y = (element.target.position.y - element.position.y) / dt;
@@ -39,23 +42,20 @@
       
       element.position.x = element.lastCommited.position.x + dt * element.speed.x;
       element.position.y = element.lastCommited.position.y + dt * element.speed.y;
+      element.position.angle = element.lastCommited.position.angle + dt * element.speed.angle;
     });
     
     element.on('commitMove', function () {
-      if (!element.target.position)
-        return;
       
       element.target.speedCalculated = false;
       
       if (
+        element.target.position &&
         element.position.x === element.target.position.x &&
-        element.position.y === element.target.position.y) {        
+        element.position.y === element.target.position.y) {
+        element.target.position = null;
         element.emit("targetReached");
       }
-    });
-
-    element.on('targetReached', function () {
-      element.target.position = null;
     });
   };
 });
