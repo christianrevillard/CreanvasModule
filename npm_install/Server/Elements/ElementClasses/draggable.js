@@ -38,18 +38,16 @@
       isDragging = false;
       element.target.position = null;      
       element.position.z = originalZ;           
-    };
-    
-    element.on('targetReached', function () {
+
       if (element.draggable.speed === 'none') {
         element.speed = { x: 0, y: 0, angle: 0 };
       }
-      else if (element.draggable.speed === 'original' && element.target.originalSpeed) {        
+      else if (element.draggable.speed === 'original' && element.target.originalSpeed) {
         element.speed = element.target.originalSpeed;
       }
       element.target.originalSpeed = null;
-    });
-    
+    };
+        
     element.on('collided', function () {
       if (!isDragging)
         return;

@@ -55,7 +55,6 @@
         element.position.x === element.target.position.x &&
         element.position.y === element.target.position.y) {
         element.target.position = null;
-        element.emit("targetReached");
       }
     });
   };

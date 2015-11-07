@@ -12,6 +12,34 @@
   
   var limited = function (appBus, element) {
     
+    element.on("speedUpdated", function () {
+      if (element.limits.speed) {
+        speedSquare = element.speed.x * element.speed.x + element.speed.y * element.speed.y;
+        if (speedSquare > element.limits.speed[1] * element.limits.speed[1]) {
+          element.speed.x = element.speed.x * element.limits.speed[1] / Math.sqrt(speedSquare);
+          element.speed.y = element.speed.y * element.limits.speed[1] / Math.sqrt(speedSquare);
+          if (!element.originalMass) {
+            element.originalMass = element.mass
+            element.mass = Infinity;
+          }
+        } else if (speedSquare < element.limits.speed[0] * element.limits.speed[0] && speedSquare>0) {
+          element.speed.x = element.speed.x * element.limits.speed[0] / Math.sqrt(speedSquare);
+          element.speed.y = element.speed.y * element.limits.speed[0] / Math.sqrt(speedSquare);
+          if (!element.originalMass) {
+            element.originalMass = element.mass
+            element.mass = Infinity;
+          }
+        }
+      }
+    });
+        
+    element.on("commitMove", function () {
+      if (element.mass === Infinity && element.originalMass) {
+        element.mass = element.originalMass;
+        element.originalMass = null;
+      }
+    })
+
     if (element.solid) {
       
       if (element.limits.position && element.limits.position.y) {
@@ -50,7 +78,6 @@
         });
       }
       
-      
       return;
     }
 
@@ -82,19 +109,6 @@
     
     element.on("moved", function () {
       setLimits(element.position);
-    });
-    
-    element.on("speedUpdated", function () {
-      if (element.limits.speed) {
-        speedSquare = element.speed.x * element.speed.x + element.speed.y * element.speed.y;
-        if (speedSquare > element.limits.speed[1] * element.limits.speed[1]) {
-          element.speed.x = element.speed.x * element.limits.speed[1] / Math.sqrt(speedSquare);
-          element.speed.y = element.speed.y * element.limits.speed[1] / Math.sqrt(speedSquare);
-        } else if (speedSquare < element.limits.speed[0] * element.limits.speed[0]) {
-          element.speed.x = element.speed.x * element.limits.speed[0] / Math.sqrt(speedSquare);
-          element.speed.y = element.speed.y * element.limits.speed[0] / Math.sqrt(speedSquare);
-        }
-      }
     });
   };
 });
