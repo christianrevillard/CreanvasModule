@@ -70,23 +70,14 @@
       if (element.circular.radius <= element.circular.minRadius) {
         element.circular.radius = element.circular.minRadius;
       }
-      
-  //    element.log('radius updated', dt, element.circular.radius);
-
-      if (element.circular.originalSpeedRadius) {
-        element.circular.speedRadius = element.circular.originalSpeedRadius;
-        element.circular.originalSpeedRadius = null;
-      };
     });
     
-    //element.on('collided', function (other) {
-    ////  element.log('collided with ', other)
-    //  // stop radius expand, a growing radius may cause immediate recollision when radius expansion speed higher than  relative speed.
-    //  if (element.circular.speedRadius > 0) {
-    //    element.circular.originalSpeedRadius = element.circular.speedRadius;
-    //    element.circular.speedRadius = 0;
-    //  }
-    //});
+    element.on('collided', function (other) {
+      // stop radius expand, a growing radius may cause immediate recollision when radius expansion speed higher than  relative speed.
+      if (element.circular.speedRadius > 0) {
+        element.circular.speedRadius = -element.circular.speedRadius;
+      }
+    });
 
     element.on('commitMove', function () {
       element.lastCommited.circular.radius = element.circular.radius;

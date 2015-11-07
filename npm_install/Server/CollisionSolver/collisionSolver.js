@@ -16,8 +16,10 @@
         if (!element.solid)
           return;
         
+        element.solid.collisionGroups = element.solid.collisionGroups || [element.id, 'main'];
+
         solidElements.push(element);
-        
+         
         element.solid.getBoundaryBox = function () {
           return {
             left: element.position.x,            

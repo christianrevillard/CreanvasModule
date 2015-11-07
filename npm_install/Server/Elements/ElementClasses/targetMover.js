@@ -11,8 +11,9 @@
   var targetMover = function (appBus, element) {
     
     element.on('setTargetDestination', function (x, y, angle) {
-        element.target = element.target || {};
-        element.target.position = { x : x, y : y };
+      element.target = element.target || {};
+      element.target.position = { x : x, y : y };
+      element.emit('targetDestinationSet');
     });
     
     element.on('move', function (dt) {

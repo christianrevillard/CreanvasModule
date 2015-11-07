@@ -9,56 +9,81 @@
         }
       });
   });
-    
+  
   var limited = function (appBus, element) {
     
+    if (element.solid) {
       
-      element.on("positionUpdated", function () {
-      if (element.limits.position) {
-        var updated = false;
-        var position = (element.target && element.target.position)? element.target.position:element.position;
-        var x = position.x;
-        var y = position.y;
+      if (element.limits.position && element.limits.position.y) {
+         appBus.emit("addElement", {
+          id: 'LimitTop' + element.id,
+          solid: { collisionGroups: [element.id] },
+          mass: Infinity,
+          position: { x: 0, y: 0, z: 0 },
+          box: { top: -Infinity, bottom: element.limits.position.y[0], left: -Infinity, right: Infinity },
+        });
+        
+         appBus.emit("addElement", {
+          id: 'LimitBottom' + element.id,
+          solid: { collisionGroups: [element.id] },
+          mass: Infinity,
+          position: { x: 0, y: 0, z: 0 },
+          box: { top: element.limits.position.y[1], bottom: Infinity, left: -Infinity, right: Infinity },
+        });
+      }
+      
+      if (element.limits.position && element.limits.position.x) {
+         appBus.emit("addElement", {
+          id: 'LimitLeft' + element.id,
+          solid: { collisionGroups: [element.id] },
+          mass: Infinity,
+          position: { x: 0, y: 0, z: 0 },
+          box: { top: -Infinity, bottom: Infinity, left: -Infinity, right: element.limits.position.x[0] },
+        });
+        
+         appBus.emit("addElement", {
+          id: 'LimitRight' + element.id,
+          solid: { collisionGroups: [element.id] },
+          mass: Infinity,
+          position: { x: 0, y: 0, z: 0 },
+          box: { top: -Infinity, bottom: Infinity, left: element.limits.position.x[1], right: Infinity },
+        });
+      }
+      
+      
+      return;
+    }
 
+    
+    var setLimits = function (position) {
+      if (element.limits.position) {
         if (element.limits.position.x) {
-          if (x < element.limits.position.x[0]) {
-            x = element.limits.position.x[0];
-            updated = true;
+          if (position.x < element.limits.position.x[0]) {
+            position.x = element.limits.position.x[0];
           }
-          if (x > element.limits.position.x[1]) {
-            x = element.limits.position.x[1];
-            updated = true;
+          if (position.x > element.limits.position.x[1]) {
+            position.x = element.limits.position.x[1];
           }
         }
         if (element.limits.position.y) {
-          if (y < element.limits.position.y[0]) {
-            y = element.limits.position.y[0];
-            updated = true;
+          if (position.y < element.limits.position.y[0]) {
+            position.y = element.limits.position.y[0];
           }
-          if (y > element.limits.position.y[1]) {
-            y = element.limits.position.y[1];
-            updated = true;
-          }
-          if (updated) {
-            element.emit("setTargetDestination", x, y);
+          if (position.y > element.limits.position.y[1]) {
+            position.y = element.limits.position.y[1];
           }
         }
-      }
+      };
+    }
+    
+    element.on("targetDestinationSet", function () {
+      setLimits(element.target.position);
     });
     
-    element.on('targetReached', function () {
-      if (!element.limits.position)
-        return;
-              
-      if (element.limits.position.x && (element.position.x == element.limits.position.x[0] || element.position.x == element.limits.position.x[1])){
-        element.speed.x = 0;
-      }
-      
-      if (element.limits.position.y && (element.position.y == element.limits.position.y[0] || element.position.y == element.limits.position.y[1])){
-        element.speed.y = 0;
-      }
+    element.on("moved", function () {
+      setLimits(element.position);
     });
-
+    
     element.on("speedUpdated", function () {
       if (element.limits.speed) {
         speedSquare = element.speed.x * element.speed.x + element.speed.y * element.speed.y;
@@ -68,7 +93,6 @@
         } else if (speedSquare < element.limits.speed[0] * element.limits.speed[0]) {
           element.speed.x = element.speed.x * element.limits.speed[0] / Math.sqrt(speedSquare);
           element.speed.y = element.speed.y * element.limits.speed[0] / Math.sqrt(speedSquare);
-
         }
       }
     });

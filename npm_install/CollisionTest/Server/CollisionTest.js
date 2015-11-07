@@ -62,11 +62,11 @@ define(['creanvas/creanvas'], function (creanvas) {
       type: 'O',
       solid: { coefficient: 0.5, staticFriction: 0.7, dynamicFriction: 0.5 },
       mass: 10,
-      position: { x: 400, y: -250, z: -100 },
+      position: { x: 0, y: 0, z: -100 },
       speed: { x: 0, y: 0, angle:Math.PI/2},
       circular: { radius: 50, minRadius: 20, maxRadius: 100, speedRadius: 50 },
       limits: {
-        position: { x: [0, 0], y: [0, 0] },
+        position: { x: [-110, 110], y: [-110, 110] },
         speed: [0,1000]
       }
     });
@@ -111,7 +111,7 @@ define(['creanvas/creanvas'], function (creanvas) {
       type: 'O',
       solid: { coefficient: 1, staticFriction: 0.7, dynamicFriction: 0.5 },
       mass: 10,
-      position: { x: -100, y: 250, z: -100 },
+      position: { x: -200, y: 150, z: -100 },
       speed: { x: -50, y: -50, angle:2*Math.PI },
       circular: { radius: 5, minRadius: 5, maxRadius: 50, speedRadius: 10 },
       limits: {

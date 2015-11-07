@@ -13,7 +13,15 @@
       c.status = false;
       return;     // do not know what to do...
     }
-
+    
+    if (!c.e1.solid.collisionGroups.some(function (group1) {
+      return c.e2.solid.collisionGroups.some(function (group2) {
+        return group1 === group2;
+      });
+    })) {
+      c.status = false;
+      return;
+    }
     
     if (!c.handler.areColliding()) {
       c.status = false;
