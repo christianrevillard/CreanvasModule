@@ -7,7 +7,7 @@
     appBus.on(
       "elementAdded", 
     function (element) {
-        element.on("positionUpdated", function () {
+        element.on("moveCommitted", function () {
           element.emit("elementUpdated", {
             type: element.type,
             x: element.position.x,

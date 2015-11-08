@@ -41,9 +41,11 @@
         element.target.speedCalculated = true;
       }
       
-      element.position.x = element.lastCommited.position.x + dt * element.speed.x;
-      element.position.y = element.lastCommited.position.y + dt * element.speed.y;
-      element.position.angle = element.lastCommited.position.angle + dt * element.speed.angle;
+      element.updatePosition(
+        element.lastCommited.position.x + dt * element.speed.x,
+        element.lastCommited.position.y + dt * element.speed.y,
+        element.lastCommited.position.angle + dt * element.speed.angle);
+
     });
     
     element.on('commitMove', function () {

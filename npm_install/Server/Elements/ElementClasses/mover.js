@@ -43,13 +43,13 @@
       var dt = element.position.pendingDt;
       
       if (element.acceleration) {
-        element.speed.x += (element.acceleration.x || 0) * dt;
-        element.speed.y += (element.acceleration.y || 0) * dt;
-        element.speed.angle += (element.acceleration.angle || 0) * dt;
+        element.updateSpeed(
+          element.speed.x + (element.acceleration.x || 0) * dt,
+          element.speed.y + (element.acceleration.y || 0) * dt,
+          element.speed.angle + (element.acceleration.angle || 0) * dt);
       }
       
-      element.emit('positionUpdated', element);
-      element.emit("speedUpdated");
+      element.emit('moveCommitted');
     });
   };
 });

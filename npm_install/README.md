@@ -20,6 +20,37 @@ appCommand : connecting a command to a specific app so it can be disposed.
 
 events
 ------
+server:
+  - applicationCreated
+
+application:
+  - checkElementEvent
+  - elementAdded
+  - updateClients
+  - clientConnected
+  - sendUpdatedElementsToClientChannels
+  - addBroadTile
+  - broadTileAdded
+  - broadTileProcessed
+  - broadPhaseCompleted
+  - solveCollisions
+  - processBroadPhase
+
+
+clientChannel:
+  - pointerEvent(eventData)
+  - sendMessage
+  - bradcastMessage
+  - message
+
+element:
+  - elementEvent(event)
+  - moveCommited
+  - elementUpdated
+  - commitMove
+  - collided
+  - positionUpdated
+
 
 ----------------------------------
 elementData

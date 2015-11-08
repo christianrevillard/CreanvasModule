@@ -52,13 +52,29 @@
         }
       }
     }
+    
+    element.updatePosition = function (x, y, angle) {
+      element.position.x = x;
+      element.position.y = y;
+      element.position.angle = angle;
+
+      element.emit('positionUpdated');
+    };
+    
+    element.updateSpeed = function (x, y, angle) {
+      element.speed.x = x;
+      element.speed.y = y;
+      element.speed.angle = angle;
+      
+      element.emit('speedUpdated');
+    };
 
     appBus.addElementListener(element, 'clientConnected', function () {
-      element.emit('positionUpdated');
+      element.emit('moveCommitted');
     });
     
     appBus.emit('elementAdded', element);
     
-    element.emit('positionUpdated');
+    element.emit('moveCommitted');
   };
 });

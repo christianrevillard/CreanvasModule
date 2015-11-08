@@ -21,11 +21,10 @@
       if (element.target.position)
         return;
       
-      element.position.x = element.lastCommited.position.x + (element.speed.x || 0) * dt;
-      element.position.y = element.lastCommited.position.y + (element.speed.y || 0) * dt;
-      element.position.angle = element.lastCommited.position.angle + (element.speed.angle || 0) * dt;
-
-      element.emit('moved');
+      element.updatePosition(
+        element.lastCommited.position.x + (element.speed.x || 0) * dt,
+        element.lastCommited.position.y + (element.speed.y || 0) * dt,
+        element.lastCommited.position.angle + (element.speed.angle || 0) * dt);
     });
   };
 });

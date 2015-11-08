@@ -30,8 +30,6 @@
       else if (event.eventId === 'pointerUp') {
         targetDragCompleted();
       }
-
-      element.emit("positionUpdated");
     });
            
     var targetDragCompleted = function () {

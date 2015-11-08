@@ -107,7 +107,7 @@
       setLimits(element.target.position);
     });
     
-    element.on("moved", function () {
+    element.on("positionUpdated", function () {
       setLimits(element.position);
     });
   };
