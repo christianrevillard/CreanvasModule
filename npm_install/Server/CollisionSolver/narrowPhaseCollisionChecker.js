@@ -1,5 +1,17 @@
 ﻿define(['creanvas/Core/serverBus'], function (serverBus) {
   
+  var collisionLogger = {};
+  var n = 0;
+  var log = function () {
+    var id = arguments[0];
+    var data = [].slice.apply(arguments);
+    data.push(n++);
+    var theLog = collisionLogger[id] = collisionLogger [id] || [];
+   // console.log(data);
+    theLog.push(data)
+    collisionLogger[id] = theLog.slice(-5);
+  };
+
   var checkForCollision = function (collisionsToCheck) {
     
     var c = collisionsToCheck.filter(function (toCheck) { return toCheck.status === undefined })[0];
@@ -27,13 +39,57 @@
       c.status = false;
       c[c.e1.id] = c.e1.position.pendingDt;
       c[c.e2.id] = c.e2.position.pendingDt;
+      log(
+        c.id,
+        'NO COLLISION',
+        Math.round(c.e1.position.x * 10000) / 10000, 
+        Math.round(c.e1.position.y * 10000) / 10000, 
+        Math.round(c.e1.getScale() * 10000) / 10000,
+        Math.round(c.e2.position.x * 10000) / 10000, 
+        Math.round(c.e2.position.y * 10000) / 10000, 
+        Math.round(c.e2.getScale() * 10000) / 10000);
       return;
     }
-        
+    
+    log(
+      c.id,
+        'COLLISION',
+        Math.round(c.e1.position.x * 10000) / 10000, 
+        Math.round(c.e1.position.y * 10000) / 10000, 
+        Math.round(c.e1.getScale() * 10000) / 10000,
+        Math.round(c.e2.position.x * 10000) / 10000, 
+        Math.round(c.e2.position.y * 10000) / 10000, 
+        Math.round(c.e2.getScale() * 10000) / 10000);
+    
     c.status = true;
         
     moveOutOfOverlap(c);
-           
+    
+    if (c.handler.areColliding()) {
+      log(
+        c.id,
+        'STILL COLLISION ???',
+        Math.round(c.e1.position.x * 10000) / 10000, 
+        Math.round(c.e1.position.y * 10000) / 10000, 
+        Math.round(c.e1.getScale() * 10000) / 10000,
+        Math.round(c.e2.position.x * 10000) / 10000, 
+        Math.round(c.e2.position.y * 10000) / 10000, 
+        Math.round(c.e2.getScale() * 10000) / 10000);
+
+   //   console.log(collisionLogger[c.id]);
+      console.log('whyyyyyyyyyyy?');
+    }
+    else {
+      log(
+        c.id,
+        'MOVED OUT OF OVERLAP',
+        Math.round(c.e1.position.x * 10000) / 10000, 
+        Math.round(c.e1.position.y * 10000) / 10000, 
+        Math.round(c.e1.getScale() * 10000) / 10000,
+        Math.round(c.e2.position.x * 10000) / 10000, 
+        Math.round(c.e2.position.y * 10000) / 10000, 
+        Math.round(c.e2.getScale() * 10000) / 10000);
+    }
     requeuePossibleCollisions(collisionsToCheck, c.e1);
     requeuePossibleCollisions(collisionsToCheck, c.e2);
   };

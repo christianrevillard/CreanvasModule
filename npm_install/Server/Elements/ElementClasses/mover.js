@@ -24,6 +24,7 @@
       
       if (!element.solid) {
         element.emit('commitMove')
+        element.emit('moveCommitted', element, dt);
       }
     });
     
@@ -39,7 +40,7 @@
         z: element.position.z,
         angle: element.position.angle,
       };
-            
+      
       var dt = element.position.pendingDt;
       
       if (element.acceleration) {
@@ -48,8 +49,6 @@
           element.speed.y + (element.acceleration.y || 0) * dt,
           element.speed.angle + (element.acceleration.angle || 0) * dt);
       }
-      
-      element.emit('moveCommitted');
     });
   };
 });

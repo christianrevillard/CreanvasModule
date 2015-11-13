@@ -8,7 +8,7 @@ define(['modules/Vector'], function (Vector) {
       (cornerX - circle.position.x) * (cornerX - circle.position.x) +
 			(cornerY - circle.position.y) * (cornerY - circle.position.y));
     
-    return distance < circle.circular.radius;
+    return distance < circle.circular.currentRadius();
   };
 
   return function (box, circle, reverse) {

@@ -8,16 +8,19 @@
       "elementAdded", 
     function (element) {
         element.on("moveCommitted", function () {
-          element.emit("elementUpdated", {
+          element.emit("elementUpdated");
+        });   
+        
+        element.on("elementUpdated", function (toSend) {
+          toSend = toSend || {
             type: element.type,
             x: element.position.x,
             y: element.position.y,        
             z: element.position.z,
+            scale: element.getScale(),
             angle: element.position.angle
-          });
-        });   
-        
-        element.on("elementUpdated", function (toSend) {          
+          };
+
           toSend.id = element.id;          
           updatedElements.push(toSend);
         });

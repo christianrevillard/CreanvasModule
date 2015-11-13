@@ -14,20 +14,22 @@
     console.log('setting up circular');
     
     element.lastCommited = element.lastCommited || {};
-    element.lastCommited.circular = { radius: element.circular.radius };
-
+    
     element.isPointInElement = function (x, y) {
-      return element.position && ((x - element.position.x) * (x - element.position.x) + (y - element.position.y) * (y - element.position.y) < element.circular.radius * element.circular.radius);
+      var radius = element.circular.currentRadius();
+      return element.position && ((x - element.position.x) * (x - element.position.x) + (y - element.position.y) * (y - element.position.y) < radius * radius);
     };
        
     element.solid.getCollisionPoint = function (x, y) {
       var distance = Math.sqrt((element.position.x - x) * (element.position.x - x) + (element.position.y - y) * (element.position.y - y));
       
+      var radius = element.circular.currentRadius();
+      
       var collisionPoint = distance == 0 ? 
       { x: element.position.x, y: element.position.y } :
 		  {
-        x: element.position.x + element.circular.radius / distance * (x - element.position.x),
-        y: element.position.y + element.circular.radius / distance * (y - element.position.y)
+        x: element.position.x + radius / distance * (x - element.position.x),
+        y: element.position.y + radius / distance * (y - element.position.y)
       };
       
       var normalVector = distance == 0 ? 
@@ -38,54 +40,34 @@
     };
 
     element.solid.getMomentOfInertia = function () {
-      return element.mass / 2 * element.circular.radius * element.circular.radius;
+      var radius = element.circular.currentRadius();
+      return element.mass / 2 * radius * radius;
     };
     
     element.solid.getBoundaryBox = function () {
       var original = element.lastCommited.position || element.position;
-      var originalRadius = element.lastCommited.circular.radius;
+      var originalRadius = element.circular.originalRadius();
+      var currentRadius = element.circular.currentRadius();
       
       return {
-        left: Math.min(element.position.x - element.circular.radius, original.x - originalRadius) ,
-        right : Math.max(element.position.x + element.circular.radius, original.x + originalRadius) ,
-        top: Math.min(element.position.y - element.circular.radius, original.y - originalRadius) ,
-        bottom: Math.max(element.position.y + element.circular.radius, original.y + originalRadius) 
+        left: Math.min(element.position.x - currentRadius, original.x - originalRadius) ,
+        right : Math.max(element.position.x + currentRadius, original.x + originalRadius) ,
+        top: Math.min(element.position.y - currentRadius, original.y - originalRadius) ,
+        bottom: Math.max(element.position.y + currentRadius, original.y + originalRadius) 
       };
     };
+        
+    element.circular.currentRadius = function () { 
+      return element.circular.radius * element.getScale();
+    };
     
-    element.solid.getEdgeSpeed = function (x, y) {
-      return {
-        x: (element.circular.speedRadius || 0) * (x - element.position.x) / element.circular.radius,
-        y: (element.circular.speedRadius || 0) * (y - element.position.y) / element.circular.radius
+    element.circular.originalRadius = function () {
+      if (!element.lastCommited.scale && element.lastCommited.scale !== 0) {
+        return element.circular.currentRadius();
       }
+      return element.circular.radius * element.lastCommited.scale;
     };
 
-    element.on('move', function (dt) {
-      element.circular.radius = element.lastCommited.circular.radius + (element.circular.speedRadius || 0) * dt;
-      
-      if (element.circular.radius > element.circular.maxRadius) {
-        element.circular.radius = element.circular.maxRadius;
-      }
-      
-      if (element.circular.radius <= element.circular.minRadius) {
-        element.circular.radius = element.circular.minRadius;
-      }
-    });
-    
-    element.on('commitMove', function () {
-      element.lastCommited.circular.radius = element.circular.radius;
-      
-      if (element.circular.speedRadius > 0 && element.circular.radius >= element.circular.maxRadius) {
-        element.circular.speedRadius = -element.circular.speedRadius;
-      }
-      
-      if (element.circular.speedRadius < 0 && element.circular.radius <= element.circular.minRadius) {
-        element.circular.speedRadius = -element.circular.speedRadius;
-      }
-
-      element.emit('elementUpdated', {circularRadius: element.circular.radius}); 
-
-
-    });
+    element.emit('elementUpdated', {circularRadius: element.circular.radius}); 
   };
 });

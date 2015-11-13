@@ -5,7 +5,7 @@
   serverBus.on('applicationCreated', function (appBus) {
     console.log('applicationCreated', appBus.id);
     
-   // appBus.on("getNewFrame", function () { console.log('getNewFrame', appBus.id); });
+    //appBus.on("getNewFrame", function () { console.log('getNewFrame', appBus.id); });
   
   //  appBus.on("updateElements", function (elements) { console.log('updateElements', appBus.id, JSON.parse(elements).length); });
         
@@ -29,7 +29,7 @@
     
    // appBus.on("elementUpdated", function () { console.log('elementUpdated', appBus.id); });
     
-     appBus.on("elementEvent", function (event, element) { console.log('elementEvent', appBus.id, event.eventId, element.id, element.position.z); });
+   //  appBus.on("elementEvent", function (event, element) { console.log('elementEvent', appBus.id, event.eventId, element.id, element.position.z); });
         
     appBus.on("clientConnected", function (clientChannel) {
       console.log('clientConnected', appBus.id, clientChannel.id);

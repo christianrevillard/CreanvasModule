@@ -56,18 +56,30 @@ define(['creanvas/creanvas'], function (creanvas) {
       position: { x: 0, y: 500, z: -100 },
       box: { left: -Infinity, right: Infinity, top: -5, bottom: Infinity }
     });
-    
+        
+    updateBumperScale = function (element, max, dt) {
+      element.customScaleSpeed = element.customScaleSpeed || 0;
+      element.scale = element.lastCommited.scale + element.customScaleSpeed * dt;
+      if (element.scale > max && element.customScaleSpeed > 0) {
+        element.customScaleSpeed = -element.customScaleSpeed;
+      } else if (element.scale < 1 && element.customScaleSpeed < 0) {
+        element.customScaleSpeed = 0;
+        element.scale = 1;
+      }
+    };
+
+
     app.addElement({
       id: 'O1',
       type: 'O',
       solid: { coefficient: 0.5, staticFriction: 0.7, dynamicFriction: 0.5 },
-      mass: 10,
+      mass: Infinity,
       position: { x: 0, y: 0, z: -100 },
       speed: { x: 0, y: 0, angle:Math.PI/2},
-      circular: { radius: 50, minRadius: 20, maxRadius: 100, speedRadius: 50 },
-      limits: {
-        position: { x: [-110, 110], y: [-110, 110] },
-        speed: [0,100]
+      circular: { radius: 50 },
+      events: { moveCommitted: function (e, dt) { updateBumperScale(this, 2, dt); } },
+      onClick: function(){          
+        this.customScaleSpeed = 10;
       }
     });
     
@@ -76,9 +88,9 @@ define(['creanvas/creanvas'], function (creanvas) {
       type: 'O',
       solid: { coefficient: 1, staticFriction: 0.7, dynamicFriction: 0.5 },
       mass: 10,
-      position: { x: 200, y: 0, z: -100 },
-      speed: { x: 50, y: 0, angle: -Math.PI/4 },
-      circular: { radius: 50, minRadius: 10, maxRadius: 100, speedRadius: 50 }
+      position: { x: 120, y: 0, z: -100 },
+      circular: { radius: 50 },
+      limits: { speed: { angle: [-2 * Math.PI, 2 * Math.PI] } }
     });
     
     app.addElement({
@@ -89,9 +101,14 @@ define(['creanvas/creanvas'], function (creanvas) {
       draggable: {speed:'keep', dropOnCollision:true},
       position: { x: -400, y: -250, z: -100 },
       speed: { x: 50, y: -50, angle: Math.PI/4 },
-      circular: { radius: 50, minRadius: 30, maxRadius: 200, speedRadius: 30 },
-      limits: { speed: [0, 500]},
-      timer: { time: 0.01, eventId: 'newFrame' }
+      circular: { radius: 50 },
+      limits: {
+        speed: { v: [0, 1000], angle: [-2 * Math.PI, 2 * Math.PI] }
+      },
+      events: { moveCommitted: function (e, dt) { updateBumperScale(this, 2, dt); } },
+      onDoubleClick: function () {
+        this.customScaleSpeed = 10;
+      }
     });
     
     app.addElement({
@@ -99,12 +116,13 @@ define(['creanvas/creanvas'], function (creanvas) {
       type: 'HeavyNone',
       solid: { coefficient: 1, staticFriction: 0.7, dynamicFriction: 0.5 },
       mass: 100,
-      draggable: { speed: 'none', dropOnCollision: false },
-      position: { x: -400, y: 250, z: -100 },
+      position: { x: -400, y: 50, z: -100 },
       speed: { x: 50, y: -50 },
-//      circular: { radius: 50, minRadius: 10, maxRadius: 100, speedRadius: 40 },
       circular: { radius: 50 },
-      limits: { speed: [0, 500]}
+      limits: {
+        position: { x: [-600, 600], y: [-300, 300] },
+        speed: { v: [0, 1000], angle: [-2 * Math.PI, 2 * Math.PI] }
+      }
     });
     
     app.addElement({
@@ -114,11 +132,10 @@ define(['creanvas/creanvas'], function (creanvas) {
       mass: 10,
       position: { x: -200, y: 150, z: -100 },
       speed: { x: -50, y: -50, angle:2*Math.PI },
-//      circular: { radius: 5, minRadius: 5, maxRadius: 50, speedRadius: 10 },
       circular: { radius: 30},
       limits: {
         position: { x: [-400, 0], y: [0, 300] },
-//        speed: [0, 100]
+        speed: { angle: [-2 * Math.PI, 2 * Math.PI] }
       }
     });
     
@@ -129,7 +146,8 @@ define(['creanvas/creanvas'], function (creanvas) {
       mass: 10,
       position: { x: 0, y: 250, z: -100 },
       speed: { x: 50, y: 50, angle: -Math.PI },
-      circular: { radius: 5, minRadius: 5, maxRadius: 50, speedRadius: 50 }
+      circular: { radius: 80 },
+      limits: { speed: { angle: [-2 * Math.PI, 2 * Math.PI] } }
     });
     
     app.addElement({
@@ -139,7 +157,8 @@ define(['creanvas/creanvas'], function (creanvas) {
       mass: 10,
       position: { x: -150, y: -300, z: -100 },
       speed: { x: 50, y: 20 },
-      circular: { radius: 5, minRadius: 5, maxRadius: 50, speedRadius: 40 }
+      circular: { radius: 30 },
+      limits: { speed: { angle: [-2 * Math.PI, 2 * Math.PI] } }
     });
     
     app.addElement({
@@ -149,7 +168,8 @@ define(['creanvas/creanvas'], function (creanvas) {
       mass: 10,
       position: { x: 450, y: 300, z: -100 },
       speed: { x: -50, y: -20 },
-      circular: { radius: 5, minRadius: 10, maxRadius: 30, speedRadius: 5 }
+      circular: { radius: 90 },
+      limits: { speed: { angle: [-2 * Math.PI, 2 * Math.PI] } }
     });
     
     testApplication = {

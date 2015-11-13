@@ -36,6 +36,7 @@
     <Compile Include="npm_install\Server\CollisionSolver\CircleCircleCollision.js" />
     <Compile Include="npm_install\Server\CollisionSolver\collisionHandlerFactory.js" />
     <Compile Include="npm_install\Server\CollisionSolver\collisionSolver.js" />
+    <Compile Include="npm_install\Server\Elements\ElementClasses\scaler.js" />
     <Compile Include="npm_install\Server\Elements\ElementClasses\targetMover.js" />
     <Compile Include="npm_install\Server\Elements\ElementClasses\generator.js" />
     <Compile Include="npm_install\Server\Elements\ElementClasses\limitHandler.js" />

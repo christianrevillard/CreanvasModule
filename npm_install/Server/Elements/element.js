@@ -22,9 +22,11 @@
         y: element.position.y,
         z: element.position.z,
         angle: element.position.angle,
-      }
+      },
+      scale :1 
     };
     
+    element.scale = element.scale || 1;
     element.target = {};
     element.elementBus = new EventEmitter();
 
@@ -48,7 +50,10 @@
       
       for (var eventId in element.events) {
         if (element.events.hasOwnProperty(eventId)) {
-          element.on(eventId, element.events[eventId]);
+          element.on(eventId, function () {
+            var args = [].slice.apply(arguments);
+            element.events[eventId].apply(element, args);
+          });
         }
       }
     }
@@ -70,11 +75,11 @@
     };
 
     appBus.addElementListener(element, 'clientConnected', function () {
-      element.emit('moveCommitted');
+      element.emit('elementUpdated');
     });
     
     appBus.emit('elementAdded', element);
     
-    element.emit('moveCommitted');
+    element.emit('elementUpdated');
   };
 });

@@ -24,8 +24,8 @@
         originalZ = element.position.z;
         element.position.z = Infinity;
       }
-      else if (event.eventId === 'pointerMove') {
-        element.emit("setTargetDestination", event.x, event.y);
+      else if (event.eventId === 'pointerMove' && element.setPositionTarget) {
+        element.setPositionTarget(event.x, event.y);
       }
       else if (event.eventId === 'pointerUp') {
         targetDragCompleted();

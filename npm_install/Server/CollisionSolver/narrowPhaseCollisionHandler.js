@@ -6,14 +6,18 @@
     
     if (!collisionEffects)
       return;
-           
-    c.e1.speed.x += collisionEffects.e1.dSpeedX;
-    c.e1.speed.y += collisionEffects.e1.dSpeedY;
-    c.e1.speed.angle += collisionEffects.e1.dSpeedAngle;
     
-    c.e2.speed.x += collisionEffects.e2.dSpeedX;
-    c.e2.speed.y += collisionEffects.e2.dSpeedY;
-    c.e2.speed.angle += collisionEffects.e2.dSpeedAngle;
+    c.e1.updateSpeed(
+      c.e1.speed.x + collisionEffects.e1.dSpeedX,
+      c.e1.speed.y + collisionEffects.e1.dSpeedY,
+      c.e1.speed.angle + collisionEffects.e1.dSpeedAngle
+    );
+    
+    c.e2.updateSpeed(
+      c.e2.speed.x + collisionEffects.e2.dSpeedX,
+      c.e2.speed.y + collisionEffects.e2.dSpeedY,
+      c.e2.speed.angle + collisionEffects.e2.dSpeedAngle
+    );
 
     c.e1.emit('collided', c.e2);
     c.e2.emit('collided', c.e1);
@@ -90,11 +94,6 @@
         localSpeed,
         element.solid.getEdgeSpeed(collisionPoint.x, collisionPoint.y));
     }    
-    
-    //if (element.moving.scaleSpeed) {
-    //  localSpeed.x += centerToCollision.x * element.moving.scaleSpeed.x;
-    //  localSpeed.y += centerToCollision.y * element.moving.scaleSpeed.y;
-    //};
     
     var localSpeedInCollisionBasis = localSpeed.getCoordinates(collisionBasis);
     

@@ -19,6 +19,7 @@ define([
   'creanvas/Elements/ElementClasses/speedMover',
   'creanvas/Elements/ElementClasses/targetMover',
   'creanvas/Elements/ElementClasses/mover',
+  'creanvas/Elements/ElementClasses/scaler',
   'creanvas/Elements/ElementClasses/draggable',
   'creanvas/Elements/ElementClasses/clickable',
   'creanvas/Elements/ElementClasses/droppable',

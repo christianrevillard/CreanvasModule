@@ -17,7 +17,6 @@
 
     element.on('move', function (dt) {
       
-      // can use a mover factory
       if (element.target.position)
         return;
       

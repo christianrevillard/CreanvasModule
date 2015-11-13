@@ -13,18 +13,36 @@
   var limited = function (appBus, element) {
     
     element.on("speedUpdated", function () {
-      if (element.limits.speed) {
+      if (element.limits.speed && element.limits.speed.v) {
         speedSquare = element.speed.x * element.speed.x + element.speed.y * element.speed.y;
-        if (speedSquare > element.limits.speed[1] * element.limits.speed[1]) {
-          element.speed.x = element.speed.x * element.limits.speed[1] / Math.sqrt(speedSquare);
-          element.speed.y = element.speed.y * element.limits.speed[1] / Math.sqrt(speedSquare);
+        if (speedSquare > element.limits.speed.v[1] * element.limits.speed.v[1]) {
+          element.speed.x = element.speed.x * element.limits.speed.v[1] / Math.sqrt(speedSquare);
+          element.speed.y = element.speed.y * element.limits.speed.v[1] / Math.sqrt(speedSquare);
           if (!element.originalMass) {
             element.originalMass = element.mass
             element.mass = Infinity;
           }
-        } else if (speedSquare < element.limits.speed[0] * element.limits.speed[0] && speedSquare>0) {
-          element.speed.x = element.speed.x * element.limits.speed[0] / Math.sqrt(speedSquare);
-          element.speed.y = element.speed.y * element.limits.speed[0] / Math.sqrt(speedSquare);
+        } else if (speedSquare < element.limits.speed.v[0] * element.limits.speed.v[0] && speedSquare>0) {
+          element.speed.x = element.speed.x * element.limits.speed.v[0] / Math.sqrt(speedSquare);
+          element.speed.y = element.speed.y * element.limits.speed.v[0] / Math.sqrt(speedSquare);
+          if (!element.originalMass) {
+            element.originalMass = element.mass
+            element.mass = Infinity;
+          }
+        }
+      }
+
+
+
+      if (element.limits.speed && element.limits.speed.angle) {
+        if (element.speed.angle > element.limits.speed.angle[1]) {
+          element.speed.angle = element.limits.speed.angle[1];
+          if (!element.originalMass) {
+            element.originalMass = element.mass
+            element.mass = Infinity;
+          }
+        } else if (element.speed.angle < element.limits.speed.angle[0]) {
+          element.speed.angle = element.limits.speed.angle[0];
           if (!element.originalMass) {
             element.originalMass = element.mass
             element.mass = Infinity;
@@ -103,7 +121,7 @@
       };
     }
     
-    element.on("targetDestinationSet", function () {
+    element.on("positionTargetUpdated", function () {
       setLimits(element.target.position);
     });
     

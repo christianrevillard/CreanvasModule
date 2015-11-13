@@ -47,8 +47,8 @@
               color2 = "#DDD";
             }
             context.moveTo(0, 0);
-            context.lineTo(el.circularRadius, 0);
-            context.arc(0, 0, el.circularRadius, 0, 6);
+            context.lineTo(el.circularRadius * el.scale, 0);
+            context.arc(0, 0, el.circularRadius * el.scale, 0, 6);
             context.lineTo(0, 0);
             var gradient = context.createRadialGradient(0, 0, 45, -20, -20, 3);
             gradient.addColorStop(0.0, color1);
@@ -70,8 +70,8 @@
               color2 = "#DDD";
             }
             context.moveTo(0, 0);
-            context.lineTo(el.circularRadius, 0);
-            context.arc(0, 0, el.circularRadius, 0, 6);
+            context.lineTo(el.circularRadius * el.scale, 0);
+            context.arc(0, 0, el.circularRadius * el.scale, 0, 6);
             context.lineTo(0, 0);
             var gradient = context.createRadialGradient(0, 0, 45, -20 , -20, 3);
             gradient.addColorStop(0.0, color1);
@@ -93,8 +93,8 @@
               color2 = "#DDD";
             }
             context.moveTo(0, 0);
-            context.lineTo(el.circularRadius, 0);
-            context.arc(0, 0, el.circularRadius, 0, 6);
+            context.lineTo(el.circularRadius * el.scale, 0);
+            context.arc(0, 0, el.circularRadius * el.scale, 0, 6);
             context.lineTo(0, 0);
             var gradient = context.createRadialGradient(0, 0, 45, -20 , -20, 3);
             gradient.addColorStop(0.0, color1);
