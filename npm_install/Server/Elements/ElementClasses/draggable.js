@@ -45,7 +45,11 @@
       }
       element.target.originalSpeed = null;
     };
-        
+    
+    element.on('targetReached', function () {
+      element.speed = { x: 0, y: 0, angle: 0 };
+    });
+
     element.on('collided', function () {
       if (!isDragging)
         return;

@@ -179,7 +179,7 @@ define(['creanvas/creanvas'], function (creanvas) {
  //     mass: 10,
       draggable: { speed:'none'},
       position: { x: 0, y: -200, z: 100 },
-      convexPolygon: { vertices: [[-50, -50], [40, -50], [30, -20], [0, 30], [-40, 10]] },
+      convexPolygon: { vertices: [[-50, -50], [40, -50], [50, -20], [0, 30], [-40, 10]] },
       events: { moveCommitted: function (e, dt) { updateBumperScale(this, 2, dt); } },
       onClick: function () {
         this.customScaleSpeed = 2;
