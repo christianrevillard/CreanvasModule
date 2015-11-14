@@ -42,6 +42,7 @@
     <Compile Include="npm_install\Server\Elements\ElementClasses\limitHandler.js" />
     <Compile Include="npm_install\Server\Elements\ElementClasses\mover.js" />
     <Compile Include="npm_install\Server\Elements\ElementTypes\box.js" />
+    <Compile Include="npm_install\Server\Elements\ElementTypes\convexPolygon.js" />
     <Compile Include="npm_install\TicTacToe\app.js" />
     <Compile Include="npm_install\TicTacToe\Client\browserTicTacToe.js" />
     <Compile Include="npm_install\TicTacToe\Client\nodeTicTacToe.js" />

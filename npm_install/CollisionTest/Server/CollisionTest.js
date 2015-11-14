@@ -172,6 +172,22 @@ define(['creanvas/creanvas'], function (creanvas) {
       limits: { speed: { angle: [-2 * Math.PI, 2 * Math.PI] } }
     });
     
+    app.addElement({
+      id: 'P1',
+      type: 'Poly',
+//      solid: { coefficient: 1, staticFriction: 0.7, dynamicFriction: 0.5 },
+ //     mass: 10,
+      draggable: { speed:'none'},
+      position: { x: 0, y: -200, z: 100 },
+      convexPolygon: { vertices: [[-50, -50], [40, -50], [30, -20], [0, 30], [-40, 10]] },
+      events: { moveCommitted: function (e, dt) { updateBumperScale(this, 2, dt); } },
+      onClick: function () {
+        this.customScaleSpeed = 2;
+      },
+      speed: { x: 0, y: 0, angle: Math.PI / 2 },
+    });
+
+    
     testApplication = {
       app: app,
       connect: function (clientChannel) {

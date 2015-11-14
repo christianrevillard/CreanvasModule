@@ -4,7 +4,7 @@
     appBus.on(
       "elementAdded", 
     function (element) {
-        if (element.speed || element.solid) {
+        if (element.speed || element.solid || element.draggable) {
           moving(appBus, element);
         }
       });

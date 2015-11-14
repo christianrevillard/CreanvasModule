@@ -29,5 +29,6 @@ define([
 
   'creanvas/Elements/ElementTypes/circular',
   'creanvas/Elements/ElementTypes/box',
+  'creanvas/Elements/ElementTypes/convexPolygon',
 ], function () {
 });

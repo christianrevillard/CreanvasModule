@@ -58,6 +58,35 @@
           }
         },
         {
+          typeName: 'Poly',
+          draw: function (context, el) {
+            
+            if (!el.vertices)
+              return;
+
+            var color1, color2;
+            if (this.dropZone) {
+              color1 = "#88F";
+              color2 = "#FFF";
+            }
+            else {
+              color1 = "#AAF";
+              color2 = "#DDD";
+            }
+            context.scale(el.scale, el.scale);
+            context.moveTo(el.vertices[el.vertices.length - 1][0], el.vertices[el.vertices.length - 1][1]);
+            el.vertices.forEach(function (v) {
+              context.lineTo(v[0], v[1]);
+            });
+            
+            var gradient = context.createRadialGradient(0, 0, 45, -20 , -20, 3);
+            gradient.addColorStop(0.0, color1);
+            gradient.addColorStop(1.0, color2);
+            context.fillStyle = gradient;
+            context.fill();
+          }
+        },
+        {
           typeName: 'HeavyNone',
           draw: function (context, el) {
             var color1, color2;
