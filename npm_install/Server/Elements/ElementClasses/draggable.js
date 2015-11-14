@@ -38,7 +38,7 @@
       element.position.z = originalZ;           
 
       if (element.draggable.speed === 'none') {
-        element.speed = { x: 0, y: 0, angle: 0 };
+        element.speed = { x: 0, y: 0, angle: element.target.originalSpeed.angle };   
       }
       else if (element.draggable.speed === 'original' && element.target.originalSpeed) {
         element.speed = element.target.originalSpeed;
@@ -47,7 +47,7 @@
     };
     
     element.on('targetReached', function () {
-      element.speed = { x: 0, y: 0, angle: 0 };
+      element.speed = { x: 0, y: 0, angle:element.target.originalSpeed.angle };
     });
 
     element.on('collided', function () {
