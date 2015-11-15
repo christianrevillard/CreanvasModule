@@ -45,7 +45,7 @@ clientChannel:
 
 element:
   - elementEvent(event)
-  - moveCommited
+  - moveCommitted
   - elementUpdated
   - commitMove
   - collided

@@ -42,6 +42,9 @@
       
       if (!element.scaleSpeed && element.scaleSpeed !== 0) {
         element.scaleSpeed = (element.scale - element.lastCommited.scale) / dt;
+        if (element.scaleSpeed != element.scaleSpeed) {
+          debugger;
+        }
       }
       
       return element.lastCommited.scale + dt * element.scaleSpeed;
@@ -49,6 +52,9 @@
     
     element.on('commitMove', function () {
       element.scale = element.lastCommited.scale = element.getScale();      
+      if (element.scale != element.scale) {
+        debugger;
+      }
       element.scaleSpeed = null;
     });
   };

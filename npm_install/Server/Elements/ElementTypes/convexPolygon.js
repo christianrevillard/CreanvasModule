@@ -14,11 +14,12 @@
     console.log('setting up convexPolygon');
     
     element.lastCommited = element.lastCommited || {};
-    
+
     element.isPointInElement = function (x, y) {
       
       var vertices = element.convexPolygon.currentVertices();
-      var testValue=0;
+      
+      var testValue = 0;
       for (var vertex = 0; vertex < vertices.length - 1; vertex++) {
         
         var A = vertices[vertex];
@@ -42,44 +43,6 @@
       }      
       return true;
     };
-       
-    //element.solid.getCollisionPoint = function (x, y) {
-    //  var distance = Math.sqrt((element.position.x - x) * (element.position.x - x) + (element.position.y - y) * (element.position.y - y));
-      
-    //  var radius = element.circular.currentRadius();
-      
-    //  var collisionPoint = distance == 0 ? 
-    //  { x: element.position.x, y: element.position.y } :
-		  //{
-    //    x: element.position.x + radius / distance * (x - element.position.x),
-    //    y: element.position.y + radius / distance * (y - element.position.y)
-    //  };
-      
-    //  var normalVector = distance == 0 ? 
-    //    new Vector(1, 0):
-    //    new Vector((x - element.position.x) / distance, (y - element.position.y) / distance);
-      
-    //  return { collisionPoint: collisionPoint, normalVector: normalVector };
-    //};
-
-    ////element.solid.getMomentOfInertia = function () {
-    //  var radius = element.circular.currentRadius();
-    //  return element.mass / 2 * radius * radius;
-    //};
-    
-    //element.solid.getBoundaryBox = function () {
-    //  var original = element.lastCommited.position || element.position;
-    //  var originalRadius = element.circular.originalRadius();
-    //  var currentRadius = element.circular.currentRadius();
-      
-    //  return {
-    //    left: Math.min(element.position.x - currentRadius, original.x - originalRadius) ,
-    //    right : Math.max(element.position.x + currentRadius, original.x + originalRadius) ,
-    //    top: Math.min(element.position.y - currentRadius, original.y - originalRadius) ,
-    //    bottom: Math.max(element.position.y + currentRadius, original.y + originalRadius) 
-    //  };
-    //};
-        
     
     element.convexPolygon.currentVertices = function () {
       
@@ -93,21 +56,71 @@
             scaled[0] * Math.sin(element.position.angle) 
           + scaled[1] * Math.cos(element.position.angle)];
           
+          if (element.position.x + rotated[0] != element.position.x + rotated[0]) {
+            debugger;
+          }
+
           return [element.position.x + rotated[0], element.position.y + rotated[1]];
         }
       );
     };
-        
-    //element.circular.currentRadius = function () { 
-    //  return element.circular.radius * element.getScale();
-    //};
     
-    //element.circular.originalRadius = function () {
-    //  if (!element.lastCommited.scale && element.lastCommited.scale !== 0) {
-    //    return element.circular.currentRadius();
-    //  }
-    //  return element.circular.radius * element.lastCommited.scale;
-    //};
+    element.convexPolygon.originalVertices = element.convexPolygon.originalVertices || element.convexPolygon.currentVertices();
+    
+    if (element.solid) {
+      
+      //element.solid.getCollisionPoint = function (x, y) {
+      //  var distance = Math.sqrt((element.position.x - x) * (element.position.x - x) + (element.position.y - y) * (element.position.y - y));
+      
+      //  var radius = element.circular.currentRadius();
+      
+      //  var collisionPoint = distance == 0 ? 
+      //  { x: element.position.x, y: element.position.y } :
+      //{
+      //    x: element.position.x + radius / distance * (x - element.position.x),
+      //    y: element.position.y + radius / distance * (y - element.position.y)
+      //  };
+      
+      //  var normalVector = distance == 0 ? 
+      //    new Vector(1, 0):
+      //    new Vector((x - element.position.x) / distance, (y - element.position.y) / distance);
+      
+      //  return { collisionPoint: collisionPoint, normalVector: normalVector };
+      //};
+      
+      ////element.solid.getMomentOfInertia = function () {
+      //  var radius = element.circular.currentRadius();
+      //  return element.mass / 2 * radius * radius;
+      //};
+      
+      element.solid.getBoundaryBox = function () {
+        
+        var vertices = element.convexPolygon.originalVertices.concat(element.convexPolygon.currentVertices());
+        if (element.convexPolygon.currentVertices()[0][0] != element.convexPolygon.currentVertices()[0][0]) {
+          console.log('original', element.convexPolygon.originalVertices);
+          console.log('current', element.convexPolygon.currentVertices());
+          console.log({
+            left: Math.min.apply(null, vertices.map(function (v) { return v[0]; })) ,
+            right : Math.max.apply(null, vertices.map(function (v) { return v[0]; })) ,
+            top: Math.min.apply(null, vertices.map(function (v) { return v[1]; })) ,
+            bottom: Math.max.apply(null, vertices.map(function (v) { return v[1]; }))
+          });
+          debugger;
+        }
+
+        return {
+          left: Math.min.apply(null, vertices.map(function (v) { return v[0]; })) ,
+          right : Math.max.apply(null, vertices.map(function (v) { return v[0]; })) ,
+          top: Math.min.apply(null, vertices.map(function (v) { return v[1]; })) ,
+          bottom: Math.max.apply(null, vertices.map(function (v) { return v[1]; }))
+        };
+      };
+    }
+    
+
+    element.on('moveCommitted', function () { 
+      element.convexPolygon.originalVertices = element.convexPolygon.currentVertices();
+    });
 
     element.emit('elementUpdated', {vertices: element.convexPolygon.vertices}); 
   };

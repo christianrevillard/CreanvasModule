@@ -36,7 +36,7 @@
       
       solidElements.forEach(function (element) {
         element.emit('commitMove');
-        element.emit('moveCommitted', element, element.position.pendingDt);
+        element.emit('moveCommitted', element, element.position.pendingDt || 0);
       });
     });
     
